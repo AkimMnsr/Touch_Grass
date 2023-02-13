@@ -20,15 +20,41 @@
 </head>
 <body>
 
-<header>
-    <div id="logo">
+<header id="header">
 
-    </div>
+    <!-- div emplacement logo -->
+
+    <!-- div emplacement ancre nav bar -->
     <div id="nav_bar">
+        <div id="nav_bar_img">
+            <a id="img_ancre" href="">
+                <img id="img_nav_bar" src="Css/img/logo_nav_bar.png" alt="logo du site">
+                <h2>Touch Grass</h2>
+            </a>
 
+        </div>
+        <div id="nav_bar_ancre">
+            <a class="nav_bar_ancre" href="">Villes</a>
+            <a class="nav_bar_ancre" href="">Sites</a>
+            <a class="nav_bar_ancre" href="">Accueil</a>
+            <a class="nav_bar_ancre" href="">Mon profil</a>
+            <a class="nav_bar_ancre" href="">Se déconnecter</a>
+        </div>
     </div>
 </header>
 
-{% block body %}{% endblock %}
+<section id="base_section">
+
+    {% block body %}{% endblock %}
+
+</section>
+
+<footer id="base_footer">
+    <div>
+        <h5>© Touch Grass - {{ "now" | date("Y") }}</h5>
+    </div>
+</footer>
+
+
 </body>
 </html>
