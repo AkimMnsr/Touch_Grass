@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Touch Grass{% endblock %}</title>
@@ -8,7 +8,8 @@
           /2000/svg%22 viewBox=%220 0 128 128%22>
           <text y=%221.2em%22 font-size=%2296%22>
           ⚫️</text></svg>">
-    <link rel="stylesheet" href="Css/base.css">
+    <link rel="stylesheet" href="{{ asset('Css/base.css') }}">
+    <link rel="stylesheet" href="{{ asset('Css/table.css') }}">
     {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
@@ -28,10 +29,9 @@
     <div id="nav_bar">
         <div id="nav_bar_img">
             <a id="img_ancre" href="">
-                <img id="img_nav_bar" src="img/MicrosoftTeams-image.png" alt="logo du site">
+                <img id="img_nav_bar" src="{{ asset('img/MicrosoftTeams-image.png') }}" alt="logo du site">
                 <h2>Touch Grass</h2>
             </a>
-
         </div>
         <div id="nav_bar_ancre">
             <a class="nav_bar_ancre" href="">Villes</a>
