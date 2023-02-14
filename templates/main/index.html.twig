@@ -48,28 +48,49 @@
                 <th>Inscrit/Places</th>
                 <th>Etat</th>
                 {% if app.user %}
-                 <th>Inscrit</th>
+                    <th>Inscrit</th>
                 {% endif %}
                 <th>Organisateur</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            {#  <tr>
+            <tr>
                 {% for sortie in lesSorties %}
                     <td>{{ sortie.Nom }}</td>
                     <td>{{ sortie.Datedebut | date("m/d/Y") }}</td>
-                    <td>{{ sortie.Datecloture | date("m/d/Y")  }}</td>
-                    <td>{{ sortie.Nbinscriptionsmax }}</td>
-                    <td>{{ sortie.EtatsNoEtat }}</td>
-                    {% if app.user %}
-                        <td>X</td>
-                    {% endif %}
-                    <td>{{ sortie.Organisateur }}</td>
-                    <td></td>
+                    <td>{{ sortie.Datecloture | date("m/d/Y") }}</td>
+                    <td>{{ sortie.IdInscription.ParticipantsNoParticipant|length }}/{{ sortie.Nbinscriptionsmax }}</td>
+                    <td>{{ sortie.EtatsNoEtat.Libelle }}</td>
+                    <td>
+                        {% if app.user %}
+                            X
+                        {% endif %}
+                    </td>
+                    <td>{{ sortie.Organisateur.Pseudo }}</td>
+                    <td>
+                        {% if app.user == sortie.Organisateur %}
+                            {% if sortie.EtatsNoEtat.Id == 1 %}
+                                Modifier - Publier
+                            {% else %}
+                                Afficher - Annuler
+                            {% endif %}
+                        {% elseif sortie.IdInscription.ParticipantsNoParticipant|length != sortie.Nbinscriptionsmax %}
+                            Afficher
+                            {% for participant in sortie.IdInscription.ParticipantsNoParticipant %}
+                                {% if app.user==participant %}
+                                    Se désister
+                                {% endif %}
+                            {% else %}
+                                S'inscrire
+                            {% endfor %}
+                        {% elseif %}
+                            Afficher
+                        {% endif %}
+                    </td>
 
                 {% endfor %}
-            </tr>#}
+            </tr>
             </tbody>
         </table>
     </div>
