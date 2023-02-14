@@ -25,10 +25,14 @@ class Inscriptions
     #[ORM\ManyToMany(targetEntity: Participants::class)]
     private Collection $participants_no_participant;
 
+    #[ORM\OneToMany(mappedBy: 'id_inscription', targetEntity: Sorties::class)]
+    private Collection $sorties;
+
     public function __construct()
     {
         $this->sorties_no_sortie = new ArrayCollection();
         $this->participants_no_participant = new ArrayCollection();
+        $this->sorties = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -92,6 +96,36 @@ class Inscriptions
     public function removeParticipantsNoParticipant(Participants $participantsNoParticipant): self
     {
         $this->participants_no_participant->removeElement($participantsNoParticipant);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Sorties>
+     */
+    public function getSorties(): Collection
+    {
+        return $this->sorties;
+    }
+
+    public function addSorty(Sorties $sorty): self
+    {
+        if (!$this->sorties->contains($sorty)) {
+            $this->sorties->add($sorty);
+            $sorty->setIdInscription($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSorty(Sorties $sorty): self
+    {
+        if ($this->sorties->removeElement($sorty)) {
+            // set the owning side to null (unless already changed)
+            if ($sorty->getIdInscription() === $this) {
+                $sorty->setIdInscription(null);
+            }
+        }
 
         return $this;
     }

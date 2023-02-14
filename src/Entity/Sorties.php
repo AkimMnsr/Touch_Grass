@@ -50,6 +50,9 @@ class Sorties
     #[ORM\JoinColumn(nullable: false)]
     private ?Etats $etats_no_etat = null;
 
+    #[ORM\ManyToOne(inversedBy: 'sorties')]
+    private ?Inscriptions $id_inscription = null;
+
 
     public function getId(): ?int
     {
@@ -184,6 +187,18 @@ class Sorties
     public function setEtatsNoEtat(?Etats $etats_no_etat): self
     {
         $this->etats_no_etat = $etats_no_etat;
+
+        return $this;
+    }
+
+    public function getIdInscription(): ?Inscriptions
+    {
+        return $this->id_inscription;
+    }
+
+    public function setIdInscription(?Inscriptions $id_inscription): self
+    {
+        $this->id_inscription = $id_inscription;
 
         return $this;
     }
