@@ -4,7 +4,7 @@
 
 {% block body %}
     <div id="info">
-        <h2>Date du Jour : {{ date.format('d/m/y') }}</h2>
+        <h2>Date du Jour : {{ "now" | date("m/d/Y") }}</h2>
         <h2>
             {% if app.user %}
                 Participant : {{ app.user.pseudo }}
@@ -50,11 +50,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
+            {#  <tr>
                 {% for sortie in lesSorties %}
                     <td>{{ sortie.Nom }}</td>
-                    <td>{{ sortie.Datedebut }}</td>
-                    <td>{{ sortie.Datecloture }}</td>
+                    <td>{{ sortie.Datedebut | date("m/d/Y") }}</td>
+                    <td>{{ sortie.Datecloture | date("m/d/Y")  }}</td>
                     <td>{{ sortie.Nbinscriptionsmax }}</td>
                     <td>{{ sortie.EtatsNoEtat }}</td>
                     {% if app.user %}
@@ -64,7 +64,7 @@
                     <td></td>
 
                 {% endfor %}
-            </tr>
+            </tr>#}
             </tbody>
         </table>
     </div>
