@@ -34,14 +34,17 @@
             </a>
         </div>
         <div id="nav_bar_ancre">
+            {% if is_granted('ROLE_ADMIN') %}
             <a class="nav_bar_ancre" href="">Villes</a>
             <a class="nav_bar_ancre" href="">Sites</a>
+            {% endif %}
             <a class="nav_bar_ancre" href="{{ path('main_index') }}">Accueil</a>
             {% if app.user %}
-            <a class="nav_bar_ancre" href="">Mon profil</a>
-            <a class="nav_bar_ancre" href="">Se déconnecter</a>
+            <a class="nav_bar_ancre" href="{{ path('profil_afficher') }}">Mon profil</a>
+            <a class="nav_bar_ancre" href="{{ path('app_logout') }}">Se déconnecter</a>
             {% else %}
-            <a class="nav_bar_ancre" href="">Se connecter / S'enregistrer</a>
+            <a class="nav_bar_ancre" href="{{ path('app_register') }}">S'inscrire</a>
+                <a class="nav_bar_ancre" href="{{ path('app_login') }}">Se connecter</a>
             {% endif %}
 
         </div>

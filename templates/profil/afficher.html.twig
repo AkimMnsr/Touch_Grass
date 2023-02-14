@@ -10,7 +10,7 @@
     Téléphone: {{ app.user.telephone }}
     Email: {{ app.user.mail }}
     Ville de rattachement: {{ app.user.SitesNoSite.NomSite }}
-    <form action="index.html.twig">
+    <form action="{{ path('main_index') }}">
         <input type="submit" value="Retour" />
     </form>
 {% endblock %}

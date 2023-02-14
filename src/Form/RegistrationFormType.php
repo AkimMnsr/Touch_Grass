@@ -55,10 +55,10 @@ class RegistrationFormType extends AbstractType
                     "choice_label" => "nom_site",
                     "label" => "Ville de rattachement"
                 ])
-            #->add('imageFile', FileType::class,
-               # [
-               #     "label" => "Ma photo"
-               # ])
+            ->add('imageFile', FileType::class,
+                [
+                    "label" => "Ma photo"
+                ])
             ->add('Enregistrer', SubmitType::class)
             ->add('Annuler', ResetType::class);
     }

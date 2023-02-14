@@ -47,14 +47,16 @@ class Participants implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn(nullable: false)]
     private ?Sites $sites_no_site = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255,nullable: true)]
     private ?string $image;
     /**
      * @Vich\UploadableField(mapping="products", fileNameProperty="image")
      */
+    #[ORM\Column(nullable: true)]
     private ?File $imageFile;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE,nullable: true)]
     private ?\DateTimeInterface $updatedAt;
 
     #[ORM\Column(nullable: true)]
@@ -210,7 +212,7 @@ class Participants implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->imageFile;
     }
 
-    public function setImageFile(string $image = null)
+    public function setImageFile(File $image = null)
     {
         $this->imageFile = $image;
 
