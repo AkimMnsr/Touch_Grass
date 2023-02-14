@@ -17,6 +17,17 @@ security:
         main:
             lazy: true
             provider: app_user_provider
+            custom_authenticator: App\Security\ParticipantsAuthenticator
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                target: main_index
+            remember_me:
+                secret: '%kernel.secret%' # required
+                lifetime: 604800 # 1 week in seconds
+                signature_properties: ['pseudo']
+                token_provider:
+                    doctrine: true
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
