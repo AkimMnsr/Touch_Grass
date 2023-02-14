@@ -2,6 +2,11 @@
 
 {% block title %}Touch Grass{% endblock %}
 
+
+  {% block stylesheets %}
+      <link rel="stylesheet" href="{{ asset('Css/table.css') }}">
+  {% endblock %}
+
 {% block body %}
     <div id="info">
         <h2>Date du Jour : {{ "now" | date("m/d/Y") }}</h2>
