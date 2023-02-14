@@ -8,10 +8,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/profil', name: 'profil_profil')]
+#[Route('/profil', name: 'profil_')]
 class ProfilController extends AbstractController
 {
-    #[Route('/', name: 'profil_afficher')]
+    #[Route('/', name: 'afficher')]
     public function afficher(
     ): Response
     {
