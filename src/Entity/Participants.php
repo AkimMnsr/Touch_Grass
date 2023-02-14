@@ -3,11 +3,17 @@
 namespace App\Entity;
 
 use App\Repository\ParticipantsRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: ParticipantsRepository::class)]
+#[Vich\Uploadable]
+#[UniqueEntity(fields: ['pseudo'], message: 'Ce pseudo est déja prit')]
 class Participants implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -36,15 +42,26 @@ class Participants implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
-    #[ORM\Column]
-    private ?bool $administrateur = null;
-
-    #[ORM\Column]
-    private ?bool $actif = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?Sites $sites_no_site = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $image;
+    /**
+     * @Vich\UploadableField(mapping="products", fileNameProperty="image")
+     */
+    private ?File $imageFile;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $updatedAt;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $administrateur = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $actif = null;
 
     public function getId(): ?int
     {
@@ -161,12 +178,69 @@ class Participants implements UserInterface, PasswordAuthenticatedUserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
+
+
+    public function getSitesNoSite(): ?Sites
+    {
+        return $this->sites_no_site;
+    }
+
+    public function setSitesNoSite(?Sites $sites_no_site): self
+    {
+        $this->sites_no_site = $sites_no_site;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getImageFile(): ?string
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(string $image = null)
+    {
+        $this->imageFile = $image;
+
+        if ($image){
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    /**
+     * @return \DateTimeInterface|null
+     */
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTimeInterface|null $updatedAt
+     */
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
     public function isAdministrateur(): ?bool
     {
         return $this->administrateur;
     }
 
-    public function setAdministrateur(bool $administrateur): self
+    public function setAdministrateur(?bool $administrateur): self
     {
         $this->administrateur = $administrateur;
 
@@ -178,21 +252,9 @@ class Participants implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->actif;
     }
 
-    public function setActif(bool $actif): self
+    public function setActif(?bool $actif): self
     {
         $this->actif = $actif;
-
-        return $this;
-    }
-
-    public function getSitesNoSite(): ?Sites
-    {
-        return $this->sites_no_site;
-    }
-
-    public function setSitesNoSite(?Sites $sites_no_site): self
-    {
-        $this->sites_no_site = $sites_no_site;
 
         return $this;
     }
