@@ -28,7 +28,7 @@
     <!-- div emplacement ancre nav bar -->
     <div id="nav_bar">
         <div id="nav_bar_img">
-            <a id="img_ancre" href="">
+            <a id="img_ancre" href="{{ path('main_index') }}">
                 <img id="img_nav_bar" src="{{ asset('img/MicrosoftTeams-image.png') }}" alt="logo du site">
                 <h2>Touch Grass</h2>
             </a>
@@ -36,9 +36,14 @@
         <div id="nav_bar_ancre">
             <a class="nav_bar_ancre" href="">Villes</a>
             <a class="nav_bar_ancre" href="">Sites</a>
-            <a class="nav_bar_ancre" href="">Accueil</a>
+            <a class="nav_bar_ancre" href="{{ path('main_index') }}">Accueil</a>
+            {% if app.user %}
             <a class="nav_bar_ancre" href="">Mon profil</a>
             <a class="nav_bar_ancre" href="">Se déconnecter</a>
+            {% else %}
+            <a class="nav_bar_ancre" href="">Se connecter / S'enregistrer</a>
+            {% endif %}
+
         </div>
     </div>
 </header>
