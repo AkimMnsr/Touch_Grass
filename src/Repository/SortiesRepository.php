@@ -38,7 +38,22 @@ class SortiesRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function findByNom($keyword){
+        $query = $this->createQueryBuilder('s')
+            ->where('s.nom LIKE :key')
+            ->setParameter('key' , '%'.$keyword.'%')->getQuery();
 
+        return $query->getResult();
+    }
+    public function findByLieu($keyword){
+        $query = $this->createQueryBuilder('s')
+            ->addSelect('lieu')
+            ->leftJoin('App\Entity\Lieux','lieu')
+            ->where('lieu.nom_lieu LIKE :key')
+            ->setParameter('key' , '%'.$keyword.'%')->getQuery();
+
+        return $query->getResult();
+    }
 //    /**
 //     * @return Sorties[] Returns an array of Sorties objects
 //     */

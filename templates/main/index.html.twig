@@ -25,16 +25,22 @@
                 {{ form(filtreForm) }}
             </div>
             <div>
-                <div><input type="checkbox" id="chkOrag" name="chkOrag">
-                    <label for="chkOrag">Sortie dont je suis l'organisateur/trice</label></div>
-                <div><input type="checkbox" id="chkInscrit" name="chkInscrit">
-                    <label for="chkInscrit">Sortie auxquelles je suis inscrit/e</label></div>
-                <div><input type="checkbox" id="chkNoInscrit" name="chkNoInscrit">
-                    <label for="chkNoInscrit">Sortie auxquelles je ne suis pas inscrit/e</label></div>
-                <div><input type="checkbox" id="chkPasse" name="chkPasse">
-                    <label for="chkPasse">Sortie passée</label></div>
-
-
+                <div>
+                    <input type="checkbox" id="chkOrag" name="chkOrag">
+                    <label for="chkOrag">Sortie dont je suis l'organisateur/trice</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="chkInscrit" name="chkInscrit">
+                    <label for="chkInscrit">Sortie auxquelles je suis inscrit/e</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="chkNoInscrit" name="chkNoInscrit">
+                    <label for="chkNoInscrit">Sortie auxquelles je ne suis pas inscrit/e</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="chkPasse" name="chkPasse">
+                    <label for="chkPasse">Sortie passée</label>
+                </div>
             </div>
         </div>
     </div>
@@ -57,38 +63,53 @@
             <tbody>
             <tr>
                 {% for sortie in lesSorties %}
+                    {# Nom #}
                     <td>{{ sortie.Nom }}</td>
+                    {# dateDeb #}
                     <td>{{ sortie.Datedebut | date("m/d/Y") }}</td>
+                    {# dateFin #}
                     <td>{{ sortie.Datecloture | date("m/d/Y") }}</td>
+                    {# nbInscrit/QteMax #}
                     <td>{{ sortie.IdInscription.ParticipantsNoParticipant|length }}/{{ sortie.Nbinscriptionsmax }}</td>
+                    {# Etat #}
                     <td>{{ sortie.EtatsNoEtat.Libelle }}</td>
-                    <td>
-                        {% if app.user %}
-                            X
-                        {% endif %}
-                    </td>
-                    <td>{{ sortie.Organisateur.Pseudo }}</td>
-                    <td>
-                        {% if app.user == sortie.Organisateur %}
-                            {% if sortie.EtatsNoEtat.Id == 1 %}
-                                Modifier - Publier
-                            {% else %}
-                                Afficher - Annuler
-                            {% endif %}
-                        {% elseif sortie.IdInscription.ParticipantsNoParticipant|length != sortie.Nbinscriptionsmax %}
-                            Afficher
+                    {# inscrit visible que une fois connecter #}
+                    {% if app.user %}
+                        <td>
                             {% for participant in sortie.IdInscription.ParticipantsNoParticipant %}
                                 {% if app.user==participant %}
-                                    Se désister
+                                    X
                                 {% endif %}
-                            {% else %}
-                                S'inscrire
                             {% endfor %}
-                        {% elseif %}
-                            Afficher
+                        </td>
+                    {% endif %}
+                    {# pseudo de l'organisateur #}
+                    <td>{{ sortie.Organisateur.Pseudo }}</td>
+                    {# Action #}
+                    {% if sortie.EtatsNoEtat.Id != 1 %}
+                        <td><a href="{{ path('sortie_sortie', {'id': sortie.Id}) }}">Afficher</a>
+                        {% if app.user %}
+                            {% if app.user.pseudo == sortie.Organisateur.Pseudo %}
+                                - Annuler</td>
+                            {% elseif sortie.IdInscription.ParticipantsNoParticipant|length != sortie.Nbinscriptionsmax %}
+                                {% for participant in sortie.IdInscription.ParticipantsNoParticipant %}
+                                    {% if app.user==participant %}
+                                        - Se désister</td>
+                                    {% endif %}
+                                {% else %}
+                                    - S'inscrire</td>
+                                {% endfor %}
+                            {% endif %}
+                        {% else %}
+                            </td>
                         {% endif %}
-                    </td>
-
+                    {% else %}
+                        {% if app.user %}
+                            {% if app.user.pseudo == sortie.Organisateur.Pseudo %}
+                                <td>Modifier - Publier</td>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
                 {% endfor %}
             </tr>
             </tbody>
