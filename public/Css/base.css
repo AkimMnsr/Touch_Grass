@@ -9,14 +9,15 @@ body {
     margin-right: 15%;
 }
 
-#base_footer {
+footer {
     border-top: 1px solid;
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 5%;
     display: flex;
     justify-content: center;
+    background-color: #fafafa;
+    padding: 1rem 1rem 1rem;
 }
 
 #navbar-end {
