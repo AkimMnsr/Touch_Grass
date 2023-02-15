@@ -2,39 +2,6 @@ body {
     margin: initial;
 }
 
-#header {
-    border-bottom: solid 1px;
-    padding: 20px;
-}
-
-#nav_bar_img {
-    display: flex;
-    flex-direction: row;
-}
-
-#nav_bar {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-#nav_bar_ancre {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.nav_bar_ancre {
-    padding: 5px;
-}
-
-#img_nav_bar {
-    width: 5%;
-}
-
-#img_ancre {
-    display: flex;
-}
 
 #base_section {
     margin-top: 3%;
@@ -42,12 +9,33 @@ body {
     margin-right: 15%;
 }
 
-#base_footer {
+footer {
     border-top: 1px solid;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
-    height: 5%;
     display: flex;
     justify-content: center;
+    background-color: #fafafa;
+    padding: 1rem 1rem 1rem;
+}
+
+#navbar-end {
+    align-items: stretch;
+    display: flex;
+}
+
+#hero-body {
+    padding: 1rem 2rem;
+}
+
+#title {
+     font-size: 1rem;
+     font-weight: 600;
+     line-height: 1.125;
+ }
+
+#p_user {
+    font-size: 0.9em;
+    display: flex;
 }

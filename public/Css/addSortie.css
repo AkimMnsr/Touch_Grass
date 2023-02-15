@@ -1,0 +1,37 @@
+#Form_div{
+    display: flex;
+    justify-content: center;
+}
+
+#Form_first_part{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin: 30px;
+
+}
+
+#Form_second_part {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin: 30px;
+}
+
+
+#div_button{
+    display: flex;
+    margin-left: 25%;
+    margin-right: 25%;
+    justify-content: space-around;
+}
+
+button {
+    padding: 15px;
+    margin: 15px;
+}
+
+#ancre {
+    display: flex;
+    justify-content: center;
+}

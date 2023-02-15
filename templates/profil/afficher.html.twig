@@ -1,16 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MainController!{% endblock %}
+{% block title %}Mon Profil{% endblock %}
 
 {% block body %}
-<h1>{{ app.user.pseudo }}</h1>
+    <h1>{{ app.user.pseudo }}</h1>
 
     Prenom: {{ app.user.prenom }}
     Nom: {{ app.user.nom }}
     Téléphone: {{ app.user.telephone }}
     Email: {{ app.user.mail }}
     Ville de rattachement: {{ app.user.SitesNoSite.NomSite }}
-    <form action="{{ path('main_index') }}">
-        <input type="submit" value="Retour" />
-    </form>
+    <button><a href="index.html.twig" value="Retour"/></button>
+    <button><a href="update.html.twig" value="Modifier"/></button>
 {% endblock %}
