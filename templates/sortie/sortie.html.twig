@@ -48,15 +48,22 @@
             <table>
                     <tr id="thead">
                         <th scope="col">Pseudo</th>
-                        <th scope="col-1">Nom</th>
+                        <th scope="col">Nom</th>
                     </tr>
                 <tbody>
+                {% if sortie.IdInscription != null %}
                 {% for result in sortie.IdInscription.ParticipantsNoParticipant %}
                 <tr>
                     <th scope="row">{{ result.Pseudo }}</th>
                     <td>{{result.Nom}} {{ result.Prenom }}</td>
                 </tr>
                 {% endfor %}
+                    {% else %}
+                        <tr>
+                            <th scope="row">Aucun participant</th>
+                            <td>no data</td>
+                        </tr>
+                {% endif %}
                 </tbody>
             </table>
         </div>

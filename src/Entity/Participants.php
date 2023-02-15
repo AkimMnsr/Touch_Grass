@@ -3,8 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\ParticipantsRepository;
+use Doctrine\DBAL\Types\IntegerType;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -124,6 +126,16 @@ class Participants implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUserIdentifier(): string
     {
         return (string) $this->pseudo;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserId(): ?int
+    {
+        return $this->id;
     }
 
     /**
