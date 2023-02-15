@@ -25,15 +25,22 @@
                 {{ form(filtreForm) }}
             </div>
             <div>
-                <div><input type="checkbox" id="chkOrag" name="chkOrag">
-                    <label for="chkOrag">Sortie dont je suis l'organisateur/trice</label></div>
-                <div><input type="checkbox" id="chkInscrit" name="chkInscrit">
-                    <label for="chkInscrit">Sortie auxquelles je suis inscrit/e</label></div>
-                <div><input type="checkbox" id="chkNoInscrit" name="chkNoInscrit">
-                    <label for="chkNoInscrit">Sortie auxquelles je ne suis pas inscrit/e</label></div>
-                <div><input type="checkbox" id="chkPasse" name="chkPasse">
-                    <label for="chkPasse">Sortie passée</label></div>
-
+                <div>
+                    <input type="checkbox" id="chkOrag" name="chkOrag">
+                    <label for="chkOrag">Sortie dont je suis l'organisateur/trice</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="chkInscrit" name="chkInscrit">
+                    <label for="chkInscrit">Sortie auxquelles je suis inscrit/e</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="chkNoInscrit" name="chkNoInscrit">
+                    <label for="chkNoInscrit">Sortie auxquelles je ne suis pas inscrit/e</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="chkPasse" name="chkPasse">
+                    <label for="chkPasse">Sortie passée</label>
+                </div>
             </div>
         </div>
     </div>
@@ -47,31 +54,69 @@
                 <th>Inscrit/Places</th>
                 <th>Etat</th>
                 {% if app.user %}
-                 <th>Inscrit</th>
+                    <th>Inscrit</th>
                 {% endif %}
                 <th>Organisateur</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            {#  <tr>
+            <tr>
                 {% for sortie in lesSorties %}
+                    {# Nom #}
                     <td>{{ sortie.Nom }}</td>
+                    {# dateDeb #}
                     <td>{{ sortie.Datedebut | date("m/d/Y") }}</td>
-                    <td>{{ sortie.Datecloture | date("m/d/Y")  }}</td>
-                    <td>{{ sortie.Nbinscriptionsmax }}</td>
-                    <td>{{ sortie.EtatsNoEtat }}</td>
+                    {# dateFin #}
+                    <td>{{ sortie.Datecloture | date("m/d/Y") }}</td>
+                    {# nbInscrit/QteMax #}
+                    <td>{{ sortie.IdInscription.ParticipantsNoParticipant|length }}/{{ sortie.Nbinscriptionsmax }}</td>
+                    {# Etat #}
+                    <td>{{ sortie.EtatsNoEtat.Libelle }}</td>
+                    {# inscrit visible que une fois connecter #}
                     {% if app.user %}
-                        <td>X</td>
+                        <td>
+                            {% for participant in sortie.IdInscription.ParticipantsNoParticipant %}
+                                {% if app.user==participant %}
+                                    X
+                                {% endif %}
+                            {% endfor %}
+                        </td>
                     {% endif %}
-                    <td>{{ sortie.Organisateur }}</td>
-                    <td></td>
-
+                    {# pseudo de l'organisateur #}
+                    <td>{{ sortie.Organisateur.Pseudo }}</td>
+                    {# Action #}
+                    {% if sortie.EtatsNoEtat.Id != 1 %}
+                        <td><a href="{{ path('sortie_sortie', {'id': sortie.Id}) }}">Afficher</a>
+                        {% if app.user %}
+                            {% if app.user.pseudo == sortie.Organisateur.Pseudo %}
+                                - Annuler</td>
+                            {% elseif sortie.IdInscription.ParticipantsNoParticipant|length != sortie.Nbinscriptionsmax %}
+                                {% for participant in sortie.IdInscription.ParticipantsNoParticipant %}
+                                    {% if app.user==participant %}
+                                        - Se désister</td>
+                                    {% endif %}
+                                {% else %}
+                                    - S'inscrire</td>
+                                {% endfor %}
+                            {% endif %}
+                        {% else %}
+                            </td>
+                        {% endif %}
+                    {% else %}
+                        {% if app.user %}
+                            {% if app.user.pseudo == sortie.Organisateur.Pseudo %}
+                                <td>Modifier - Publier</td>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
                 {% endfor %}
-            </tr>#}
+            </tr>
             </tbody>
         </table>
     </div>
     <button><a href="{{ path('sortie_addSortie') }}">Créer une sortie</a></button>
+
+
 
 {% endblock %}

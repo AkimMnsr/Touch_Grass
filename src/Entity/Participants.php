@@ -46,9 +46,10 @@ class Participants implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 15, nullable: true)]
     private ?string $telephone = null;
 
+
     #[Assert\Email]
     #[Assert\NotBlank]
-    #[ORM\Column(length: 20)]
+    #[ORM\Column(length: 100)]
     private ?string $mail = null;
 
     #[ORM\Column]
