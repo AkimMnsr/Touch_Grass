@@ -10,6 +10,6 @@
     Téléphone: {{ app.user.telephone }}
     Email: {{ app.user.mail }}
     Ville de rattachement: {{ app.user.SitesNoSite.NomSite }}
-    <button><a href="index.html.twig" value="Retour"/></button>
-    <button><a href="update.html.twig" value="Modifier"/></button>
+    <button><a href={{ path('profil_afficher')}} >Retour</a></button>
+    <button><a href={{ path('profil_modifier') }} >Modifier</a></button>
 {% endblock %}

@@ -59,8 +59,7 @@ class RegistrationFormType extends AbstractType
                 [
                     "label" => "Ma photo"
                 ])
-            ->add('Enregistrer', SubmitType::class)
-            ->add('Annuler', ResetType::class);
+            ->add('Enregistrer', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

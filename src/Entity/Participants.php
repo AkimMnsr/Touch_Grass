@@ -86,7 +86,7 @@ class Participants implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255,nullable: true)]
     private ?string $image;
     /**
-     * @Vich\UploadableField(mapping="products", fileNameProperty="image")
+     * @Vich\UploadableField(mapping="participants", fileNameProperty="image")
      */
     private ?File $imageFile;
 
