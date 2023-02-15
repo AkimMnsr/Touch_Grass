@@ -1,14 +1,50 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Inscription{% endblock %}
-
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('Css/register.css') }}">
+{% endblock %}
 {% block body %}
     <h1>Rejoins nous et toi aussi organise des sorties!</h1>
+    <br>
+    <fieldset>
+    <div id="form">
 
     {{ form_start(registrationForm) }}
-
-    <button><a href="{{ path('profil_afficher') }}">back to list</a></button>
-
+        <ul>
+        <li>
+    {{ form_label(registrationForm.pseudo) }}
+    {{ form_widget(registrationForm.pseudo) }}
+        </li>
+        <li>
+    {{ form_label(registrationForm.prenom) }}
+    {{ form_widget(registrationForm.prenom) }}
+        </li>
+        <li>
+    {{ form_label(registrationForm.nom) }}
+    {{ form_widget(registrationForm.nom) }}
+        </li>
+        <li>
+    {{ form_label(registrationForm.telephone) }}
+    {{ form_widget(registrationForm.telephone) }}
+        </li>
+        <li>
+    {{ form_label(registrationForm.mail) }}
+    {{ form_widget(registrationForm.mail) }}
+        </li>
+        <li>
+    {{ form_widget(registrationForm.plainPassword) }}
+        </li>
+        <li>
+    {{ form_label(registrationForm.sitesNoSite) }}
+    {{ form_widget(registrationForm.sitesNoSite) }}
+        </li>
+        <li>
+    {{ form_label(registrationForm.imageFile) }}
+    {{ form_widget(registrationForm.imageFile) }}
+        </li>
+            </ul>
     {{ form_end(registrationForm) }}
-
+    </div>
+    </fieldset>
 {% endblock %}

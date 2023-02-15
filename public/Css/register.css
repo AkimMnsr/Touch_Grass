@@ -1,0 +1,39 @@
+#form {
+    padding-left: 40%;
+    padding-right: 40%;
+    justify-content: center;
+}
+
+body {
+    font-family: Arial;
+}
+
+input[type=text], [type=password], [type=submit], [type=reset], [type=file], [type=select] {
+    padding: 12px 20px;
+    box-sizing: border-box;
+    width: 86%;
+}
+
+button[type=submit], [type=reset] {
+    background-color: #48c78e;
+    color: white;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+select {
+    width: 225px;
+}
+
+h1 {
+    text-align: center;
+}
+
+li {
+    list-style-type: none;
+}
+fieldset{
+    border:1px solid;
+}
