@@ -18,6 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 use function Sodium\add;
 
 class RegistrationFormType extends AbstractType
@@ -55,11 +56,12 @@ class RegistrationFormType extends AbstractType
                     "choice_label" => "nom_site",
                     "label" => "Ville de rattachement"
                 ])
-            ->add('imageFile', FileType::class,
+            ->add('imageFile', VichFileType::class,
                 [
                     "label" => "Ma photo"
                 ])
-            ->add('Enregistrer', SubmitType::class);
+            ->add('Enregistrer', SubmitType::class)
+            ->add('Annuler', ResetType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -28,7 +28,6 @@ class ProfilController extends AbstractController
     ): Response
     {
         $participant = new Participants();
-        $site = new Sites();
         $participant->setPseudo($this->getUser()->getPseudo());
         $participant->setPrenom($this->getUser()->getPrenom());
         $participant->setNom($this->getUser()->getNom());

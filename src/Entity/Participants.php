@@ -31,29 +31,15 @@ class Participants implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\NotBlank]
     #[ORM\Column(length: 20, unique: true)]
     private ?string $pseudo = null;
-    #[Assert\Regex(
-        pattern: '/^[a-zA-Z]/',
-        message: 'Le nom ne peut contenir que des lettres',
-        match: false,
-    )]
+
     #[Assert\NotBlank]
     #[ORM\Column(length: 30)]
     private ?string $nom = null;
 
-    #[Assert\Regex(
-        pattern: '/^[a-zA-Z]/',
-        message: 'Le prenom ne peut contenir que des lettres',
-        match: false,
-    )]
     #[Assert\NotBlank]
     #[ORM\Column(length: 30)]
     private ?string $prenom = null;
 
-    #[Assert\Regex(
-        pattern: '/^[0-9]/',
-        message: 'Le numéro de téléphone ne doit contenir que des chiffres',
-        match: false,
-    )]
     #[Assert\NotBlank]
     #[ORM\Column(length: 15, nullable: true)]
     private ?string $telephone = null;
@@ -71,7 +57,7 @@ class Participants implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[Assert\NotBlank]
     #[Assert\Length(
-        min: 10,
+        min: 5,
         max: 20,
         minMessage: "Mot de passe trop court.",
         maxMessage: "Mot de passe trop long."
@@ -83,15 +69,14 @@ class Participants implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn(nullable: false)]
     private ?Sites $sites_no_site = null;
 
-    #[ORM\Column(length: 255,nullable: true)]
-    private ?string $image;
-    /**
-     * @Vich\UploadableField(mapping="participants", fileNameProperty="image")
-     */
-    private ?File $imageFile;
+    #[ORM\Column(length: 255, nullable: true)]
+    private $image;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $updatedAt;
+    #[Vich\UploadableField(mapping: "product_image", fileNameProperty: "image")]
+    private $imageFile;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTime $updatedAt;
 
     #[ORM\Column(nullable: true)]
     private ?bool $administrateur = null;
@@ -123,7 +108,7 @@ class Participants implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->pseudo;
+        return (string)$this->pseudo;
     }
 
     /**
@@ -144,6 +129,7 @@ class Participants implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
     public function getNom(): ?string
     {
         return $this->nom;
@@ -191,6 +177,7 @@ class Participants implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
     /**
      * @see PasswordAuthenticatedUserInterface
      */
@@ -216,7 +203,6 @@ class Participants implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
 
-
     public function getSitesNoSite(): ?Sites
     {
         return $this->sites_no_site;
@@ -229,19 +215,19 @@ class Participants implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImage()
     {
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage($image)
     {
         $this->image = $image;
 
         return $this;
     }
 
-    public function getImageFile(): ?string
+    public function getImageFile()
     {
         return $this->imageFile;
     }
@@ -250,7 +236,7 @@ class Participants implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->imageFile = $image;
 
-        if ($image){
+        if ($image) {
             $this->updatedAt = new \DateTime('now');
         }
     }
@@ -291,6 +277,45 @@ class Participants implements UserInterface, PasswordAuthenticatedUserInterface
     public function setActif(?bool $actif): self
     {
         $this->actif = $actif;
+
+        return $this;
+    }
+
+    public function __serialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'pseudo' => $this->pseudo,
+            'nom' => $this->nom,
+            'prenom' => $this->prenom,
+            'telephone' => $this->telephone,
+            'mail' => $this->mail,
+            'roles' => $this->roles,
+            'password' => $this->password,
+            'sites_no_site' => $this->sites_no_site,
+            'imageFile' => base64_encode($this->imageFile),
+            'updatedAt' => $this->updatedAt,
+            'administrateur' => $this->administrateur,
+            'actif' => $this->actif
+        ];
+
+    }
+
+    public function __unserialize(array $serialized)
+    {
+        $this->id = $serialized['id'];
+        $this->pseudo = $serialized['pseudo'];
+        $this->nom = $serialized['id'];
+        $this->prenom = $serialized['nom'];
+        $this->telephone = $serialized['telephone'];
+        $this->mail = $serialized['mail'];
+        $this->roles = $serialized['roles'];
+        $this->password = $serialized['password'];
+        $this->sites_no_site = $serialized['sites_no_site'];
+        $this->imageFile = base64_decode($serialized['imageFile']);
+        $this->updatedAt = $serialized['updatedAt'];
+        $this->administrateur = $serialized['administrateur'];
+        $this->actif = $serialized['actif'];
 
         return $this;
     }
