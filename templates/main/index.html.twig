@@ -61,8 +61,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                {% for sortie in lesSorties %}
+            {% for sortie in lesSorties %}
+                <tr>
                     {# Nom #}
                     <td>{{ sortie.Nom }}</td>
                     {# dateDeb #}
@@ -110,8 +110,8 @@
                             {% endif %}
                         {% endif %}
                     {% endif %}
-                {% endfor %}
-            </tr>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>
