@@ -33,6 +33,50 @@
                     <label for="chkNoInscrit">Sortie auxquelles je ne suis pas inscrit/e</label></div>
                 <div><input type="checkbox" id="chkPasse" name="chkPasse">
                     <label for="chkPasse">Sortie passée</label></div>
+                    
+                    
+<<<<<<< am/addSortie
+            </div>
+        </div>
+    </div>
+    <div id="dvg">
+        <table>
+            <thead>
+            <tr>
+                <th>Nom de la Sortie</th>
+                <th>Date de la Sortie</th>
+                <th>Clôture</th>
+                <th>Inscrit/Places</th>
+                <th>Etat</th>
+                {% if app.user %}
+                 <th>Inscrit</th>
+                {% endif %}
+                <th>Organisateur</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {#  <tr>
+                {% for sortie in lesSorties %}
+                    <td>{{ sortie.Nom }}</td>
+                    <td>{{ sortie.Datedebut | date("m/d/Y") }}</td>
+                    <td>{{ sortie.Datecloture | date("m/d/Y")  }}</td>
+                    <td>{{ sortie.Nbinscriptionsmax }}</td>
+                    <td>{{ sortie.EtatsNoEtat }}</td>
+                    {% if app.user %}
+                        <td>X</td>
+                    {% endif %}
+                    <td>{{ sortie.Organisateur }}</td>
+                    <td></td>
+
+                {% endfor %}
+            </tr>#}
+            </tbody>
+        </table>
+    </div>
+    <button><a href="{{ path('sortie_addSortie') }}">Créer une sortie</a></button>
+=======
+>>>>>>> master
 
 
 {% endblock %}
