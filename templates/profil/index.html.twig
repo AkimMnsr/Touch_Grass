@@ -1,15 +1,32 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Mon Profil{% endblock %}
-
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('Css/profil.css') }}">
+{% endblock %}
 {% block body %}
     <h1>{{ app.user.pseudo }}</h1>
-
+<ul>
+    <li>
     Prenom: {{ app.user.prenom }}
+    </li>
+    <li>
     Nom: {{ app.user.nom }}
+    </li>
+    <li>
     Téléphone: {{ app.user.telephone }}
+    </li>
+    <li>
     Email: {{ app.user.mail }}
+    </li>
+    <li>
     Ville de rattachement: {{ app.user.SitesNoSite.NomSite }}
+    </li>
+    <li>
     <button><a href={{ path('profil_afficher')}} >Retour</a></button>
+    </li>
+    <li>
     <button><a href={{ path('profil_modifier') }} >Modifier</a></button>
+    </li>
+</ul>
 {% endblock %}
