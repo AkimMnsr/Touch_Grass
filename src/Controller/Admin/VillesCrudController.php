@@ -15,12 +15,13 @@ class VillesCrudController extends AbstractCrudController
     }
 
 
-    public function configureFields(string $Villes): iterable
+   /* public function configureFields(string $Villes): iterable
     {
         return [
+            IdField::new('id')->hideOnForm(),
             TextField::new('nom_ville'),
             TextField::new('code_postal'),
         ];
     }
-
+*/
 }

@@ -2,7 +2,9 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Participants;
 use App\Entity\Sites;
+use App\Entity\Sorties;
 use App\Entity\Villes;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -45,5 +47,7 @@ class AdminController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Site', 'fas fa-list', Sites::class);
         yield MenuItem::linkToCrud('Ville', 'fas fa-list', Villes::class);
+        yield MenuItem::linkToCrud('Sorties', 'fas fa-list', Sorties::class);
+        yield MenuItem::linkToCrud('Users', 'fas fa-list', Participants::class);
     }
 }
