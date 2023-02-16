@@ -71,6 +71,11 @@
     </div>
     {%  endif %}
 </nav>
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
 {% if app.user %}
 <section class="hero is-info">
     <div id="hero-body">
