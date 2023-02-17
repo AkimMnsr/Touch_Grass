@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Inscriptions;
 use App\Entity\Sorties;
 use App\Form\AddSortieType;
+use App\Form\CancelType;
 use App\Repository\EtatsRepository;
 use App\Repository\SortiesRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -126,6 +127,50 @@ class SortieController extends AbstractController
         }
     }
 
+    //Function for cancel a 'sortie'
+    #[IsGranted('ROLE_USER')]
+    #[Route('/annuler/{id}', name: 'annuler')]
+    public function annuler(
+        int $id,
+        Request $request,
+        SortiesRepository $sortiesRepository,
+        EntityManagerInterface $em,
+        EtatsRepository $etatsRepository,
+    ) : Response
+    {
+        $owner = $this->getUser();
+        $sortie = $sortiesRepository->findOneBy(["id" => $id]);
+        $cancelForm = $this->createForm(CancelType::class, $sortie);
+        $cancelForm->handleRequest($request);
+
+
+        if ($sortie->getOrganisateur() === $owner ){
+            if($cancelForm->isSubmitted()){
+                try {
+                    $cancel = $etatsRepository->findOneBy(['id' => 5]);
+                    $sortie->setEtatsNoEtat($cancel);
+                    if($cancelForm->isValid()) {
+                        $sortie->setDescriptioninfos("Motif de l'annulation : ".$sortie->getDescriptioninfos());
+                        $em->persist($sortie);
+                        $em->flush();
+                        $this->addFlash('sucess', 'La sortie a bien été annulée');
+                        return $this->redirectToRoute('main_index');
+                    }
+                } catch (Exception $exception) {
+                    dd($exception->getMessage());
+                }
+            }
+        }
+        return $this->render('sortie/annuler.html.twig', [
+            'sortie' => $sortie,
+            'cancelForm' => $cancelForm->createView(),
+        ]);
+    }
+
+
+
 
 }
+
+
 

@@ -1,0 +1,41 @@
+#section {
+
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+}
+
+#article_one {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+#article_two {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 15px;
+}
+
+form  {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+textarea {
+    width: 424px;
+    height: 220px;
+
+}
+
+#div_button {
+    display: flex;
+    padding: 15px;
+    gap: 20px;
+}
+
+button  {
+
+}
