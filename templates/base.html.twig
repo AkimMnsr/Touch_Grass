@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>{% block title %}Touch Grass{% endblock %}</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>️</text></svg>">
-    <link rel="icon" type="image/png" href="{{ asset('img/MicrosoftTeams-image.png') }}" />
+    <link rel="icon" type="image/png" href="{{ asset('img/groot.svg') }}" />
     <link rel="stylesheet" href="{{ asset('Css/base.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css">
 
@@ -20,10 +20,12 @@
 </head>
 <body>
 
+<script src="{{ asset('Js/base.js') }}"></script>
+
 <nav class="navbar is-success" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item" href="{{ path('main_index') }}">
-            <img src="{{ asset('img/MicrosoftTeams-image.svg') }}" width="112" height="28">TOUCH GRASS</a>
+            <img src="{{ asset('img/groot.svg') }}" width="112" height="28">TOUCH GRASS</a>
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
             <span class="is-active" aria-hidden="false"></span>
             <span class="is-active" aria-hidden="true"></span>
@@ -77,13 +79,20 @@
     </div>
 {% endfor %}
 {% if app.user %}
-<section class="hero is-info">
-    <div id="hero-body">
-        <p id="title">
-            Bienvenue {{ app.user.pseudo }}
-        </p>
-    </div>
-</section>
+    <article id="art-info" class="message is-link">
+        <div class="message-header">
+            <p>Info :</p>
+            <button onclick="deleteme()" class="delete" aria-label="delete"></button>
+        </div>
+        <div id="Div_message" class="message-body">
+            <img id="baby-groot" src="{{ asset('Img/groot.svg') }}" alt="">
+           <p>Hey bienvenue sur Touch Grass, moi c'est Baby groot et j'te propose de découvrir notre app de gardien de la planete :D
+           Le concept est simple, un Admin (bouuuh) t'a créer un compte ! Pourquoi ? ben pour aller toucher de l'herbe un peu :D
+               Une fois connecté tu n'a plus qu'a t'inscrire ou créer des sorties alors n'hésite pas :)
+               Si tu t'ennui y'a un petit secret a découvrir :P
+           </p>
+        </div>
+    </article>
 {% endif %}
 <section id="base_section">
 

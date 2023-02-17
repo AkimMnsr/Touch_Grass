@@ -4,7 +4,24 @@ body {
 
 }
 
+#baby-groot{
+    width: 100px;
+    height: 100px;
+}
+.message.is-link {
+    background-color: #eff1fa;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
 
+#Div_message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 #base_section {
     margin-top: 3%;
     margin-left: 15%;
