@@ -3,9 +3,12 @@
 {% block title %}Touch Grass{% endblock %}
 
 
-  {% block stylesheets %}
-      <link rel="stylesheet" href="{{ asset('Css/table.css') }}">
-  {% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('Css/table.css') }}">
+{% endblock %}
+{% block javascripts %}
+
+{% endblock %}
 
 {% block body %}
     <div id="info">
@@ -24,28 +27,30 @@
             <div>
                 {{ form(filtreForm) }}
             </div>
-            <div>
+            {% if app.user %}
                 <div>
-                    <input type="checkbox" id="chkOrag" name="chkOrag">
-                    <label for="chkOrag">Sortie dont je suis l'organisateur/trice</label>
+                    <div>
+                        <input type="checkbox" class="filter-checkbox" id="organisateur" name="organisateur">
+                        <label for="organisateur">Sortie dont je suis l'organisateur/trice</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" class="filter-checkbox" id="inscrit" name="inscrit">
+                        <label for="inscrit">Sortie auxquelles je suis inscrit/e</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" class="filter-checkbox" id="non-inscrit" name="non-inscrit">
+                        <label for="non-inscrit">Sortie auxquelles je ne suis pas inscrit/e</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" class="filter-checkbox" id="fini" name="fini">
+                        <label for="fini">Sortie passée</label>
+                    </div>
                 </div>
-                <div>
-                    <input type="checkbox" id="chkInscrit" name="chkInscrit">
-                    <label for="chkInscrit">Sortie auxquelles je suis inscrit/e</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="chkNoInscrit" name="chkNoInscrit">
-                    <label for="chkNoInscrit">Sortie auxquelles je ne suis pas inscrit/e</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="chkPasse" name="chkPasse">
-                    <label for="chkPasse">Sortie passée</label>
-                </div>
-            </div>
+            {% endif %}
         </div>
     </div>
     <div id="dvg">
-        <table>
+        <table id="table-sorties">
             <thead>
             <tr>
                 <th>Nom de la Sortie</th>
@@ -62,7 +67,10 @@
             </thead>
             <tbody>
             {% for sortie in lesSorties %}
-                <tr>
+                <tr class="table-row"
+                    data-est-inscrit="{{ (app.user is defined and app.user in sortie.IdInscription.ParticipantsNoParticipant) ? '1' : '0' }}"
+                    data-est-organisateur="{{ app.user==sortie.Organisateur?'1':'0'}}"
+                    data-est-fini="{{ sortie.Datecloture<date?'1':'0' }}">
                     {# Nom #}
                     <td>{{ sortie.Nom }}</td>
                     {# dateDeb #}
@@ -78,7 +86,7 @@
                         <td>
                             {% for participant in sortie.IdInscription.ParticipantsNoParticipant %}
                                 {% if app.user==participant %}
-                                    X
+                                    <img src="{{ asset('img/cross-23.svg') }}" alt="inscrit">
                                 {% endif %}
                             {% endfor %}
                         </td>
@@ -116,7 +124,5 @@
         </table>
     </div>
     <button><a href="{{ path('sortie_addSortie') }}">Créer une sortie</a></button>
-
-
-
+    <script type="text/javascript" src="{{ asset('Js/Filtre.js') }}"></script>
 {% endblock %}

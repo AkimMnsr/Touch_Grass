@@ -42,7 +42,7 @@ class MainController extends AbstractController
                 $reset = false;
             }
             if ($dateDeb != null) {
-                $lesSorties += $sr->findByDateFin($dateDeb);
+                $lesSorties += $sr->findByDateDeb($dateDeb);
                 $reset = false;
             }
             if ($dateFin != null) {
@@ -57,7 +57,7 @@ class MainController extends AbstractController
             if ($this->isGranted('ROLE_USER') || $this->isGranted('ROLE_ADMIN')) {
                 $lesSorties = $sr->findAllBasic($this->getUser()->getId());
             } else {
-                $lesSorties = $sr->findBy(['etats_no_etat' => 1]);
+                $lesSorties = $sr->findByEtat();
             }
         }
         return $this->render('main/index.html.twig',

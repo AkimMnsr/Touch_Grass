@@ -48,6 +48,13 @@ class SortiesRepository extends ServiceEntityRepository
 
         return $query->getResult();
     }
+    public function findByEtat()
+    {
+        $query = $this->createQueryBuilder('s')
+            ->where('s.etats_no_etat != 1')->getQuery();
+
+        return $query->getResult();
+    }
     public function findByDateDeb($keyword)
     {
         $query = $this->createQueryBuilder('s')
