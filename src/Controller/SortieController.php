@@ -94,7 +94,7 @@ class SortieController extends AbstractController
                     } else {
                         $publish = $etatsRepository->findOneBy(['id' => 2]);
                         $sortie->setEtatsNoEtat($publish);
-                    };
+                    }
                     if ($sortieModif->get("remove")->isClicked()){
                         $em->remove($sortie);
                         $em->flush();
@@ -105,7 +105,6 @@ class SortieController extends AbstractController
                         $em->flush();
                         $idSortie = $sortie->getId();
                         $this->addFlash('sucess', 'La sortie a bien été modifiée');
-                        $this->addFlash('sucess', 'pipi');
                         return $this->redirectToRoute('sortie_sortie', array('id' =>$idSortie));
                     }
 
