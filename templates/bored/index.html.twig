@@ -1,0 +1,30 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ asset('Css/bored.css') }}">
+</head>
+<body>
+<div class="ctn">
+    <canvas id="c" width="360px" height="640px"></canvas>
+    <div id="scoreboard">0</div>
+    <div id="start-screen">
+        <div id="ctrl-ctn">
+            <div id="up" class="ctrl-btn">↑</div>
+            <div id="space" class="ctrl-btn">SPACE</div>
+            <div id="tap" class="ctrl-btn">TAP</div>
+        </div>
+    </div>
+    <div id="gameover-screen">
+        <div id="gameover">GAME OVER</div>
+        <div id="replay">REPLAY</div>
+    </div>
+</div>
+
+
+<script src="{{ asset('Js/bored.js') }}"></script>
+</body>
+</html>
