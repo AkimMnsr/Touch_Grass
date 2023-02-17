@@ -10,62 +10,119 @@
 
 
 <div id="Div_form">
-    <p>Ville organisatrice : {{ app.user.SitesNoSite.NomSite }} </p>
+
     {{ form_start(formSortie) }}
+
     <div id="Form_div">
         <div id="Form_first_part">
 
-        {{ form_label(formSortie.nom, 'Nom de la sortie :') }}
-        {{ form_widget(formSortie.nom) }}
 
-        {{ form_label(formSortie.datedebut, 'Date et heure de la sortie :') }}
-        {{ form_widget(formSortie.datedebut) }}
+            <div class="control">
+                <label class="label">Nom de la sortie :</label>
+                <input class="input is-focused" {{ form_widget(formSortie.nom) }}
+            </div>
 
-        {{ form_label(formSortie.datecloture, 'Date limite d\'inscription :') }}
-        {{ form_widget(formSortie.datecloture) }}
+            <div class="control">
+                <label class="label"> {{ form_label(formSortie.datedebut, 'Date et heure de la sortie :') }}</label>
+                <input class="input is-focused"
+                {{ form_widget(formSortie.datedebut) }}
+            </div>
 
-        {{ form_label(formSortie.nbinscriptionsmax, 'Nombre de place :') }}
-        {{ form_widget(formSortie.nbinscriptionsmax) }}
+            <div class="control">
+                <label class="label">   {{ form_label(formSortie.datecloture, 'Date limite d\'inscription :') }}</label>
+                <input class="input is-focused"
+                {{ form_widget(formSortie.datecloture) }}
+            </div>
 
-        {{ form_label(formSortie.duree , 'Durée :')}}
-        {{ form_widget(formSortie.duree) }}
 
-        {{ form_label(formSortie.descriptioninfos, 'Description et infos :') }}
-        {{ form_widget(formSortie.descriptioninfos) }}
+       <strong>{{ form_label(formSortie.nbinscriptionsmax, 'Nombre de place :') }}</strong>
+            <div class="field has-addons">
+                <p class="control">
+                    <input class="input"   {{ form_widget(formSortie.nbinscriptionsmax) }}
+                </p>
+                <p class="control">
+                    <a class="button is-static">
+                        places
+                    </a>
+                </p>
+            </div>
+            <strong>      {{ form_label(formSortie.duree , 'Durée :')}}</strong>
+
+            <div class="field has-addons">
+                <p class="control">
+                    <input class="input" {{ form_widget(formSortie.duree) }}
+                </p>
+                <p class="control">
+                    <a class="button is-static">
+                        minutes
+                    </a>
+                </p>
+            </div>
+
+
+            {{ form_label(formSortie.descriptioninfos, 'Description et infos :') }}
+            <textarea class="textarea is-primary"  {{ form_widget(formSortie.descriptioninfos) }}
+
 
         </div>
 
      <div id="Form_second_part">
 
-        {{ form_label(formSortie.lieux_no_lieu, 'Lieu:') }}     <a href="" >Ajouter nouveau lieu</a>
-        {{ form_widget(formSortie.lieux_no_lieu) }}
-
-         <label for="rue">Rue </label>
-         <input id="rue" type="text" placeholder="1 rue de la joie">
-
-         <label for="ville">Ville  </label>
-         <input id="ville" type="number" placeholder="Ville">
-
-         <label for="cp">Code postal </label>
-         <input id="cp" type="number" placeholder="44000">
-
-         <label for="lat">Latitude </label>
-         <input id="lat" type="number" placeholder="latitude">
-
-         <label for="lon">Longitude </label>
-         <input id="lon" type="number" placeholder="longitude">
 
 
+         <strong>{{ form_label(formSortie.lieux_no_lieu, 'Lieu:') }}</strong>
+         <div class="field">
+             <p class="control has-icons-left">
+                    <span class="select">
+                        <select {{ form_widget(formSortie.lieux_no_lieu) }}
+             </p>
+         </div>
+
+         <div class="field">
+             <label class="label">Rue</label>
+             <div class="control">
+                 <input class="input" type="text" placeholder="Nom de la rue">
+             </div>
+         </div>
+
+         <div class="field">
+             <label class="label">Ville</label>
+             <div class="control">
+                 <input class="input" type="text" placeholder="Ville">
+             </div>
+         </div>
+
+         <div class="field">
+             <label class="label">Code postal</label>
+             <div class="control">
+                 <input class="input" type="number" placeholder="code postal">
+             </div>
+         </div>
+
+         <div class="field">
+             <label class="label">Latitude</label>
+             <div class="control">
+                 <input class="input" type="text" placeholder="Latitude">
+             </div>
+         </div>
+
+         <div class="field">
+             <label class="label">Longitude</label>
+             <div class="control">
+                 <input class="input" type="text" placeholder="longitude">
+             </div>
+         </div>
         </div>
     </div>
         <div id="div_button">
-            {{ form_widget(formSortie.save) }}
-            {{ form_widget(formSortie.publish) }}
+            <button class="button is-info" {{ form_widget(formSortie.save) }}
+            <button class="button is-success" {{ form_widget(formSortie.publish) }}
+            <a class="button is-light"  href="{{ path('main_index') }}" >Annuler</a>
+            <div style="display: none">
+                <button href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" {{ form_widget(formSortie.remove) }}
+            </div>
         </div>
     {{ form_end(formSortie) }}
-        <div id="ancre">
-            <a href="{{ path('main_index') }}" >Annuler</a>
-        </div>
 </div>
 
 
