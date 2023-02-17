@@ -20,27 +20,27 @@
         <h1>Afficher la sortie</h1>
         <article id="article_un">
             <div id="info_div_1">
-                <p>Nom de la sortie : {{ sortie.nom }}</p>
-                <p>Date et heure de la sortie : {{ sortie.datedebut | date("m/d/Y à H:i")}}</p>
-                <p>Date limite d'inscription : {{ sortie.datecloture | date("m/d/Y") }}</p>
-                <p>Nombre de places : {{ sortie.nbinscriptionsmax }}</p>
-                <p>Durée : {{ sortie.duree }} minutes</p>
-                <p>Description et infos : {{ sortie.descriptioninfos }} </p>
+                <p class="p_info">Nom de la sortie : {{ sortie.nom }}</p>
+                <p class="p_info">Date et heure de la sortie : {{ sortie.datedebut | date("m/d/Y à H:i")}}</p>
+                <p class="p_info">Date limite d'inscription : {{ sortie.datecloture | date("m/d/Y") }}</p>
+                <p class="p_info">Nombre de places : {{ sortie.nbinscriptionsmax }}</p>
+                <p class="p_info">Durée : {{ sortie.duree }} minutes</p>
+                <p class="p_info">Description et infos : {{ sortie.descriptioninfos }} </p>
             </div>
 
             <div id="info_div_2">
-                <p>Ville organisatrice : {{ sortie.LieuxNoLieu.VillesNoVille.NomVille }}</p>
-                <p>Lieu : {{ sortie.LieuxNoLieu.NomLieu }}</p>
-                <p>Rue : {{ sortie.LieuxNoLieu.Rue }}</p>
-                <p>Code postal : {{ sortie.LieuxNoLieu.VillesNoVille.CodePostal }}</p>
-                    <p>Latitude :
+                <p class="p_info">Ville organisatrice : {{ sortie.LieuxNoLieu.VillesNoVille.NomVille }}</p>
+                <p class="p_info">Lieu : {{ sortie.LieuxNoLieu.NomLieu }}</p>
+                <p class="p_info">Rue : {{ sortie.LieuxNoLieu.Rue }}</p>
+                <p class="p_info">Code postal : {{ sortie.LieuxNoLieu.VillesNoVille.CodePostal }}</p>
+                    <p class="p_info">Latitude :
                         {%  if   sortie.LieuxNoLieu.Latitude is null %}
                         (Latitude non renseignée)
                         {% else %}
                         {{ sortie.LieuxNoLieu.Latitude }}
                     {% endif %}
                     </p>
-                <p>Longitude :
+                <p class="p_info">Longitude :
                     {%  if   sortie.LieuxNoLieu.Longitude is null %}
                         (Longitude non renseignée)
                     {% else %}
