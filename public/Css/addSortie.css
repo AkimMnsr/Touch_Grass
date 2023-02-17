@@ -25,6 +25,7 @@
     margin-right: 25%;
     margin-bottom: 5px;
     justify-content: space-around;
+    gap:10px;
 }
 
 p {
