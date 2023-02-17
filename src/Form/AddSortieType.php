@@ -41,9 +41,9 @@ class AddSortieType extends AbstractType
                     'class' => Lieux::class,
                     'choice_label' => 'nom_lieu',
                 ])
-
             ->add('save', SubmitType::class, ['label' => 'Enregistrer'])
             ->add('publish', SubmitType::class, ['label' => 'Publier la sortie'])
+            ->add('remove', SubmitType::class, ['label' => 'Supprimer la sortie'])
 
         ;
     }

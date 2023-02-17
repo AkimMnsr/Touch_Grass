@@ -6,69 +6,148 @@
 {% block title %}Sortie{% endblock %}
 
 {% block body %}
-    <h1>Afficher une sortie</h1>
-    <article id="article_un">
 
 
-        <div id="info_div_1">
-            <p>Nom de la sortie : {{ sortie.nom }}</p>
-            <p>Date et heure de la sortie : {{ sortie.datedebut | date("m/d/Y")}}</p>
-            <p>Date limite d'inscription : {{ sortie.datecloture | date("m/d/Y") }}</p>
-            <p>Nombre de places : {{ sortie.nbinscriptionsmax }}</p>
-            <p>Durée : {{ sortie.duree }} minutes</p>
-            <p>Description et infos : {{ sortie.descriptioninfos }} </p>
-        </div>
+    <script src="{{ asset('Js/AddSortie.js') }}"></script>
+    {% for message in app.flashes('sucess') %}
+    <div class="alter alert-success">
+        {{ message }}
+    </div>
+    {% endfor %}
 
-        <div id="info_div_2">
-            <p>Ville organisatrice : {{ sortie.LieuxNoLieu.VillesNoVille.NomVille }}</p>
-            <p>Lieu : {{ sortie.LieuxNoLieu.NomLieu }}</p>
-            <p>Rue : {{ sortie.LieuxNoLieu.Rue }}</p>
-            <p>Code postal : {{ sortie.LieuxNoLieu.VillesNoVille.CodePostal }}</p>
-                <p>Latitude :
-                    {%  if   sortie.LieuxNoLieu.Latitude is null %}
-                    (Latitude non renseignée)
+
+    <section id="sectionDetail">
+        <h1>Afficher la sortie</h1>
+        <article id="article_un">
+            <div id="info_div_1">
+                <p>Nom de la sortie : {{ sortie.nom }}</p>
+                <p>Date et heure de la sortie : {{ sortie.datedebut | date("m/d/Y à H:i")}}</p>
+                <p>Date limite d'inscription : {{ sortie.datecloture | date("m/d/Y") }}</p>
+                <p>Nombre de places : {{ sortie.nbinscriptionsmax }}</p>
+                <p>Durée : {{ sortie.duree }} minutes</p>
+                <p>Description et infos : {{ sortie.descriptioninfos }} </p>
+            </div>
+
+            <div id="info_div_2">
+                <p>Ville organisatrice : {{ sortie.LieuxNoLieu.VillesNoVille.NomVille }}</p>
+                <p>Lieu : {{ sortie.LieuxNoLieu.NomLieu }}</p>
+                <p>Rue : {{ sortie.LieuxNoLieu.Rue }}</p>
+                <p>Code postal : {{ sortie.LieuxNoLieu.VillesNoVille.CodePostal }}</p>
+                    <p>Latitude :
+                        {%  if   sortie.LieuxNoLieu.Latitude is null %}
+                        (Latitude non renseignée)
+                        {% else %}
+                        {{ sortie.LieuxNoLieu.Latitude }}
+                    {% endif %}
+                    </p>
+                <p>Longitude :
+                    {%  if   sortie.LieuxNoLieu.Longitude is null %}
+                        (Longitude non renseignée)
                     {% else %}
-                    {{ sortie.LieuxNoLieu.Latitude }}
-                {% endif %}
+                        {{ sortie.LieuxNoLieu.Longitude }}
+                    {% endif %}
                 </p>
-            <p>Longitude :
-                {%  if   sortie.LieuxNoLieu.Longitude is null %}
-                    (Longitude non renseignée)
-                {% else %}
-                    {{ sortie.LieuxNoLieu.Longitude }}
-                {% endif %}
-            </p>
-        </div>
 
-    </article>
-
-    <article id="article_deux">
-        <div id="info_div_liste">
-            <h4>Liste des participants inscrits :</h4>
-            <table>
-                    <tr id="thead">
-                        <th scope="col">Pseudo</th>
-                        <th scope="col">Nom</th>
-                    </tr>
-                <tbody>
-                {% if sortie.IdInscription != null %}
-                {% for result in sortie.IdInscription.ParticipantsNoParticipant %}
-                <tr>
-                    <th scope="row">{{ result.Pseudo }}</th>
-                    <td>{{result.Nom}} {{ result.Prenom }}</td>
-                </tr>
-                {% endfor %}
-                    {% else %}
-                        <tr>
-                            <th scope="row">Aucun participant</th>
-                            <td>no data</td>
+            </div>
+            <div id="info_div_liste">
+                <h4>Liste des participants inscrits :</h4>
+                <table>
+                        <tr id="thead">
+                            <th scope="col">Pseudo</th>
+                            <th scope="col">Nom</th>
                         </tr>
-                {% endif %}
-                </tbody>
-            </table>
-        </div>
+                    <tbody>
+                    {% if sortie.IdInscription != null %}
+                    {% for result in sortie.IdInscription.ParticipantsNoParticipant %}
+                    <tr>
+                        <td>{{ result.Pseudo }}</td>
+                        <td>{{result.Nom}} {{ result.Prenom }}</td>
+                    </tr>
+                    {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td>Aucun participant</td>
+                                <td>no data</td>
+                            </tr>
+                    {% endif %}
+                    </tbody>
+                </table>
 
-    </article>
+            </div>
+        </article>
+
+        <div id="buttonSortie">
+            {% if app.user == sortie.organisateur %}
+                <button onclick="myFunction()" id="iwantToModify">Modifier</button>
+            {% endif %}
+            <a href="{{ path('main_index')  }}" type="submit">Retour</a>
+        </div>
+    </section>
+
+    <section onload="hideMe()" id="sectionForm">
+        <div id="showform">
+            {%if app.user == sortie.organisateur %}
+                <div id="Div_form">
+                    <h1>Modifier la sortie</h1>
+                    <p>Ville organisatrice : {{ app.user.SitesNoSite.NomSite }} </p>
+                    {{ form_start(formSortie) }}
+                    <div id="Form_div">
+                        <div id="Form_first_part">
+
+                            {{ form_label(formSortie.nom, 'Nom de la sortie :') }}
+                            {{ form_widget(formSortie.nom) }}
+
+                            {{ form_label(formSortie.datedebut, 'Date et heure de la sortie :') }}
+                            {{ form_widget(formSortie.datedebut) }}
+
+                            {{ form_label(formSortie.datecloture, 'Date limite d\'inscription :') }}
+                            {{ form_widget(formSortie.datecloture) }}
+
+                            {{ form_label(formSortie.nbinscriptionsmax, 'Nombre de place :') }}
+                            {{ form_widget(formSortie.nbinscriptionsmax) }}
+
+                            {{ form_label(formSortie.duree , 'Durée :')}}
+                            {{ form_widget(formSortie.duree) }}
+
+                            {{ form_label(formSortie.descriptioninfos, 'Description et infos :') }}
+                            {{ form_widget(formSortie.descriptioninfos) }}
+
+                        </div>
+
+                        <div id="Form_second_part">
+
+                            {{ form_label(formSortie.lieux_no_lieu, 'Lieu:') }}     <a href="" >Ajouter nouveau lieu</a>
+                            {{ form_widget(formSortie.lieux_no_lieu) }}
+
+                            <label for="rue">Rue </label>
+                            <input id="rue" type="text" placeholder="1 rue de la joie">
+
+                            <label for="ville">Ville  </label>
+                            <input id="ville" type="number" placeholder="Ville">
+
+                            <label for="cp">Code postal </label>
+                            <input id="cp" type="number" placeholder="44000">
+
+                            <label for="lat">Latitude </label>
+                            <input id="lat" type="number" placeholder="latitude">
+
+                            <label for="lon">Longitude </label>
+                            <input id="lon" type="number" placeholder="longitude">
+
+
+                        </div>
+                    </div>
+                    <div id="div_button">
+                        {{ form_widget(formSortie.save) }}
+                        {{ form_widget(formSortie.publish) }}
+                        {{ form_widget(formSortie.remove) }}
+                    </div>
+                    {{ form_end(formSortie) }}
+                </div>
+                <button onclick="retour()" id="iwantToModify">retour</button>
+            {% endif %}
+        </div>
+    </section>
 
 
 {% endblock %}

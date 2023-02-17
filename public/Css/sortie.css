@@ -1,6 +1,16 @@
 h1 {
     text-align: center;
 }
+#sectionDetail{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: space-around;
+    justify-content: center;
+    align-items: center;
+}
+
+
 
 #article_un {
     display: flex;
@@ -9,7 +19,7 @@ h1 {
 }
 
 #article_deux {
-    display: inline-block;
+    display:inherit;
 }
 
 #info_div_1 {
@@ -20,50 +30,75 @@ h1 {
     margin: 30px;
 }
 
+#Form_div{
+    display: flex;
+    justify-content: center;
+}
+
+#Form_first_part{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin: 30px;
+
+}
+
+#Form_second_part {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin: 30px;
+}
+
+
+#div_button{
+    display: flex;
+    margin-left: 25%;
+    margin-right: 25%;
+    justify-content: space-around;
+}
+
+button {
+    padding: 15px;
+    margin: 15px;
+}
+
+#ancre {
+    display: flex;
+    justify-content: center;
+}
+
+
+table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table td, table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+table tr:hover {
+    background-color: #ddd;
+}
+
+table th {
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+}
+
 table {
     border-collapse: collapse;
-    border: 2px solid rgb(200, 200, 200);
-    letter-spacing: 1px;
-    font-family: sans-serif;
-    font-size: 0.8rem;
-    display: inline-block;
-    width: 150%;
-    text-align: justify;
-
-    overflow: auto;
-}
-th[scope='col']{
-    padding-right: 20px;
 }
 
-th[scope='col-1']{
-    width: 100%;
-}
-td,
-th {
-    border: 1px solid rgb(190, 190, 190);
+th, td {
+    border: 1px solid black;
     padding: 10px;
 }
-td {
-    width: 100%;
-}
-
-#thead {
-    background-color: #696969;
-    color: #fff;
-}
-
-tr:nth-child(even) {
-    background-color: #eee;
-}
-caption {
-    padding: 5px;
-    caption-side: top;
-}
-
-tbody {
-    display: inline-block;
-    width: 100%;
-    overflow: auto;
-}
-
