@@ -8,9 +8,20 @@ h1 {
     align-content: space-around;
     justify-content: center;
     align-items: center;
+    border-radius: 20px;
+    box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+    box-sizing: border-box;
+    background: #ecf0f3;
+    padding: 15px;
 }
 
-
+#sectionForm {
+    border-radius: 20px;
+    box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+    box-sizing: border-box;
+    background: #ecf0f3;
+    padding: 15px;
+}
 
 #article_un {
     display: flex;

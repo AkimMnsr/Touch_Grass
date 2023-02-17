@@ -140,11 +140,9 @@ class SortieController extends AbstractController
     {
         $owner = $this->getUser();
         $sortie = $sortiesRepository->findOneBy(["id" => $id]);
+        if ($sortie->getOrganisateur() === $owner ){
         $cancelForm = $this->createForm(CancelType::class, $sortie);
         $cancelForm->handleRequest($request);
-
-
-        if ($sortie->getOrganisateur() === $owner ){
             if($cancelForm->isSubmitted()){
                 try {
                     $cancel = $etatsRepository->findOneBy(['id' => 5]);
@@ -160,11 +158,19 @@ class SortieController extends AbstractController
                     dd($exception->getMessage());
                 }
             }
-        }
+
         return $this->render('sortie/annuler.html.twig', [
             'sortie' => $sortie,
             'cancelForm' => $cancelForm->createView(),
         ]);
+        }
+        return $this->trolling();
+    }
+
+
+    #[Route('/troll', name: 'troll')]
+    public function trolling() {
+            return $this->render('sortie/trolling.html.twig');
     }
 
 

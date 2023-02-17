@@ -32,4 +32,13 @@ p {
     text-align: center;
 }
 
+form {
+    padding-bottom: 15px;
+    border-radius: 20px;
+    box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+    box-sizing: border-box;
+    background: #ecf0f3;
+
+}
+
 
