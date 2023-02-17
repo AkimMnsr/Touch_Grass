@@ -15,10 +15,9 @@
 ###< symfony/phpunit-bridge ###
 
 ###> phpunit/phpunit ###
-/phpunit.xml
-.phpunit.result.cache
 ###< phpunit/phpunit ###
 
 #Enlever le fichier de config php
 .idea
 
+/public/img/products/

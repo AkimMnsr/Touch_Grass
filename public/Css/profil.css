@@ -1,0 +1,46 @@
+.column {
+    float: left;
+    width: 33.33%;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+p {
+    text-align: center;
+}
+
+.imgProfil {
+    width: 60%;
+    height: auto;
+
+}
+
+#label {
+    text-align: right;
+    clear: both;
+    float: left;
+    margin-right: 15px;
+}
+
+#text {
+    text-align: left;
+    float: right;
+    margin-left: 15px;
+}
+
+li {
+    list-style-type: none;
+}
+
+#retour, #modifier {
+    text-align: center;
+}
+
+#back {
+    padding-right: 11px;
+    padding-left: 11px;
+}
