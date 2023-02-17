@@ -18,7 +18,7 @@ class MainController extends AbstractController
     {
         $date=new \DateTime();
         $reset=false;
-
+        if($this->isGranted('ROL'))
         $lesSorties=$sr->findAll();
 
         $filtreForm = $this->createForm(FiltreType::class);
