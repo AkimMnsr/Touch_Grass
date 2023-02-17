@@ -3,12 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Inscriptions;
-use App\Entity\Lieux;
 use App\Entity\Sorties;
 use App\Form\AddSortieType;
 use App\Repository\EtatsRepository;
-use App\Repository\InscriptionsRepository;
-use App\Repository\LieuxRepository;
 use App\Repository\SortiesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
@@ -41,7 +38,9 @@ class SortieController extends AbstractController
 
         if ($sortieForm->isSubmitted()) {
             try {
-
+                $inscription = new Inscriptions();
+                $inscription->setDateInscription($sortie->getDatedebut());
+                $sortie->setIdInscription($inscription);
                if( $sortieForm->get("save")->isClicked()) {
                    $save = $etatsRepository->findOneBy(['id' => 1]);
                    $sortie->setEtatsNoEtat($save);
@@ -49,9 +48,8 @@ class SortieController extends AbstractController
                    $publish = $etatsRepository->findOneBy(['id' => 2]);
                    $sortie->setEtatsNoEtat($publish);
                };
-
-
                 if ($sortieForm->isValid()) {
+                    $em->persist($inscription);
                     $em->persist($sortie);
                     $em->flush();
                     $idSortie = $sortie->getId();
@@ -67,22 +65,67 @@ class SortieController extends AbstractController
         ]);
 
     }
-
-
-    // Function show details of single 'sortie'
+    // Function have two function :
+    // First one : Participant can only show sortie
+    // Second : Owner of sortie can modify sortie
     #[IsGranted('ROLE_USER')]
     #[Route('/{id}', name: 'sortie')]
     public function sortie(
+        EntityManagerInterface $em,
+        Request $request,
         int $id,
-        SortiesRepository $sortiesRepository
+        SortiesRepository $sortiesRepository,
+        EtatsRepository $etatsRepository,
+
     ): Response
     {
+        $owner = $this->getUser();
         $sortie = $sortiesRepository->findOneBy(["id" =>$id]);
-        return $this->render('sortie/sortie.html.twig',
-            compact('sortie')
-        );
-    }
+        if ($sortie->getOrganisateur() === $owner ){
 
+            $sortieModif = $this->createForm(AddSortieType::class,$sortie);
+            $sortieModif->handleRequest($request);
+            if ($sortieModif->isSubmitted()) {
+                try {
+
+                    if( $sortieModif->get("save")->isClicked()) {
+                        $save = $etatsRepository->findOneBy(['id' => 1]);
+                        $sortie->setEtatsNoEtat($save);
+                    } else {
+                        $publish = $etatsRepository->findOneBy(['id' => 2]);
+                        $sortie->setEtatsNoEtat($publish);
+                    };
+                    if ($sortieModif->get("remove")->isClicked()){
+                        $em->remove($sortie);
+                        $em->flush();
+                        return $this->redirectToRoute('main_index');
+                    }
+                    if ($sortieModif->isValid()) {
+                        $em->persist($sortie);
+                        $em->flush();
+                        $idSortie = $sortie->getId();
+                        $this->addFlash('sucess', 'La sortie a bien été modifiée');
+                        $this->addFlash('sucess', 'pipi');
+                        return $this->redirectToRoute('sortie_sortie', array('id' =>$idSortie));
+                    }
+
+                } catch (Exception $exception) {
+                    dd($exception->getMessage());
+                }
+            }
+
+            return $this->render('sortie/sortie.html.twig', [
+                'formSortie' => $sortieModif->createView(),
+                'sortie' => $sortie
+            ] );
+        } else {
+            return $this->render('sortie/sortie.html.twig',
+                [
+                    'sortie' => $sortie
+                ]
+            );
+        }
+    }
 
 
 }

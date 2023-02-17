@@ -23,15 +23,12 @@
     display: flex;
     margin-left: 25%;
     margin-right: 25%;
+    margin-bottom: 5px;
     justify-content: space-around;
 }
 
-button {
-    padding: 15px;
-    margin: 15px;
+p {
+    text-align: center;
 }
 
-#ancre {
-    display: flex;
-    justify-content: center;
-}
+
