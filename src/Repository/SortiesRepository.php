@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Sorties;
+use App\Entity\Etats;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -38,22 +39,62 @@ class SortiesRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-    public function findByNom($keyword){
+
+    public function findByNom($keyword)
+    {
         $query = $this->createQueryBuilder('s')
             ->where('s.nom LIKE :key')
-            ->setParameter('key' , '%'.$keyword.'%')->getQuery();
+            ->setParameter('key', '%' . $keyword . '%')->getQuery();
 
         return $query->getResult();
     }
-    public function findByLieu($keyword){
+    public function findByDateDeb($keyword)
+    {
         $query = $this->createQueryBuilder('s')
-            ->addSelect('lieu')
-            ->leftJoin('App\Entity\Lieux','lieu')
-            ->where('lieu.nom_lieu LIKE :key')
-            ->setParameter('key' , '%'.$keyword.'%')->getQuery();
+            ->where('s.datedebut LIKE :key')
+            ->setParameter('key', '%' . $keyword . '%')->getQuery();
 
         return $query->getResult();
     }
+    public function findByDateFin($keyword)
+    {
+        $query = $this->createQueryBuilder('s')
+            ->where('s.datecloture LIKE :key')
+            ->setParameter('key', '%' . $keyword . '%')->getQuery();
+
+        return $query->getResult();
+    }
+
+    public function findAllBasic($keyword)
+    {
+        $query2 = $this->createQueryBuilder('s')
+            ->select('s.id')
+            ->from('App\Entity\Sorties', 'sorties')
+            ->join('App\Entity\Etats', 'e', 'WITH', 'e = s.etats_no_etat')
+            ->where('s.organisateur != :key')
+            ->andWhere('e.id != 1')
+            ->setParameter('key', $keyword)
+            ->getQuery()->getResult();
+        $query = $this->createQueryBuilder('s')
+            ->select('s')
+            ->from('App\Entity\Sorties', 'sorties')
+            ->where('s.organisateur = :key')
+            ->orWhere('s.id IN (:param)')
+            ->setParameter('key', $keyword)
+            ->setParameter('param', $query2)
+            ->getQuery();
+        return $query->getResult();
+    }
+
+    /*public function findAvgSFdql(): array
+    {
+        $em = $this->getEntityManager();
+        $dql = "SELECT AVG(s.vote) AS avg
+FROM App\Entity\Serie As s
+WHERE s.genres LIKE '%Sci-Fi%'";
+        $req = $em->createQuery($dql);
+        return $req->getOneOrNullResult();
+    }*/
 //    /**
 //     * @return Sorties[] Returns an array of Sorties objects
 //     */
