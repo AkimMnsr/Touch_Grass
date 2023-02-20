@@ -32,13 +32,24 @@ p {
     text-align: center;
 }
 
-form {
+#Div_form{
     padding-bottom: 15px;
     border-radius: 20px;
     box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
     box-sizing: border-box;
     background: #ecf0f3;
+    width: 100%;
+    height: 75%;
 
+}
+
+#span-lieux {
+    display: flex;
+    flex-direction: row;
+}
+
+#reset-button {
+    margin: 15px;
 }
 
 

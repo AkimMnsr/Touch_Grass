@@ -8,122 +8,138 @@
 
 {% block body %}
 
+    <script src="{{ asset('Js/twigAddSortie.js') }}"></script>
 
-<div id="Div_form">
+    <div id="Div_form">
 
-    {{ form_start(formSortie) }}
+        <button id="reset-button" onclick="reset()" class="button is-light"><img style="width: 25px; height: 25px"
+                                                                                 src="{{ asset('img/Refresh_icon.svg.png') }}"
+                                                                                 alt=""></a></button>
 
-    <div id="Form_div">
-        <div id="Form_first_part">
+        {{ form_start(formSortie) }}
+
+        <div id="Form_div">
+            <div id="Form_first_part">
 
 
-            <div class="control">
-                <label class="label">Nom de la sortie :</label>
-                <input class="input is-focused" {{ form_widget(formSortie.nom) }}
+                <div class="control">
+                    <label class="label">Nom de la sortie :</label>
+                    <input id="nomSortie" onload="load()" class="input is-focused" {{ form_widget(formSortie.nom) }}
+                </div>
+
+                <div class="control">
+                    <label class="label"> {{ form_label(formSortie.datedebut, 'Date et heure de la sortie :') }}</label>
+                    <input id="dateSortie" onload="load()" class="input is-focused"
+                    {{ form_widget(formSortie.datedebut) }}
+                </div>
+
+                <div class="control">
+                    <label class="label">   {{ form_label(formSortie.datecloture, 'Date limite d\'inscription :') }}</label>
+                    <input id="dateCloture" onload="load()" class="input is-focused"
+                    {{ form_widget(formSortie.datecloture) }}
+                </div>
+
+
+                <strong>{{ form_label(formSortie.nbinscriptionsmax, 'Nombre de place :') }}</strong>
+                <div class="field has-addons">
+                    <p class="control">
+                        <input id="PlaceId" onload="load()"
+                               class="input" {{ form_widget(formSortie.nbinscriptionsmax) }}
+                    </p>
+                    <p class="control">
+                        <a class="button is-static">
+                            places
+                        </a>
+                    </p>
+                </div>
+                <strong>      {{ form_label(formSortie.duree , 'Durée :') }}</strong>
+
+                <div class="field has-addons">
+                    <p class="control">
+                        <input id="DuréeId" onload="load()" class="input" {{ form_widget(formSortie.duree) }}
+                    </p>
+                    <p class="control">
+                        <a class="button is-static">
+                            minutes
+                        </a>
+                    </p>
+                </div>
+
+                {{ form_label(formSortie.descriptioninfos, 'Description et infos :') }}
+                <textarea id="DescriptionId" onload="load()"
+                          class="textarea is-primary" {{ form_widget(formSortie.descriptioninfos) }}
+
+
             </div>
 
-            <div class="control">
-                <label class="label"> {{ form_label(formSortie.datedebut, 'Date et heure de la sortie :') }}</label>
-                <input class="input is-focused"
-                {{ form_widget(formSortie.datedebut) }}
-            </div>
-
-            <div class="control">
-                <label class="label">   {{ form_label(formSortie.datecloture, 'Date limite d\'inscription :') }}</label>
-                <input class="input is-focused"
-                {{ form_widget(formSortie.datecloture) }}
-            </div>
+            <div id="Form_second_part">
 
 
-       <strong>{{ form_label(formSortie.nbinscriptionsmax, 'Nombre de place :') }}</strong>
-            <div class="field has-addons">
-                <p class="control">
-                    <input class="input"   {{ form_widget(formSortie.nbinscriptionsmax) }}
-                </p>
-                <p class="control">
-                    <a class="button is-static">
-                        places
-                    </a>
-                </p>
-            </div>
-            <strong>      {{ form_label(formSortie.duree , 'Durée :')}}</strong>
-
-            <div class="field has-addons">
-                <p class="control">
-                    <input class="input" {{ form_widget(formSortie.duree) }}
-                </p>
-                <p class="control">
-                    <a class="button is-static">
-                        minutes
-                    </a>
-                </p>
-            </div>
-
-
-            {{ form_label(formSortie.descriptioninfos, 'Description et infos :') }}
-            <textarea class="textarea is-primary"  {{ form_widget(formSortie.descriptioninfos) }}
-
-
-        </div>
-
-     <div id="Form_second_part">
-
-
-
-         <strong>{{ form_label(formSortie.lieux_no_lieu, 'Lieu:') }}</strong>
-         <div class="field">
-             <p class="control has-icons-left">
-                    <span class="select">
+                <strong>{{ form_label(formSortie.lieux_no_lieu, 'Lieu:') }}</strong>
+                <div class="field">
+                    <p class="control has-icons-left">
+                    <span id="span-lieux" class="select">
                         <select {{ form_widget(formSortie.lieux_no_lieu) }}
-             </p>
-         </div>
+                         <a class="button is-light" onclick="save()" href="{{ path('sortie_addLieu') }}"> + </a>
+                    </span>
+                    </p>
+                </div>
 
-         <div class="field">
-             <label class="label">Rue</label>
-             <div class="control">
-                 <input class="input" type="text" placeholder="Nom de la rue">
-             </div>
-         </div>
+                <div id="result">
+                    <p>Rue : </p>
+                    <p>Ville :</p>
+                    <p>Code postal :</p>
+                    <p>Longitude :</p>
+                    <p>latitude :</p>
+                </div>
 
-         <div class="field">
-             <label class="label">Ville</label>
-             <div class="control">
-                 <input class="input" type="text" placeholder="Ville">
-             </div>
-         </div>
-
-         <div class="field">
-             <label class="label">Code postal</label>
-             <div class="control">
-                 <input class="input" type="number" placeholder="code postal">
-             </div>
-         </div>
-
-         <div class="field">
-             <label class="label">Latitude</label>
-             <div class="control">
-                 <input class="input" type="text" placeholder="Latitude">
-             </div>
-         </div>
-
-         <div class="field">
-             <label class="label">Longitude</label>
-             <div class="control">
-                 <input class="input" type="text" placeholder="longitude">
-             </div>
-         </div>
+            </div>
         </div>
-    </div>
         <div id="div_button">
             <button class="button is-info" {{ form_widget(formSortie.save) }}
             <button class="button is-success" {{ form_widget(formSortie.publish) }}
-            <a class="button is-light"  href="{{ path('main_index') }}" >Annuler</a>
+            <a class="button is-danger" onclick="save()" href="{{ path('main_index') }}">Annuler</a>
+
             <div style="display: none">
+
                 <button href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" {{ form_widget(formSortie.remove) }}
+
             </div>
+
+            {{ form_end(formSortie) }}
         </div>
-    {{ form_end(formSortie) }}
-</div>
+    </div>
+
+    <script>
+        const myComboBox = document.getElementById('cboLieu');
+        const result = document.getElementById('result');
+        // Objet Symfony à filtrer
+        const myObject = [
+            {id: 1, value: 'valeur 1', category: 'option1'},
+            {id: 2, value: 'valeur 2', category: 'option2'},
+            {id: 3, value: 'valeur 3', category: 'option1'},
+            {id: 4, value: 'valeur 4', category: 'option2'},
+            {id: 5, value: 'valeur 5', category: 'option1'}
+        ];
+        // Ajout de l'écouteur d'événement
+        myComboBox.addEventListener('change', function () {
+            const selectedValue = this.value;
+            // Filtrage de l'objet Symfony en fonction de la valeur sélectionnée
+            const filteredObject = myObject.filter(function (element) {
+                return selectedValue === 'all' || element.category === selectedValue;
+            });
+            // Affichage des éléments filtrés
+            result.innerHTML = '';
+            filteredObject.forEach(function (element) {
+                const item = document.createElement('div');
+                item.textContent = element.value;
+                result.appendChild(item);
+            });
+        });
+
+    </script>
+
+
 
 
 {% endblock %}

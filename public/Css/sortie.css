@@ -117,3 +117,9 @@ th, td {
 .p_info {
     padding: 5px;
 }
+
+
+#span-lieux {
+    display: flex;
+    flex-direction: row;
+}
