@@ -29,7 +29,8 @@
             </div>
 
             <div id="info_div_2">
-                <p class="p_info">Ville organisatrice : {{ sortie.LieuxNoLieu.VillesNoVille.NomVille }}</p>
+                <p class="p_info">Site organisateur : {{ sortie.organisateur.SitesNoSite.NomSite }} </p>
+                <p class="p_info">Ville : {{ sortie.LieuxNoLieu.VillesNoVille.NomVille }}</p>
                 <p class="p_info">Lieu : {{ sortie.LieuxNoLieu.NomLieu }}</p>
                 <p class="p_info">Rue : {{ sortie.LieuxNoLieu.Rue }}</p>
                 <p class="p_info">Code postal : {{ sortie.LieuxNoLieu.VillesNoVille.CodePostal }}</p>
@@ -116,23 +117,23 @@
 
                         <div id="Form_second_part">
 
-                            {{ form_label(formSortie.lieux_no_lieu, 'Lieu:') }}     <a href="" >Ajouter nouveau lieu</a>
-                            {{ form_widget(formSortie.lieux_no_lieu) }}
+                            <strong>{{ form_label(formSortie.lieux_no_lieu, 'Lieu:') }}</strong>
+                            <div class="field">
+                                <p class="control has-icons-left">
+                    <span id="span-lieux" class="select">
+                        <select id="id-lieu" {{ form_widget(formSortie.lieux_no_lieu) }}
+                        <a href="{{ path('sortie_LieuSortie', {'id': sortie.Id}) }}" >+</a>
+                    </span>
+                                </p>
+                            </div>
 
-                            <label for="rue">Rue </label>
-                            <input id="rue" type="text" placeholder="1 rue de la joie">
+                        {% dump(lieu) %}
 
-                            <label for="ville">Ville  </label>
-                            <input id="ville" type="number" placeholder="Ville">
-
-                            <label for="cp">Code postal </label>
-                            <input id="cp" type="number" placeholder="44000">
-
-                            <label for="lat">Latitude </label>
-                            <input id="lat" type="number" placeholder="latitude">
-
-                            <label for="lon">Longitude </label>
-                            <input id="lon" type="number" placeholder="longitude">
+                            <p id="id-rue" >Rue: </p>
+                            <p id="id-ville" >ville : </p>
+                            <p id="id-code_postal">Code postal : </p>
+                            <p id="id-longitude">Longitude : </p>
+                            <p id="id-latitude">Latitude : </p>
 
 
                         </div>
@@ -141,9 +142,10 @@
                         {{ form_widget(formSortie.save) }}
                         {{ form_widget(formSortie.publish) }}
                         {{ form_widget(formSortie.remove) }}
-                        <button onclick="retour()" id="iwantToModify">retour</button>
+
                     </div>
                     {{ form_end(formSortie) }}
+                    <button onclick="retour()" id="iwantToModify">retour</button>
                 </div>
 
             {% endif %}

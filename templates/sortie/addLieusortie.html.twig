@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+  {% block stylesheets %}
+      <link rel="stylesheet" href="{{ asset('Css/addLieu.css') }}">
+  {% endblock %}
+
+
+{% block title %}Création de Lieu{% endblock %}
+
+{% block body %}
+
+    <article>
+        <div>
+            {{ form_start(formLieu) }}
+
+
+
+
+            {{ form_end(formLieu) }}
+            <a class="button is-light"  href="{{ path('sortie_sortie',{'id': sortie.Id}) }}" >Annuler</a>
+
+
+        </div>
+
+
+    </article>
+
+{% endblock %}
