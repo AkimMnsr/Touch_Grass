@@ -41,23 +41,14 @@
             {% if app.user %}
             <a class="navbar-item" href="{{ path('profil_afficher') }}">Mon profil</a>
             {% endif %}
-
             {% if is_granted('ROLE_ADMIN') %}
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">Admin</a>
-                <div class="navbar-dropdown">
-                    <a class="navbar-item">Ville</a>
-                    <a class="navbar-item">Site</a>
-                    <a class="navbar-item">Gérer les utilisateurs</a>
-                </div>
-            </div>
+                <a class="navbar-item" href="{{ path('admin') }}">Admin</a>
             {% endif %}
         </div>
         {% if app.user is null %}
         <div id="navbar-end">
             <div class="navbar-item">
                 <div class="buttons">
-                    <a class="button is-primary" href="{{ path('app_register') }}"><strong>S'inscrire</strong></a>
                     <a class="button is-light" href="{{ path('app_login') }}">Se connecter</a>
                 </div>
             </div>
