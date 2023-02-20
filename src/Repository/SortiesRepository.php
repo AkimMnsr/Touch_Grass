@@ -41,7 +41,7 @@ class SortiesRepository extends ServiceEntityRepository
     }
 
     //no connected
-    public function NoConnected()
+    public function findByEtat()
     {
         $query = $this->createQueryBuilder('s')
             ->where('s.etats_no_etat != 1')->getQuery();
@@ -53,13 +53,11 @@ class SortiesRepository extends ServiceEntityRepository
     public function filtreByNom($keyword,$createby)
     {
         $query2 = $this->createQueryBuilder('s')
-            ->select('s.id')
             ->where('s.nom LIKE :key')
             ->andWhere('s.etats_no_etat != 1')
             ->setParameter('key', '%' . $keyword . '%')->getQuery()->getResult();
 
         $query3 = $this->createQueryBuilder('s')
-            ->select('s.organisateur')
             ->where('s.organisateur = :orga')
             ->andWhere('s.nom LIKE :key')
             ->setParameter('orga',$createby)
@@ -72,23 +70,19 @@ class SortiesRepository extends ServiceEntityRepository
     //connected filtre Site
     public function filtreBySite($keyword,$createby, ParticipantsRepository $pr)
     {
-        $site = $pr->findBy([
-            'sites_no_site' => $keyword
+        $query2 = $this->findBy([
+            'organisateur'=>$pr->findBy([
+                'sites_no_site' => $keyword
+            ]),
+            'etats_no_etat'=>$this->findByEtat()
         ]);
+
         $query3 = $this->findBy([
             'organisateur' => $pr->findBy([
                 'id' => $createby,
                 'sites_no_site' =>$keyword
             ])
         ]);
-        $query2 = $this->createQueryBuilder('s')
-            ->select('s')
-            ->from('App\Entity\Sorties', 'sorties')
-            ->where('s.organisateur IN (:param)')
-            ->andWhere('s.etats_no_etat != 1')
-            ->setParameter('param', $site)
-            ->getQuery()
-            ->getResult();
         $query = $this->createdByWithSearch($query2,$query3);
         return $query->getResult();
     }
@@ -97,13 +91,11 @@ class SortiesRepository extends ServiceEntityRepository
     public function filtreByDateDeb($keyword,$createby)
     {
         $query2 = $this->createQueryBuilder('s')
-            ->select('s.id')
             ->where('s.datedebut LIKE :key')
             ->andWhere('s.etats_no_etat != 1')
             ->setParameter('key', '%' . $keyword . '%')->getQuery()->getResult();
 
         $query3 = $this->createQueryBuilder('s')
-            ->select('s.organisateur')
             ->where('s.organisateur = :orga')
             ->andWhere('s.datedebut LIKE :key')
             ->setParameter('orga',$createby)
@@ -117,13 +109,11 @@ class SortiesRepository extends ServiceEntityRepository
     public function filtreByDateFin($keyword,$createby)
     {
         $query2 = $this->createQueryBuilder('s')
-            ->select('s.id')
             ->where('s.datecloture LIKE :key')
             ->andWhere('s.etats_no_etat != 1')
             ->setParameter('key', '%' . $keyword . '%')->getQuery()->getResult();
 
         $query3 = $this->createQueryBuilder('s')
-            ->select('s.organisateur')
             ->where('s.organisateur = :orga')
             ->andWhere('s.datecloture LIKE :key')
             ->setParameter('orga',$createby)
@@ -137,7 +127,6 @@ class SortiesRepository extends ServiceEntityRepository
     public function findAllNoFiltre($keyword)
     {
         $query2 = $this->createQueryBuilder('s')
-            ->select('s.id')
             ->from('App\Entity\Sorties', 'sorties')
             ->where('s.organisateur != :key')
             ->andWhere('s.etats_no_etat != 1')
@@ -145,7 +134,6 @@ class SortiesRepository extends ServiceEntityRepository
             ->getQuery()->getResult();
 
         $query = $this->createQueryBuilder('s')
-            ->select('s')
             ->from('App\Entity\Sorties', 'sorties')
             ->where('s.organisateur = :key')
             ->orWhere('s.id IN (:param)')
@@ -158,7 +146,6 @@ class SortiesRepository extends ServiceEntityRepository
 
     public function createdByWithSearch($query2,$query3){
         $query = $this->createQueryBuilder('s')
-            ->select('s')
             ->from('App\Entity\Sorties', 'sorties')
             ->where('s.id IN (:verif)')
             ->orWhere('s.id IN (:param)')

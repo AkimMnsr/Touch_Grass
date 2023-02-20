@@ -34,7 +34,7 @@ class MainController extends AbstractController
                 $reset = false;
             }
             if ($nom != null || $nom != "") {
-                $lesSorties += $sr->filtreByNom($nom,$orga);
+                $lesSorties += $sr->filtreByNom($nom,$orga->getId());
                 $reset = false;
             }
             if ($dateDeb != null) {
