@@ -58,13 +58,7 @@ class Participants implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      */
-    #[Assert\NotBlank]
-    #[Assert\Length(
-        min: 5,
-        max: 20,
-        minMessage: "Mot de passe trop court.",
-        maxMessage: "Mot de passe trop long."
-    )]
+
     #[ORM\Column]
     private ?string $password = null;
 
@@ -130,8 +124,13 @@ class Participants implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        if (!$this->administrateur)
+            // guarantee every user at least has ROLE_USER
+            $roles[] = 'ROLE_USER';
+        else {
+            // Si administrateur = 1 ou true, le rôle admin lui est assigné
+            $roles[] = 'ROLE_ADMIN';
+        }
 
         return array_unique($roles);
     }

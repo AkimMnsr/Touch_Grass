@@ -20,7 +20,7 @@ class SortiesCrudController extends AbstractCrudController
     }
 
 
-    /*public function configureFields(string $pageName): iterable
+    public function configureFields(string $Sorties): iterable
     {
         return [
             IdField::new('id')->hideOnForm(),
@@ -35,5 +35,5 @@ class SortiesCrudController extends AbstractCrudController
             TextField::new('organisateur'),
         ];
     }
-*/
+
 }
