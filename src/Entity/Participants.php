@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\IntegerType;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use phpDocumentor\Reflection\Types\Integer;
+use phpDocumentor\Reflection\Types\String_;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -40,6 +41,7 @@ class Participants implements UserInterface, PasswordAuthenticatedUserInterface
         minMessage: "Le nom doit être supérieur à 2 caractères.",
         maxMessage: "Le nom ne peut pas être supérieur à 20 caractères."
     )]
+    #[Assert\Type(type:'string')]
     #[ORM\Column(length: 30)]
     private ?string $nom = null;
 
@@ -49,6 +51,7 @@ class Participants implements UserInterface, PasswordAuthenticatedUserInterface
         minMessage: "Le prenom doit être supérieur à 2 caractères.",
         maxMessage: "Le prenom ne peut pas être supérieur à 20 caractères."
     )]
+    #[Assert\Type(type:'string')]
     #[ORM\Column(length: 30)]
     private ?string $prenom = null;
 
@@ -74,6 +77,7 @@ class Participants implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn(nullable: false)]
     private ?Sites $sites_no_site = null;
 
+    #[Assert\Type(type:'string')]
     #[ORM\Column(length: 255, nullable: true)]
     private $image;
 
