@@ -27,26 +27,22 @@ class MainController extends AbstractController
             $nom = $request->get("filtre")["nom"];
             $dateDeb =$request->get("filtre")['datedebut'];
             $dateFin = $request->get("filtre")['datecloture'];
-            dump($dateFin);
+            $orga = $this->getUser();
 
             if ($site != null || $site != "") {
-                $lesSorties += $sr->findBy([
-                    'organisateur' => $pr->findBy([
-                        'sites_no_site' => $site
-                    ])
-                ]);
+                $lesSorties += $sr->filtreBySite($site,$orga->getId(),$pr);
                 $reset = false;
             }
             if ($nom != null || $nom != "") {
-                $lesSorties += $sr->findByNom($nom);
+                $lesSorties += $sr->filtreByNom($nom,$orga);
                 $reset = false;
             }
             if ($dateDeb != null) {
-                $lesSorties += $sr->findByDateDeb($dateDeb);
+                $lesSorties += $sr->filtreByDateDeb($dateDeb,$orga);
                 $reset = false;
             }
             if ($dateFin != null) {
-                $lesSorties += $sr->findByDateFin($dateFin);
+                $lesSorties += $sr->filtreByDateFin($dateFin,$orga);
                 $reset = false;
             }
             if(!$reset){
@@ -55,7 +51,7 @@ class MainController extends AbstractController
         }
         if ($reset) {
             if ($this->isGranted('ROLE_USER') || $this->isGranted('ROLE_ADMIN')) {
-                $lesSorties = $sr->findAllBasic($this->getUser()->getId());
+                $lesSorties = $sr->findAllNoFiltre($this->getUser());
             } else {
                 $lesSorties = $sr->findByEtat();
             }

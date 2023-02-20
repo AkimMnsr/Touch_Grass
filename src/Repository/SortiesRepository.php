@@ -3,7 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Sorties;
-use App\Entity\Etats;
+use App\Repository\ParticipantsRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -40,48 +40,110 @@ class SortiesRepository extends ServiceEntityRepository
         }
     }
 
-    public function findByNom($keyword)
-    {
-        $query = $this->createQueryBuilder('s')
-            ->where('s.nom LIKE :key')
-            ->setParameter('key', '%' . $keyword . '%')->getQuery();
-
-        return $query->getResult();
-    }
-    public function findByEtat()
+    //no connected
+    public function NoConnected()
     {
         $query = $this->createQueryBuilder('s')
             ->where('s.etats_no_etat != 1')->getQuery();
 
         return $query->getResult();
     }
-    public function findByDateDeb($keyword)
+
+    //connected filtre Nom
+    public function filtreByNom($keyword,$createby)
     {
-        $query = $this->createQueryBuilder('s')
+        $query2 = $this->createQueryBuilder('s')
+            ->select('s.id')
+            ->where('s.nom LIKE :key')
+            ->andWhere('s.etats_no_etat != 1')
+            ->setParameter('key', '%' . $keyword . '%')->getQuery()->getResult();
+
+        $query3 = $this->createQueryBuilder('s')
+            ->select('s.organisateur')
+            ->where('s.organisateur = :orga')
+            ->andWhere('s.nom LIKE :key')
+            ->setParameter('orga',$createby)
+            ->setParameter('key','%'.$keyword.'%')->getQuery()->getResult();
+
+        $query = $this->createdByWithSearch($query2,$query3);
+        return $query->getResult();
+    }
+
+    //connected filtre Site
+    public function filtreBySite($keyword,$createby, ParticipantsRepository $pr)
+    {
+        $site = $pr->findBy([
+            'sites_no_site' => $keyword
+        ]);
+        $query3 = $this->findBy([
+            'organisateur' => $pr->findBy([
+                'id' => $createby,
+                'sites_no_site' =>$keyword
+            ])
+        ]);
+        $query2 = $this->createQueryBuilder('s')
+            ->select('s')
+            ->from('App\Entity\Sorties', 'sorties')
+            ->where('s.organisateur IN (:param)')
+            ->andWhere('s.etats_no_etat != 1')
+            ->setParameter('param', $site)
+            ->getQuery()
+            ->getResult();
+        $query = $this->createdByWithSearch($query2,$query3);
+        return $query->getResult();
+    }
+
+    //connected filtre date deb
+    public function filtreByDateDeb($keyword,$createby)
+    {
+        $query2 = $this->createQueryBuilder('s')
+            ->select('s.id')
             ->where('s.datedebut LIKE :key')
-            ->setParameter('key', '%' . $keyword . '%')->getQuery();
+            ->andWhere('s.etats_no_etat != 1')
+            ->setParameter('key', '%' . $keyword . '%')->getQuery()->getResult();
 
+        $query3 = $this->createQueryBuilder('s')
+            ->select('s.organisateur')
+            ->where('s.organisateur = :orga')
+            ->andWhere('s.datedebut LIKE :key')
+            ->setParameter('orga',$createby)
+            ->setParameter('key','%'.$keyword.'%')->getQuery()->getResult();
+
+        $query = $this->createdByWithSearch($query2,$query3);
         return $query->getResult();
     }
-    public function findByDateFin($keyword)
+
+    //connected filtre date fin
+    public function filtreByDateFin($keyword,$createby)
     {
-        $query = $this->createQueryBuilder('s')
+        $query2 = $this->createQueryBuilder('s')
+            ->select('s.id')
             ->where('s.datecloture LIKE :key')
-            ->setParameter('key', '%' . $keyword . '%')->getQuery();
+            ->andWhere('s.etats_no_etat != 1')
+            ->setParameter('key', '%' . $keyword . '%')->getQuery()->getResult();
 
+        $query3 = $this->createQueryBuilder('s')
+            ->select('s.organisateur')
+            ->where('s.organisateur = :orga')
+            ->andWhere('s.datecloture LIKE :key')
+            ->setParameter('orga',$createby)
+            ->setParameter('key','%'.$keyword.'%')->getQuery()->getResult();
+
+        $query = $this->createdByWithSearch($query2,$query3);
         return $query->getResult();
     }
 
-    public function findAllBasic($keyword)
+    //connected nofiltre
+    public function findAllNoFiltre($keyword)
     {
         $query2 = $this->createQueryBuilder('s')
             ->select('s.id')
             ->from('App\Entity\Sorties', 'sorties')
-            ->join('App\Entity\Etats', 'e', 'WITH', 'e = s.etats_no_etat')
             ->where('s.organisateur != :key')
-            ->andWhere('e.id != 1')
+            ->andWhere('s.etats_no_etat != 1')
             ->setParameter('key', $keyword)
             ->getQuery()->getResult();
+
         $query = $this->createQueryBuilder('s')
             ->select('s')
             ->from('App\Entity\Sorties', 'sorties')
@@ -93,15 +155,18 @@ class SortiesRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
-    /*public function findAvgSFdql(): array
-    {
-        $em = $this->getEntityManager();
-        $dql = "SELECT AVG(s.vote) AS avg
-FROM App\Entity\Serie As s
-WHERE s.genres LIKE '%Sci-Fi%'";
-        $req = $em->createQuery($dql);
-        return $req->getOneOrNullResult();
-    }*/
+
+    public function createdByWithSearch($query2,$query3){
+        $query = $this->createQueryBuilder('s')
+            ->select('s')
+            ->from('App\Entity\Sorties', 'sorties')
+            ->where('s.id IN (:verif)')
+            ->orWhere('s.id IN (:param)')
+            ->setParameter('verif',$query3)
+            ->setParameter('param', $query2)
+            ->getQuery();
+        return $query;
+    }
 //    /**
 //     * @return Sorties[] Returns an array of Sorties objects
 //     */
