@@ -11,6 +11,24 @@
 {% endblock %}
 
 {% block body %}
+    <!-- message d'accueil supprimable -->
+    {% if app.user %}
+        <article id="art-info" class="message is-link">
+            <div class="message-header">
+                <p>Info :</p>
+                <button id="close-popup" class="delete" aria-label="delete"></button>
+            </div>
+            <div id="Div_message" class="message-body">
+                <img id="baby-groot" src="{{ asset('Img/groot.svg') }}" alt="">
+                <p>Hey bienvenue sur Touch Grass, moi c'est Baby groot et j'te propose de découvrir notre app de gardien de la planete :D
+                    Le concept est simple, un Admin (bouuuh) t'a créer un compte ! Pourquoi ? ben pour aller toucher de l'herbe un peu :D
+                    Une fois connecté tu n'a plus qu'a t'inscrire ou créer des sorties alors n'hésite pas :)
+                    Si tu t'ennui y'a un petit secret a découvrir :P
+                </p>
+            </div>
+        </article>
+    {% endif %}
+
     <div id="info">
         <h2>Date du Jour : {{ "now" | date("m/d/Y") }}</h2>
         <h2>

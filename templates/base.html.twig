@@ -67,7 +67,7 @@
     <div id="navbar-end">
         <div class="navbar-item">
             <div class="buttons">
-                <a class="button is-light" href="{{ path('app_logout') }}">Se déconnecter</a>
+                <a id="logout-button" onclick="logout()" class="button is-light" href="{{ path('app_logout') }}">Se déconnecter</a>
             </div>
         </div>
     </div>
@@ -78,22 +78,7 @@
         {{ message }}
     </div>
 {% endfor %}
-{% if app.user %}
-    <article id="art-info" class="message is-link">
-        <div class="message-header">
-            <p>Info :</p>
-            <button onclick="deleteme()" class="delete" aria-label="delete"></button>
-        </div>
-        <div id="Div_message" class="message-body">
-            <img id="baby-groot" src="{{ asset('Img/groot.svg') }}" alt="">
-           <p>Hey bienvenue sur Touch Grass, moi c'est Baby groot et j'te propose de découvrir notre app de gardien de la planete :D
-           Le concept est simple, un Admin (bouuuh) t'a créer un compte ! Pourquoi ? ben pour aller toucher de l'herbe un peu :D
-               Une fois connecté tu n'a plus qu'a t'inscrire ou créer des sorties alors n'hésite pas :)
-               Si tu t'ennui y'a un petit secret a découvrir :P
-           </p>
-        </div>
-    </article>
-{% endif %}
+
 <section id="base_section">
 
     {% block body %}{% endblock %}
