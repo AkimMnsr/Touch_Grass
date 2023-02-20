@@ -9,7 +9,6 @@ class ServiceUtilitaire
         foreach ($lesSorties as $sortie){
             if(!in_array($sortie,$vretour)){
                 array_push($vretour,$sortie);
-                dd('pipi');
             }
         }
         return $vretour;
