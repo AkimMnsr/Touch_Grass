@@ -11,6 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -30,26 +31,34 @@ class Participants implements UserInterface, PasswordAuthenticatedUserInterface
         minMessage: "Le pseudo doit être supérieur à 2 caractères.",
         maxMessage: "Le pseudo ne peut pas être supérieur à 20 caractères."
     )]
-    #[Assert\NotBlank]
     #[ORM\Column(length: 20, unique: true)]
     private ?string $pseudo = null;
 
-    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 2,
+        max: 20,
+        minMessage: "Le nom doit être supérieur à 2 caractères.",
+        maxMessage: "Le nom ne peut pas être supérieur à 20 caractères."
+    )]
     #[ORM\Column(length: 30)]
     private ?string $nom = null;
 
-    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 2,
+        max: 20,
+        minMessage: "Le prenom doit être supérieur à 2 caractères.",
+        maxMessage: "Le prenom ne peut pas être supérieur à 20 caractères."
+    )]
     #[ORM\Column(length: 30)]
     private ?string $prenom = null;
 
-    #[Assert\NotBlank]
+    #[Assert\Regex('/^\(0\)[0-9]*$)')]
     #[ORM\Column(length: 15, nullable: true)]
     private ?string $telephone = null;
 
 
     #[Assert\Email]
-    #[Assert\NotBlank]
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 180)]
     private ?string $mail = null;
 
     #[ORM\Column]
@@ -58,7 +67,6 @@ class Participants implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      */
-
     #[ORM\Column]
     private ?string $password = null;
 
@@ -69,6 +77,7 @@ class Participants implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private $image;
 
+    #[Assert\Image]
     #[Vich\UploadableField(mapping: "product_image", fileNameProperty: "image")]
     private $imageFile;
 
@@ -331,4 +340,10 @@ class Participants implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->nom;
+    }
+
 }
