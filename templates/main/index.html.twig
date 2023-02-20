@@ -116,14 +116,14 @@
                         <td><a href="{{ path('sortie_sortie', {'id': sortie.Id}) }}">Afficher</a>
                         {% if app.user %}
                             {% if app.user.pseudo == sortie.Organisateur.Pseudo %}
-                                - Annuler</td>
+                                - <a href="{{ path('sortie_annuler', {'id': sortie.Id}) }}">Annuler</a></td>
                             {% elseif sortie.IdInscription.ParticipantsNoParticipant|length != sortie.Nbinscriptionsmax %}
                                 {% for participant in sortie.IdInscription.ParticipantsNoParticipant %}
                                     {% if app.user==participant %}
-                                        - Se désister</td>
+                                        - <a href="#">Se désister</a></td>
                                     {% endif %}
                                 {% else %}
-                                    - S'inscrire</td>
+                                    - <a href="#">S'inscrire</a></td>
                                 {% endfor %}
                             {% endif %}
                         {% else %}
