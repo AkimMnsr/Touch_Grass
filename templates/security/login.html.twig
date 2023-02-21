@@ -5,42 +5,59 @@
     <link rel="stylesheet" href="{{ asset('Css/login.css') }}">
 {% endblock %}
 {% block body %}
+    <video poster="{{ asset('/img/videoFixed.png') }}" autoplay muted loop id="myVideo">
+        <source src="{{ asset('video/video.mp4') }}" type="video/mp4">
+    </video>
+
+    <article id="form-article">
     <div id="form">
+
+        <div id="form-chil">
+
         <form method="post">
+
             {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                <div id="div-error" class="alert alert-danger is-mobile">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
 
-            {% if app.user %}
-                <div class="mb-3">
-                    You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+            <!--IDENTIFIANT-->
+            <div class="field is-mobile">
+                <label class="label is-mobile">Identifiant</label>
+                <div class="control is-mobile">
+                    <input class="input is-success is-mobile" name="pseudo"  type="text" placeholder="Pseudo" value="{{ last_username }}" id="inputPseudo" autocomplete="username" required autofocus>
                 </div>
-            {% endif %}
-            <div id="identifiant"></div>
-            <label for="inputPseudo">Identifiant</label>
-            <input type="text" value="{{ last_username }}" name="pseudo" id="inputPseudo" class="form-control"
-                   autocomplete="username" required autofocus>
-            <div id="password">
-                <label for="inputPassword">Mot de passe</label>
-                <input type="password" name="password" id="inputPassword" class="form-control"
-                       autocomplete="current-password" required>
             </div>
-            <input type="hidden" name="_csrf_token"
-                   value="{{ csrf_token('authenticate') }}">
-            <div>
-                <input class="btn btn-lg btn-primary" type="submit" value="Connexion">
-                <div id="">
-                    <div class="checkbox mb-3">
-                        <label>
-                            <input type="checkbox" name="_remember_me"> Se souvenir de moi
-                        </label>
+
+            <!--MOT DE PASSE-->
+            <div class="field is-mobile">
+                    <label for="inputPassword"><strong>Mot de Passe</strong></label>
+                    <input class="input is-mobile" name="password" id="inputPassword" type="password" placeholder="Mot de Passe" autocomplete="current-password" required>
+                </p>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            </div>
+
+            <!--BOUTTON CONNEXION-->
+            <div id="button-div">
+                <input id="button-connexion" class="button is-primary is-mobile" type="submit" value="Connexion">
+                <div id="button-div-child">
+                    <div class="checkbox mb-3 is-mobile">
+                           <label>
+                               <input type="checkbox" name="_remember_me"> Se souvenir de moi
+                           </label>
                     </div>
+
                     <div>
                        <a href="{{ path('app_reset_password', {'token': 'x'}) }}"> Mot de passe oublié </a>
                     </div>
                 </div>
 
             </div>
+
         </form>
+
+        </div>
+
     </div>
+
+    </article>
 {% endblock %}
