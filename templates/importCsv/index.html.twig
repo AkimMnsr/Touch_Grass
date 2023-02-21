@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Import Csv{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('') }}">
+{% endblock %}
+{% block body %}
+
+    {{ form_start(form) }}
+
+    {{ form_widget(form.csvFile) }}
+
+    {{ form_end(form) }}
+
+{% endblock %}

@@ -32,7 +32,7 @@ class ProfilController extends AbstractController
         $registrationForm = $this->createForm(RegistrationFormType::class, $participant);
         $registrationForm->handleRequest($request);
 
-        if ($registrationForm->isSubmitted()) {
+        if ($registrationForm->isSubmitted()&&$registrationForm->isValid()) {
             $participant = $registrationForm->getData();
             $em->persist($participant);
             $em->flush();
