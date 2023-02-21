@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Sorties;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -20,10 +21,9 @@ class SortiesCrudController extends AbstractCrudController
     }
 
 
-    public function configureFields(string $Sorties): iterable
+    public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id')->hideOnForm(),
             TextField::new('nom'),
             DateField::new('datedebut'),
             TimeField::new('duree'),
@@ -31,8 +31,11 @@ class SortiesCrudController extends AbstractCrudController
             NumberField::new('nbinscriptionsmax'),
             TextEditorField::new('descriptioninfos'),
             TextField::new('urlphoto'),
+            AssociationField::new('lieux_no_lieu'),
             TextField::new('etatsortie'),
-            TextField::new('organisateur'),
+            AssociationField::new('organisateur'),
+            AssociationField::new('etats_no_etat'),
+            AssociationField::new('id_inscription')
         ];
     }
 

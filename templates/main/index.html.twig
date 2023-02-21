@@ -122,10 +122,12 @@
                                 - <a href="{{ path('sortie_annuler', {'id': sortie.Id}) }}">Annuler</a></td>
                             {% elseif sortie.IdInscription.ParticipantsNoParticipant|length != sortie.Nbinscriptionsmax %}
                                 {% if app.user in sortie.IdInscription.ParticipantsNoParticipant %}
+
                                     - <a href="{{ path('inscription_desinscription', {'id': sortie.Id})}}">Se désister</a>
                                     </td>
                                 {% else %}
                                     - <a href="{{ path('inscription_inscription', {'id': sortie.Id}) }}">S'inscrire</a></td>
+
                                 {% endif %}
                             {% endif %}
                         {% else %}
@@ -134,7 +136,7 @@
                     {% else %}
                         {% if app.user %}
                             {% if app.user.pseudo == sortie.Organisateur.Pseudo %}
-                                <td>Modifier - Publier</td>
+                                <td><a href="{{ path('sortie_sortie', {'id': sortie.Id}) }}">Modifier - Publier</a></td>
                             {% endif %}
                         {% endif %}
                     {% endif %}

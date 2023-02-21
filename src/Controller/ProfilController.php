@@ -10,7 +10,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+#[IsGranted('ROLE_USER')]
 #[Route('/profil', name: 'profil_')]
 class ProfilController extends AbstractController
 {
@@ -19,9 +21,10 @@ class ProfilController extends AbstractController
     {
         return $this->render('profil/index.html.twig');
     }
+
     #[Route('/modifier', name: 'modifier',)]
     public function edit(
-        Request $request,
+        Request                $request,
         EntityManagerInterface $em,
     ): Response
     {
@@ -41,10 +44,11 @@ class ProfilController extends AbstractController
             compact('participant', 'registrationForm')
         );
     }
+
     #[Route('/supprimer', name: 'supprimer')]
     public function delete(Request $request, Participants $participant, ParticipantsRepository $participantsRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$participant->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $participant->getId(), $request->request->get('_token'))) {
             $participantsRepository->remove($participant, true);
         }
 

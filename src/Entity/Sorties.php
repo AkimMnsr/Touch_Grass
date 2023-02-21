@@ -252,4 +252,9 @@ class Sorties
         return $this;
     }
 
+    public function __toString(): string
+    {
+        return $this->nom;
+    }
+
 }

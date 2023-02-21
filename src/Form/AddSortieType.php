@@ -40,9 +40,9 @@ class AddSortieType extends AbstractType
                 [
                     'class' => Lieux::class,
                     'choice_label' => 'nom_lieu',
-                    'attr' => [
-                        'id' => 'cboLieu'
-                    ]
+                    'choice_value' => function(?Lieux $lieux) {
+                        return $lieux ? $lieux:"";
+                    }
                 ])
 
 
