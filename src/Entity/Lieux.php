@@ -93,8 +93,9 @@ class Lieux
 
         return $this;
     }
+
     public function __toString(): string
     {
-        return $this->nom_lieu;
+        return $this->getId() . '|' . $this->getRue() . '|' . $this->getLongitude() . '|' . $this->getLatitude() . '|' . $this->getVillesNoVille()->getNomVille() . '|' . $this->getVillesNoVille()->getCodePostal();
     }
 }
