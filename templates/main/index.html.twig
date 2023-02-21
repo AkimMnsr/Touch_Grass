@@ -20,8 +20,10 @@
             </div>
             <div id="Div_message" class="message-body">
                 <img id="baby-groot" src="{{ asset('Img/groot.svg') }}" alt="">
-                <p>Hey bienvenue sur Touch Grass, moi c'est Baby groot et j'te propose de découvrir notre app de gardien de la planete :D
-                    Le concept est simple, un Admin (bouuuh) t'a créer un compte ! Pourquoi ? ben pour aller toucher de l'herbe un peu :D
+                <p>Hey bienvenue sur Touch Grass, moi c'est Baby groot et j'te propose de découvrir notre app de gardien
+                    de la planete :D
+                    Le concept est simple, un Admin (bouuuh) t'a créer un compte ! Pourquoi ? ben pour aller toucher de
+                    l'herbe un peu :D
                     Une fois connecté tu n'a plus qu'a t'inscrire ou créer des sorties alors n'hésite pas :)
                     Si tu t'ennui y'a un petit secret a découvrir :P
                 </p>
@@ -87,7 +89,7 @@
             {% for sortie in lesSorties %}
                 <tr class="table-row"
                     data-est-inscrit="{{ (app.user is defined and app.user in sortie.IdInscription.ParticipantsNoParticipant) ? '1' : '0' }}"
-                    data-est-organisateur="{{ app.user==sortie.Organisateur?'1':'0'}}"
+                    data-est-organisateur="{{ app.user==sortie.Organisateur?'1':'0' }}"
                     data-est-fini="{{ sortie.Datecloture<date?'1':'0' }}">
                     {# Nom #}
                     <td>{{ sortie.Nom }}</td>
@@ -113,18 +115,18 @@
                     <td>{{ sortie.Organisateur.Pseudo }}</td>
                     {# Action #}
                     {% if sortie.EtatsNoEtat.Id != 1 %}
-                        <td><a href="{{ path('sortie_sortie', {'id': sortie.Id}) }}">Afficher</a>
+                        <td>
+                        <a href="{{ path('sortie_sortie', {'id': sortie.Id}) }}">Afficher</a>
                         {% if app.user %}
                             {% if app.user.pseudo == sortie.Organisateur.Pseudo %}
                                 - <a href="{{ path('sortie_annuler', {'id': sortie.Id}) }}">Annuler</a></td>
                             {% elseif sortie.IdInscription.ParticipantsNoParticipant|length != sortie.Nbinscriptionsmax %}
-                                {% for participant in sortie.IdInscription.ParticipantsNoParticipant %}
-                                    {% if app.user==participant %}
-                                        - <a href="#">Se désister</a></td>
-                                    {% endif %}
+                                {% if app.user in sortie.IdInscription.ParticipantsNoParticipant %}
+                                    - <a href="{{ path('inscription_desinscription', {'id': sortie.Id})}}">Se désister</a>
+                                    </td>
                                 {% else %}
-                                    - <a href="#">S'inscrire</a></td>
-                                {% endfor %}
+                                    - <a href="{{ path('inscription_inscription', {'id': sortie.Id}) }}">S'inscrire</a></td>
+                                {% endif %}
                             {% endif %}
                         {% else %}
                             </td>

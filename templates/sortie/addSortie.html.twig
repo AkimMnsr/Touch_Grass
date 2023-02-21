@@ -14,7 +14,7 @@
 
         <button id="reset-button" onclick="reset()" class="button is-light"><img style="width: 25px; height: 25px"
                                                                                  src="{{ asset('img/Refresh_icon.svg.png') }}"
-                                                                                 alt=""></a></button>
+                                                                                 alt="refresh button"></button>
 
         {{ form_start(formSortie) }}
 
@@ -25,6 +25,7 @@
                 <div class="control">
                     <label class="label">Nom de la sortie :</label>
                     <input id="nomSortie" onload="load()" class="input is-focused" {{ form_widget(formSortie.nom) }}
+
                 </div>
 
                 <div class="control">
@@ -35,7 +36,7 @@
 
                 <div class="control">
                     <label class="label">   {{ form_label(formSortie.datecloture, 'Date limite d\'inscription :') }}</label>
-                    <input id="dateCloture" onload="load()" class="input is-focused"
+                    <input id="dateCloture" onload="load()" class="input is-focused" type="date"
                     {{ form_widget(formSortie.datecloture) }}
                 </div>
 
