@@ -5,6 +5,7 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('Css/table.css') }}">
+    <link rel="stylesheet" href="{{ asset('Css/home.css') }}">
 {% endblock %}
 {% block javascripts %}
 
@@ -30,121 +31,123 @@
             </div>
         </article>
     {% endif %}
+    <div id="Div_form">
 
-    <div id="info">
-        <h2>Date du Jour : {{ "now" | date("m/d/Y") }}</h2>
-        <h2>
-            {% if app.user %}
-                Participant : {{ app.user.pseudo }}
-            {% else %}
-                Pensez à vous connecter pour participer
-            {% endif %}
-        </h2>
-    </div>
-    <div id="filtre">
-        <p>Filtrer les Sorties</p>
-        <div style="display: flex;justify-content: space-around;">
-            <div>
-                {{ form(filtreForm) }}
-            </div>
-            {% if app.user %}
-                <div>
-                    <div>
-                        <input type="checkbox" class="filter-checkbox" id="organisateur" name="organisateur">
-                        <label for="organisateur">Sortie dont je suis l'organisateur/trice</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" class="filter-checkbox" id="inscrit" name="inscrit">
-                        <label for="inscrit">Sortie auxquelles je suis inscrit/e</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" class="filter-checkbox" id="non-inscrit" name="non-inscrit">
-                        <label for="non-inscrit">Sortie auxquelles je ne suis pas inscrit/e</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" class="filter-checkbox" id="fini" name="fini">
-                        <label for="fini">Sortie passée</label>
-                    </div>
-                </div>
-            {% endif %}
-        </div>
-    </div>
-    <div id="dvg">
-        <table id="table-sorties">
-            <thead>
-            <tr>
-                <th>Nom de la Sortie</th>
-                <th>Date de la Sortie</th>
-                <th>Clôture</th>
-                <th>Inscrit/Places</th>
-                <th>Etat</th>
+        <div id="info">
+            <h2>Date du Jour : {{ "now" | date("d/m/Y") }}</h2>
+            <h2>
                 {% if app.user %}
-                    <th>Inscrit</th>
+                    Participant : {{ app.user.pseudo }}
+                {% else %}
+                    Pensez à vous connecter pour participer
                 {% endif %}
-                <th>Organisateur</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for sortie in lesSorties %}
-                <tr class="table-row"
-                    data-est-inscrit="{{ (app.user is defined and app.user in sortie.IdInscription.ParticipantsNoParticipant) ? '1' : '0' }}"
-                    data-est-organisateur="{{ app.user==sortie.Organisateur?'1':'0' }}"
-                    data-est-fini="{{ sortie.Datecloture<date?'1':'0' }}">
-                    {# Nom #}
-                    <td>{{ sortie.Nom }}</td>
-                    {# dateDeb #}
-                    <td>{{ sortie.Datedebut | date("m/d/Y") }}</td>
-                    {# dateFin #}
-                    <td>{{ sortie.Datecloture | date("m/d/Y") }}</td>
-                    {# nbInscrit/QteMax #}
-                    <td>{{ sortie.IdInscription.ParticipantsNoParticipant|length }}/{{ sortie.Nbinscriptionsmax }}</td>
-                    {# Etat #}
-                    <td>{{ sortie.EtatsNoEtat.Libelle }}</td>
-                    {# inscrit visible que une fois connecter #}
+            </h2>
+        </div>
+        <div id="Form_div">
+            <p id="filtreTitre">Filtrer les Sorties</p>
+            <div id="filtrage">
+                <div id="Form_first_part">
+                    {{ form(filtreForm) }}
+                </div>
+                {% if app.user %}
+                    <div id="Form_second_part">
+                        <div>
+                            <input type="checkbox" class="filter-checkbox" id="organisateur" name="organisateur">
+                            <label for="organisateur">Sortie dont je suis l'organisateur/trice</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="filter-checkbox" id="inscrit" name="inscrit">
+                            <label for="inscrit">Sortie auxquelles je suis inscrit/e</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="filter-checkbox" id="non-inscrit" name="non-inscrit">
+                            <label for="non-inscrit">Sortie auxquelles je ne suis pas inscrit/e</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="filter-checkbox" id="fini" name="fini">
+                            <label for="fini">Sortie passée</label>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div id="dgv">
+            <table id="table-sorties" class="is-success">
+                <thead>
+                <tr>
+                    <th>Nom de la Sortie</th>
+                    <th>Date de la Sortie</th>
+                    <th>Clôture</th>
+                    <th>Inscrit/Places</th>
+                    <th>Etat</th>
                     {% if app.user %}
-                        <td>
-                            {% for participant in sortie.IdInscription.ParticipantsNoParticipant %}
-                                {% if app.user==participant %}
-                                    <img src="{{ asset('img/cross-23.svg') }}" alt="inscrit">
-                                {% endif %}
-                            {% endfor %}
-                        </td>
+                        <th>Inscrit</th>
                     {% endif %}
-                    {# pseudo de l'organisateur #}
-                    <td>{{ sortie.Organisateur.Pseudo }}</td>
-                    {# Action #}
-                    {% if sortie.EtatsNoEtat.Id != 1 %}
-                        <td>
-                        <a href="{{ path('sortie_sortie', {'id': sortie.Id}) }}">Afficher</a>
+                    <th>Organisateur</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for sortie in lesSorties %}
+                    <tr class="table-row"
+                        data-est-inscrit="{{ (app.user is defined and app.user in sortie.IdInscription.ParticipantsNoParticipant) ? '1' : '0' }}"
+                        data-est-organisateur="{{ app.user==sortie.Organisateur?'1':'0' }}"
+                        data-est-fini="{{ sortie.Datecloture<date?'1':'0' }}">
+                        {# Nom #}
+                        <td>{{ sortie.Nom }}</td>
+                        {# dateDeb #}
+                        <td>{{ sortie.Datedebut | date("m/d/Y") }}</td>
+                        {# dateFin #}
+                        <td>{{ sortie.Datecloture | date("m/d/Y") }}</td>
+                        {# nbInscrit/QteMax #}
+                        <td>{{ sortie.IdInscription.ParticipantsNoParticipant|length }}
+                            /{{ sortie.Nbinscriptionsmax }}</td>
+                        {# Etat #}
+                        <td>{{ sortie.EtatsNoEtat.Libelle }}</td>
+                        {# inscrit visible que une fois connecter #}
+                        {% if app.user %}
+                            <td>
+                                {% for participant in sortie.IdInscription.ParticipantsNoParticipant %}
+                                    {% if app.user==participant %}
+                                        <img src="{{ asset('img/check.svg') }}"
+                                             id="checked"
+                                             alt="inscrit">
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                        {% endif %}
+                        {# pseudo de l'organisateur #}
+                        <td>{{ sortie.Organisateur.Pseudo }}</td>
+                        {# Action #}
+                        {% if sortie.EtatsNoEtat.Id != 1 %}
+                        <td><a href="{{ path('sortie_sortie', {'id': sortie.Id}) }}">Afficher</a>
                         {% if app.user %}
                             {% if app.user.pseudo == sortie.Organisateur.Pseudo %}
                                 - <a href="{{ path('sortie_annuler', {'id': sortie.Id}) }}">Annuler</a></td>
                             {% elseif sortie.IdInscription.ParticipantsNoParticipant|length != sortie.Nbinscriptionsmax %}
                                 {% if app.user in sortie.IdInscription.ParticipantsNoParticipant %}
-
                                     - <a href="{{ path('inscription_desinscription', {'id': sortie.Id})}}">Se désister</a>
                                     </td>
                                 {% else %}
                                     - <a href="{{ path('inscription_inscription', {'id': sortie.Id}) }}">S'inscrire</a></td>
-
                                 {% endif %}
+                            {% else %}
+                                </td>
                             {% endif %}
                         {% else %}
-                            </td>
-                        {% endif %}
-                    {% else %}
-                        {% if app.user %}
-                            {% if app.user.pseudo == sortie.Organisateur.Pseudo %}
-                                <td><a href="{{ path('sortie_sortie', {'id': sortie.Id}) }}">Modifier - Publier</a></td>
+                            {% if app.user %}
+                                {% if app.user.pseudo == sortie.Organisateur.Pseudo %}
+                                    <td><a href="{{ path('sortie_sortie', {'id': sortie.Id}) }}">Modifier - Publier</a>
+                                    </td>
+                                {% endif %}
                             {% endif %}
                         {% endif %}
-                    {% endif %}
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <button class="button is-success"><a id="button-color" href="{{ path('sortie_addSortie') }}">Créer une sortie</a></button>
     </div>
-    <button><a href="{{ path('sortie_addSortie') }}">Créer une sortie</a></button>
     <script type="text/javascript" src="{{ asset('Js/Filtre.js') }}"></script>
 {% endblock %}

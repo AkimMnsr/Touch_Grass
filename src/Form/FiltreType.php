@@ -19,9 +19,10 @@ class FiltreType extends AbstractType
             ->add('site',EntityType::class,
                 [
                     'class' => Sites::class,
-                    'placeholder' => '',
+                    'placeholder' => '---------------------------',
                     'choice_label' => 'NomSite',
-                    'required' => false
+                    'required' => false,
+                    'label'=>'Le site : '
                 ])
             ->add('nom', options: [
                 'required'=>false,
@@ -39,19 +40,11 @@ class FiltreType extends AbstractType
                 'html5' => true,
                 'widget' => 'single_text'
             ])
-            /*->add('orga',type:CheckboxType::class,options: [
-                'label'=>"Sortie dont je suis l'organisateur/trice"
+            ->add('Rechercher', type: SubmitType::class,options: [
+                'attr' => [
+                    'class' => 'button is-info'
+                ]
             ])
-            ->add('inscrit',type:CheckboxType::class,options: [
-                'label'=>'Sortie auxquelles je suis inscrit/e'
-            ])
-            ->add('noInscrit',type:CheckboxType::class,options: [
-                'label'=>'Sortie auxquelles je ne suis pas inscrit/e'
-            ])
-            ->add('passe',type:CheckboxType::class,options:[
-                'label'=>'Sortie passée'
-            ])*/
-            ->add('Valider', type: SubmitType::class)
         ;
     }
 

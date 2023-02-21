@@ -70,6 +70,16 @@
         {{ message }}
     </div>
 {% endfor %}
+{% for message in app.flashes('annule') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+{% for message in app.flashes('remove') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
 
 <section id="base_section">
 

@@ -234,7 +234,7 @@ class SortieController extends AbstractController
                         $sortie->setDescriptioninfos("Motif de l'annulation : ".$sortie->getDescriptioninfos());
                         $em->persist($sortie);
                         $em->flush();
-                        $this->addFlash('sucess', 'La sortie a bien été annulée');
+                        $this->addFlash('annule', 'La sortie a bien été annulée');
                         return $this->redirectToRoute('main_index');
                     }
                 } catch (Exception $exception) {
