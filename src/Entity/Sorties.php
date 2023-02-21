@@ -3,8 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\SortiesRepository;
+use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SortiesRepository::class)]
 class Sorties
@@ -15,21 +17,68 @@ class Sorties
     private ?int $id = null;
 
     #[ORM\Column(length: 30)]
+    #[Assert\Regex(
+        pattern: '/^([^0-9]*)$/',
+        match: true,
+        message: 'Le nom de la sortie ne peux contenir de nombre',
+    )]
+    #[Assert\NotBlank(
+        message: 'Un nom de sortie doit être renseigné'
+    )]
+    #[Assert\Length(
+        min: 4,
+        max: 30,
+        minMessage: "Le nom ne peut être inférieur a 4 caractères.",
+        maxMessage: "Le pseudo ne peut pas être supérieur à 30 caractères."
+    )]
     private ?string $nom = null;
 
+
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Assert\Type("\DateTimeInterface")]
+    #[Assert\GreaterThanOrEqual ('today',
+        message: 'La date de sortie ne peux être inférieur à la date du jour'
+    )]
     private ?\DateTimeInterface $datedebut = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(nullable: false)]
+    #[Assert\Type(type: "integer")]
+    #[Assert\Range(
+        min: 15,
+        max: 480,
+        notInRangeMessage: 'La durée doit être comprise entre {{ min }} minutes et {{ max }} minutes' ,
+
+    )]
+    #[Assert\NotBlank(message: "Vous devez renseigner une durée")]
     private ?int $duree = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Assert\LessThanOrEqual (
+        propertyPath: "datedebut",
+        message: 'La date de sortie ne peux être supérieure à la date de sortie'
+    )]
+    #[Assert\GreaterThanOrEqual ('today',
+        message: 'La date de sortie ne peux être inférieur à la date du jour'
+    )]
     private ?\DateTimeInterface $datecloture = null;
 
-    #[ORM\Column]
+    #[ORM\Column (nullable: false)]
+    #[Assert\Type(type: "integer")]
+    #[Assert\NotBlank(message: "Vous devez renseigner le nombre de place")]
+    #[Assert\Range(
+        min: 2,
+        max:100,
+        notInRangeMessage: 'Le nombre de place doit être compris entre {{ min }} et {{ max }}' ,
+    )]
     private ?int $nbinscriptionsmax = null;
 
-    #[ORM\Column(length: 500, nullable: true)]
+    #[ORM\Column(length: 500, nullable: false)]
+    #[Assert\Length(
+        min:10,
+        max: 500,
+        minMessage: 'La description doit être au minimum de 10 caractères',
+        maxMessage: 'La description doit être au maximum de 500 caractères',
+    )]
     private ?string $descriptioninfos = null;
 
     #[ORM\Column(length: 250, nullable: true)]
