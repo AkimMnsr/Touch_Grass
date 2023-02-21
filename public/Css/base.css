@@ -24,20 +24,25 @@ body {
 }
 #base_section {
     margin-top: 3%;
-    margin-left: 15%;
-    margin-right: 15%;
+    margin-left: 10%;
+    margin-right: 10%;
     padding-bottom: 20%;
 }
 
 footer {
-    border-top: 1px solid;
-    position: fixed;
+    opacity: 0.8;
+    position: sticky;
+    left: 0;
     bottom: 0;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    background-color: #fafafa;
-    padding: 1rem 1rem 1rem;
+    padding: 15px;
+    background-color:#1ea471 ;
+    color: white;
+    text-align: center;
+}
+.footer-a {
+    text-decoration: none;
+    color:lightgoldenrodyellow;
 }
 
 #navbar-end {
