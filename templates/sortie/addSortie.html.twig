@@ -14,7 +14,7 @@
 
         <button id="reset-button" onclick="reset()" class="button is-light"><img style="width: 25px; height: 25px"
                                                                                  src="{{ asset('img/Refresh_icon.svg.png') }}"
-                                                                                 alt=""></a></button>
+                                                                                 alt=""></button>
 
         {{ form_start(formSortie) }}
 
@@ -74,7 +74,6 @@
 
             <div id="Form_second_part">
 
-
                 <strong>{{ form_label(formSortie.lieux_no_lieu, 'Lieu:') }}</strong>
                 <div class="field">
                     <p class="control has-icons-left">
@@ -84,13 +83,12 @@
                     </span>
                     </p>
                 </div>
-
                 <div id="result">
-                    <p>Rue : </p>
-                    <p>Ville :</p>
-                    <p>Code postal :</p>
-                    <p>Longitude :</p>
-                    <p>latitude :</p>
+                    <p>Rue : <span id="rue"></span></p>
+                    <p>Ville :<span id="ville"></span></p>
+                    <p>Code postal :<span id="cp"></span></p>
+                    <p>Longitude :<span id="long"></span></p>
+                    <p>latitude :<span id="lat"></span></p>
                 </div>
 
             </div>
@@ -111,30 +109,31 @@
     </div>
 
     <script>
-        const myComboBox = document.getElementById('cboLieu');
-        const result = document.getElementById('result');
-        // Objet Symfony à filtrer
-        const myObject = [
-            {id: 1, value: 'valeur 1', category: 'option1'},
-            {id: 2, value: 'valeur 2', category: 'option2'},
-            {id: 3, value: 'valeur 3', category: 'option1'},
-            {id: 4, value: 'valeur 4', category: 'option2'},
-            {id: 5, value: 'valeur 5', category: 'option1'}
-        ];
-        // Ajout de l'écouteur d'événement
-        myComboBox.addEventListener('change', function () {
-            const selectedValue = this.value;
-            // Filtrage de l'objet Symfony en fonction de la valeur sélectionnée
-            const filteredObject = myObject.filter(function (element) {
-                return selectedValue === 'all' || element.category === selectedValue;
-            });
-            // Affichage des éléments filtrés
-            result.innerHTML = '';
-            filteredObject.forEach(function (element) {
-                const item = document.createElement('div');
-                item.textContent = element.value;
-                result.appendChild(item);
-            });
+
+        const rueElement = document.getElementById('rue');
+        const villeElement = document.getElementById('ville');
+        const codepostalElement = document.getElementById('cp');
+        const longitudeElement = document.getElementById('long');
+        const latitudeElement = document.getElementById('lat');
+        const combo = document.getElementById('add_sortie_lieux_no_lieu');
+        const listLieu = document.getElementById('add_sortie_lieux_no_lieu').value;
+        let value = [];
+        window.addEventListener('load',function(){
+            value = listLieu.split("|");
+            rueElement.textContent = value[1];
+            villeElement.textContent = value[4];
+            codepostalElement.textContent = value[5];
+            longitudeElement.textContent = value[2];
+            latitudeElement.textContent = value[3];
+        })
+        combo.addEventListener('change',function(event){
+            value = event.target.value.split("|");
+            console.log(value)
+            rueElement.textContent = value[1];
+            villeElement.textContent = value[4];
+            codepostalElement.textContent = value[5];
+            longitudeElement.textContent = value[2];
+            latitudeElement.textContent = value[3];
         });
 
     </script>

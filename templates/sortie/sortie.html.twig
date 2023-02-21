@@ -10,9 +10,9 @@
 
     <script src="{{ asset('Js/AddSortie.js') }}"></script>
     {% for message in app.flashes('sucess') %}
-    <div class="alter alert-success">
-        {{ message }}
-    </div>
+        <div class="alter alert-success">
+            {{ message }}
+        </div>
     {% endfor %}
 
 
@@ -21,7 +21,7 @@
         <article id="article_un">
             <div id="info_div_1">
                 <p class="p_info">Nom de la sortie : {{ sortie.nom }}</p>
-                <p class="p_info">Date et heure de la sortie : {{ sortie.datedebut | date("m/d/Y à H:i")}}</p>
+                <p class="p_info">Date et heure de la sortie : {{ sortie.datedebut | date("m/d/Y à H:i") }}</p>
                 <p class="p_info">Date limite d'inscription : {{ sortie.datecloture | date("m/d/Y") }}</p>
                 <p class="p_info">Nombre de places : {{ sortie.nbinscriptionsmax }}</p>
                 <p class="p_info">Durée : {{ sortie.duree }} minutes</p>
@@ -34,15 +34,15 @@
                 <p class="p_info">Lieu : {{ sortie.LieuxNoLieu.NomLieu }}</p>
                 <p class="p_info">Rue : {{ sortie.LieuxNoLieu.Rue }}</p>
                 <p class="p_info">Code postal : {{ sortie.LieuxNoLieu.VillesNoVille.CodePostal }}</p>
-                    <p class="p_info">Latitude :
-                        {%  if   sortie.LieuxNoLieu.Latitude is null %}
+                <p class="p_info">Latitude :
+                    {% if   sortie.LieuxNoLieu.Latitude is null %}
                         (Latitude non renseignée)
-                        {% else %}
+                    {% else %}
                         {{ sortie.LieuxNoLieu.Latitude }}
                     {% endif %}
-                    </p>
+                </p>
                 <p class="p_info">Longitude :
-                    {%  if   sortie.LieuxNoLieu.Longitude is null %}
+                    {% if   sortie.LieuxNoLieu.Longitude is null %}
                         (Longitude non renseignée)
                     {% else %}
                         {{ sortie.LieuxNoLieu.Longitude }}
@@ -53,23 +53,23 @@
             <div id="info_div_liste">
                 <h4>Liste des participants inscrits :</h4>
                 <table>
-                        <tr id="thead">
-                            <th scope="col">Pseudo</th>
-                            <th scope="col">Nom</th>
-                        </tr>
+                    <tr id="thead">
+                        <th scope="col">Pseudo</th>
+                        <th scope="col">Nom</th>
+                    </tr>
                     <tbody>
                     {% if sortie.IdInscription != null %}
-                    {% for result in sortie.IdInscription.ParticipantsNoParticipant %}
-                    <tr>
-                        <td>{{ result.Pseudo }}</td>
-                        <td>{{result.Nom}} {{ result.Prenom }}</td>
-                    </tr>
-                    {% endfor %}
-                        {% else %}
+                        {% for result in sortie.IdInscription.ParticipantsNoParticipant %}
                             <tr>
-                                <td>Aucun participant</td>
-                                <td>no data</td>
+                                <td>{{ result.Pseudo }}</td>
+                                <td>{{ result.Nom }} {{ result.Prenom }}</td>
                             </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td>Aucun participant</td>
+                            <td>no data</td>
+                        </tr>
                     {% endif %}
                     </tbody>
                 </table>
@@ -81,13 +81,13 @@
             {% if app.user == sortie.organisateur %}
                 <button onclick="myFunction()" id="iwantToModify">Modifier</button>
             {% endif %}
-            <a href="{{ path('main_index')  }}" type="submit">Retour</a>
+            <a href="{{ path('main_index') }}" type="submit">Retour</a>
         </div>
     </section>
 
     <section onload="hideMe()" id="sectionForm">
         <div id="showform">
-            {%if app.user == sortie.organisateur %}
+            {% if app.user == sortie.organisateur %}
                 <div id="Div_form">
                     <h1>Modifier la sortie</h1>
                     <p>Ville organisatrice : {{ app.user.SitesNoSite.NomSite }} </p>
@@ -107,7 +107,7 @@
                             {{ form_label(formSortie.nbinscriptionsmax, 'Nombre de place :') }}
                             {{ form_widget(formSortie.nbinscriptionsmax) }}
 
-                            {{ form_label(formSortie.duree , 'Durée :')}}
+                            {{ form_label(formSortie.duree , 'Durée :') }}
                             {{ form_widget(formSortie.duree) }}
 
                             {{ form_label(formSortie.descriptioninfos, 'Description et infos :') }}
@@ -122,18 +122,17 @@
                                 <p class="control has-icons-left">
                     <span id="span-lieux" class="select">
                         <select id="id-lieu" {{ form_widget(formSortie.lieux_no_lieu) }}
-                        <a href="{{ path('sortie_LieuSortie', {'id': sortie.Id}) }}" >+</a>
+                        <a href="{{ path('sortie_LieuSortie', {'id': sortie.Id}) }}">+</a>
                     </span>
                                 </p>
                             </div>
 
-                        {% dump(lieu) %}
 
-                            <p id="id-rue" >Rue: </p>
-                            <p id="id-ville" >ville : </p>
-                            <p id="id-code_postal">Code postal : </p>
-                            <p id="id-longitude">Longitude : </p>
-                            <p id="id-latitude">Latitude : </p>
+                            <p>Rue : <span id="rue"></span></p>
+                            <p>Ville :<span id="ville"></span></p>
+                            <p>Code postal :<span id="cp"></span></p>
+                            <p>Longitude :<span id="long"></span></p>
+                            <p>latitude :<span id="lat"></span></p>
 
 
                         </div>
@@ -151,6 +150,34 @@
             {% endif %}
         </div>
     </section>
+    <script>
 
+        const rueElement = document.getElementById('rue');
+        const villeElement = document.getElementById('ville');
+        const codepostalElement = document.getElementById('cp');
+        const longitudeElement = document.getElementById('long');
+        const latitudeElement = document.getElementById('lat');
+        const combo = document.getElementById('id-lieu');
+        const listLieu = document.getElementById('id-lieu').value;
+        let value = [];
+        window.addEventListener('load',function(){
+            value = listLieu.split("|");
+            rueElement.textContent = value[1];
+            villeElement.textContent = value[4];
+            codepostalElement.textContent = value[5];
+            longitudeElement.textContent = value[2];
+            latitudeElement.textContent = value[3];
+        })
+        combo.addEventListener('change',function(event){
+            value = event.target.value.split("|");
+            console.log(value)
+            rueElement.textContent = value[1];
+            villeElement.textContent = value[4];
+            codepostalElement.textContent = value[5];
+            longitudeElement.textContent = value[2];
+            latitudeElement.textContent = value[3];
+        });
+
+    </script>
 
 {% endblock %}
