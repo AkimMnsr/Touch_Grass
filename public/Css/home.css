@@ -38,6 +38,7 @@
     border-collapse: inherit;
     border-radius: 10px;
     box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+    background: rgb(236,240,243);
     margin-top: 30px;
     margin-bottom: 30px;
 }
@@ -69,6 +70,7 @@ h2,#filtreTitre{
     border-radius: 10px;
     box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
     margin-right: 30px;
+    background: rgb(236,240,243);
     border-top-width: 30px;
     align-items: center;
     padding-left: 20px;
@@ -92,4 +94,7 @@ body{
 }
 #base_section{
     padding-bottom: 10%;
+}
+.transparent{
+    opacity: 0.6;
 }
