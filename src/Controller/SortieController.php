@@ -13,6 +13,7 @@ use App\Repository\LieuxRepository;
 use App\Repository\SortiesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
+use phpDocumentor\Reflection\Types\String_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,15 +39,16 @@ class SortieController extends AbstractController
         $lieu = $lieuxRepository->findAll();
         $sortieForm = $this->createForm(AddSortieType::class,$sortie);
         $sortieForm->handleRequest($request);
-        $organisateur = $this->getUser();
-        $sortie->setOrganisateur($organisateur);
 
         if ($sortieForm->isSubmitted()) {
             try {
+                $organisateur = $this->getUser();
+                $sortie->setOrganisateur($organisateur);
                 $inscription = new Inscriptions();
                 $inscription->setDateInscription($sortie->getDatedebut());
                 $sortie->setIdInscription($inscription);
                 $inscription->addParticipantsNoParticipant($organisateur);
+                dump($sortie);
                if( $sortieForm->get("save")->isClicked()) {
                    $save = $etatsRepository->findOneBy(['id' => 1]);
                    $sortie->setEtatsNoEtat($save);
@@ -58,6 +60,7 @@ class SortieController extends AbstractController
                     $em->persist($inscription);
                     $em->persist($sortie);
                     $em->flush();
+
                     $idSortie = $sortie->getId();
                     return $this->redirectToRoute('sortie_sortie', array('id' =>$idSortie));
                 }
