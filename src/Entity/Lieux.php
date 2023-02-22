@@ -18,7 +18,7 @@ class Lieux
     #[Assert\NotBlank(
         message: 'Un nom de lieu doit être renseigné'
     )]
-    #[Assert\length(
+    #[Assert\Length(
         min: 4,
         max: 30,
         minMessage: '4 caractères minimum',
