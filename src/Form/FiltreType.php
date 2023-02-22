@@ -36,7 +36,7 @@ class FiltreType extends AbstractType
             ])
             ->add('datecloture', type: DateType::class, options: [
                 'required'=>false,
-                'label' => 'Termine le : ',
+                'label' => "Fin d'inscription le : ",
                 'html5' => true,
                 'widget' => 'single_text'
             ])

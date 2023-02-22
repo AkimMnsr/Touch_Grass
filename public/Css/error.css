@@ -1,0 +1,18 @@
+body{
+    background-image: url("../img/error.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.error{
+    margin: 0 15%;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    box-shadow: 14px 14px 20px #9c9ea1, -14px -14px 20px #838080;
+    border-collapse: inherit;
+    border-radius: 10px;
+    background: rgb(60 59 54);
+}
+.bear{
+    color: #DEB887;
+}

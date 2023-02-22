@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
-
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('Css/404.css') }}">
+{% endblock %}
 {% block body %}
-
-
-    <img src="https://cdn.dribbble.com/users/2458211/screenshots/16954499/media/40db74439d25aee391cacdbd63e85989.png" alt="LOL">
-
+    <div class="error">
+    <h1 class="title is-1 fox">Désolé c'est qu'un petit Renard nommé 404</h1>
+    </div>
 {% endblock %}
