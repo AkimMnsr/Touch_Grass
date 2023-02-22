@@ -5,71 +5,55 @@
     <link rel="stylesheet" href="{{ asset('Css/profil.css') }}">
 {% endblock %}
 {% block body %}
-    <p class="title is-1">{{ app.user.pseudo }} </p>
-    <div class="row">
-    <div class="column" id="imageProfil">
-            <img class="imgProfil" src="\img\products\{{ app.user.image }}">
-    </div>
-    <div class="column" id="infoProfil">
-        <li>
-            <div id="label">
-                Nom:
-            </div>
-            <div id="text">
-                {{ app.user.nom }}
-            </div>
-        </li>
-        <li>
-            <div id="label">
-            Prenom:
-            </div>
-            <div id="text">
-                {{ app.user.prenom }}
-            </div>
-        </li>
 
-        <li>
-            <div id="label">
-            Téléphone:
-            </div>
-            <div id="text">
-            {{ app.user.telephone }}
-    </div>
-        </li>
-        <li>
-            <div id="label">
-            Email:
-            </div>
-            <div id="text">
-            {{ app.user.mail }}
-    </div>
-        </li>
-        <li>
-            <div id="label">
-            Ville de rattachement:
-            </div>
-            <div id="text">
-            {{ app.user.SitesNoSite.NomSite }}
-            </div>
-        </li>
+    <section id="section_un">
 
-    </div>
-        <div class="column">
+        <div id="Div_form">
+
+            <h1 class="title is-1 is-mobile">{{ app.user.pseudo }} </h1>
+            <hr>
+            <div id="Form_div">
+
+                <div id="Form_first_part">
+
+                    <figure class="image is-128x128">
+
+                        <img class="is-rounded" src="\img\products\{{ app.user.image }}">
+
+                    </figure>
+
+                </div>
+
+                <div id="Form_second_part">
+
+                    <div id="result">
+
+                        <p class="result-p is-mobile"><strong>Nom</strong></p>
+                        <p>{{ app.user.nom }}</p>
+                        <p class="result-p is-mobile"><strong>Prenom</strong></p>
+                        <p>{{ app.user.prenom }}</p>
+                        <p class="result-p is-mobile"><strong>Téléphone</strong></p>
+                        <p>{{ app.user.telephone }}</p>
+                        <p class="result-p is-mobile"><strong>Email</strong></p>
+                        <p>{{ app.user.mail }}</p>
+                        <p class="result-p is-mobile"><strong>Ville de rattachement: </strong></p>
+                        <p>{{ app.user.SitesNoSite.NomSite }}</p>
+                        <hr>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div id="div_button">
+
+                <a class="button is-info" href={{ path('profil_modifier') }}>Modifier</a></button>
+                <a class="button is-danger" href={{ path('main_index') }}>Retour</a>
+
+            </div>
 
         </div>
-    </div>
-    <div>
-{# {% if app.user == app.user.id %} #}
-    <li>
-        <div id="modifier">
-            <button id="modif"><a href={{ path('profil_modifier') }}>Modifier</a></button>
-        </div>
-    </li>
-            {# {%  endif %} #}
-        <li>
-            <div id="retour">
-                <button id="back"><a href={{ path('main_index') }}>Retour</a></button>
-            </div>
-        </li>
-    </div>
+
+
+    </section>
 {% endblock %}
