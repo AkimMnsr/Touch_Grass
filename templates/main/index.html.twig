@@ -121,24 +121,27 @@
                         {% if sortie.EtatsNoEtat.Id != 1 %}
                             <td><a href="{{ path('sortie_sortie', {'id': sortie.Id}) }}">Afficher</a>
                             {% if app.user %}
-                                {% if app.user.pseudo == sortie.Organisateur.Pseudo %}
-                                    - <a href="{{ path('sortie_annuler', {'id': sortie.Id}) }}">Annuler</a></td>
-                                {% elseif sortie.IdInscription.ParticipantsNoParticipant|length != sortie.Nbinscriptionsmax %}
-                                    {% if app.user in sortie.IdInscription.ParticipantsNoParticipant %}
-                                        - <a href="{{ path('inscription_desinscription', {'id': sortie.Id})}}">Se désister</a>
-                                        </td>
-                                    {% else %}
-                                        - <a href="{{ path('inscription_inscription', {'id': sortie.Id}) }}">S'inscrire</a></td>
-                                    {% endif %}
-                                {% else %}
-                                    </td>
-                                {% endif %}
-                            {% else %}
-                                {% if app.user %}
+                                {% if sortie.EtatsNoEtat.Id != 5 %}
                                     {% if app.user.pseudo == sortie.Organisateur.Pseudo %}
-                                        <td><a href="{{ path('sortie_sortie', {'id': sortie.Id}) }}">Modifier - Publier</a>
+                                        - <a href="{{ path('sortie_annuler', {'id': sortie.Id}) }}">Annuler</a></td>
+                                    {% elseif sortie.IdInscription.ParticipantsNoParticipant|length != sortie.Nbinscriptionsmax %}
+                                        {% if app.user in sortie.IdInscription.ParticipantsNoParticipant %}
+                                            - <a href="{{ path('inscription_desinscription', {'id': sortie.Id}) }}">Se
+                                            désister</a>
+                                            </td>
+                                        {% else %}
+                                            - <a href="{{ path('inscription_inscription', {'id': sortie.Id}) }}">S'inscrire</a></td>
+                                        {% endif %}
+                                    {% else %}
                                         </td>
                                     {% endif %}
+                                {% endif %}
+                            {% endif %}
+                        {% else %}
+                            {% if app.user %}
+                                {% if app.user.pseudo == sortie.Organisateur.Pseudo %}
+                                    <td><a href="{{ path('sortie_sortie', {'id': sortie.Id}) }}">Modifier -
+                                            Publier</a></td>
                                 {% endif %}
                             {% endif %}
                         {% endif %}
@@ -147,7 +150,8 @@
                 </tbody>
             </table>
         </div>
-        <button class="button is-success"><a id="button-color" href="{{ path('sortie_addSortie') }}">Créer une sortie</a></button>
+        <button class="button is-success"><a id="button-color" href="{{ path('sortie_addSortie') }}">Créer une
+                sortie</a></button>
     </div>
     <script type="text/javascript" src="{{ asset('Js/Filtre.js') }}"></script>
 {% endblock %}
