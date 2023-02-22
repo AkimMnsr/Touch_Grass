@@ -1,3 +1,19 @@
+body{
+    background-image: url(../img/home.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+p {
+    text-align: center;
+}
+#dgv{
+    margin: 0 10% 5%;
+    overflow-x: auto ;
+    overflow-y: auto ;
+}
+#button-color{
+    color:black;
+}
 #div_button{
     display: flex;
     margin-left: 25%;
@@ -6,50 +22,9 @@
     justify-content: space-around;
     gap:10px;
 }
-#Form_first_part{
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    margin: 30px;
-
-}
-#Div_form{
-    padding-bottom: 15px;
-    border-radius: 20px;
-    box-shadow: 14px 14px 20px #CBCED1, -14px -14px 20px white;
-    box-sizing: border-box;
-    background: rgba(236,240,243,0.6);
-    width: 100%;
-    height: 80%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-#Form_second_part {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    margin: 30px;
-}
-#Form_div{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    border-collapse: inherit;
-    border-radius: 10px;
-    box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
-    background: rgb(236,240,243);
-    margin-top: 30px;
-    margin-bottom: 30px;
-}
-#button-color{
-    color:white;
-}
-p {
-    text-align: center;
-}
-#dgv{
-    margin: 0 10% 5%;
+#create-sortie{
+    border: solid;
+    border-color: chocolate;
 }
 #checked{
     width: 50px;
@@ -58,39 +33,8 @@ p {
 h2,#filtreTitre{
     font-weight: bold;
 }
-#filtreTitre{
-    font-size: 1.2em;
-}
-#info{
-    margin-left: 70%;
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-    border-collapse: inherit;
-    border-radius: 10px;
-    box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
-    margin-right: 30px;
-    background: rgb(236,240,243);
-    border-top-width: 30px;
-    align-items: center;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-body{
-    background-image: url(../img/homepage.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-#filtrage{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-#filtre_Rechercher{
-    margin: 10px 40%;
+br{
+    display: none;
 }
 #base_section{
     padding-bottom: 10%;
@@ -98,3 +42,203 @@ body{
 .transparent{
     opacity: 0.6;
 }
+#tabList{
+    display: flex;
+    align-items: center;
+}
+#Div_form{
+    padding-bottom: 15px;
+    border-radius: 20px;
+    box-sizing: border-box;
+    background: rgba(236,240,243,0.6);
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#info{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    border-collapse: inherit;
+    border-radius: 10px;
+    background: rgb(236,240,243);
+    border-top-width: 30px;
+    padding: 10px 20px;
+    align-items: center;
+}
+#Form_div{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border-collapse: inherit;
+    border-radius: 10px;
+    background: rgb(236,240,243);
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+#filtrage{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#Form_second_part, #Form_first_part{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+@media screen and (min-width: 1000px) {
+    body{
+        background-image: url(../img/home.jpg);
+    }
+    #Div_form{
+        box-shadow: 14px 14px 20px #CBCED1, -14px -14px 20px white;
+    }
+    #filtre_Rechercher{
+        margin: 10px 40%;
+    }
+    #filtreTitre{
+        font-size: 1.2em;
+    }
+    #filtrage{
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    #info{
+        margin-left: 70%;
+        box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+        margin-right: 30px;
+    }
+
+    #tabList{
+        flex-direction: column;
+    }
+    #Form_second_part, #Form_first_part{
+        margin: 30px;
+    }
+    #Form_div{
+        box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+    }
+
+}
+
+@media screen and (max-width: 1000px) {
+    body{
+        background-image: url(../img/homeMobile.jpg);
+    }
+    #Div_form{
+        box-shadow: 14px -9px 20px #cbced1;
+    }
+    #Form_div{
+        box-shadow: 14px 14px 20px #cbced1;
+    }
+    #filtrage{
+        flex-direction: column-reverse;
+    }
+    #filtre_Rechercher{
+        margin: 10px 0;
+    }
+
+    #info{
+        box-shadow: 14px 14px 20px #cbced1;
+    }
+    #filtre{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    #tabList{
+        flex-direction: column-reverse;
+    }
+    #Form_second_part, #Form_first_part{
+        margin: 10px;
+    }
+    #create-sortie{
+        margin-bottom: 20px;
+    }
+    #table-sorties{
+        box-shadow: none;
+    }
+
+
+/*adaptation mobile du tableau*/
+    table {
+        border: 1px solid #ccc;
+        border-collapse: collapse;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        table-layout: fixed;
+    }
+    table {
+        border: 0;
+    }
+
+    table caption {
+        font-size: 1.3em;
+    }
+
+    table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    table tr {
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: .625em;
+    }
+
+    table td {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: .8em;
+        text-align: right !important;
+    }
+
+    table td::before {
+        /*
+        * aria-label has no advantage, it won't be read inside a table
+        content: attr(aria-label);
+        */
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    table caption {
+        font-size: 1.5em;
+        margin: .5em 0 .75em;
+    }
+
+    table tr {
+        background-color: #f8f8f8;
+        border: 1px solid #ddd;
+        padding: .35em;
+    }
+
+    table th,
+    table td {
+        padding: .625em;
+        text-align: center;
+    }
+
+    table th {
+        font-size: .85em;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+    }
+}
+
+
+
