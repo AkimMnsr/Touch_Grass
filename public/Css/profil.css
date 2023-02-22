@@ -11,7 +11,7 @@ body {
 #section_un {
     display: flex;
     justify-content: center;
-    padding-top: 15%;
+    padding-top: 2%;
 }
 
 #Form_div{
@@ -43,6 +43,8 @@ body {
     box-shadow: 14px 14px 20px #cbced1;
     box-sizing: border-box;
     background: #ecf0f3;
+    width: 75%;
+    height: 100%;
 }
 
 @media screen and (max-width: 1400px) {
