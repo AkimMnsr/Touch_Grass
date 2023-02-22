@@ -24,8 +24,10 @@
                 <p class="p_info"><U>Date limite d'inscription</U> : {{ sortie.datecloture | date("m/d/Y") }}</p>
                 <p class="p_info"><U>Nombre de places</U> : {{ sortie.nbinscriptionsmax }}</p>
                 <p class="p_info"><U>Durée</U> : {{ sortie.duree }} minutes</p>
-                <p class="p_info"><U>Description et infos</U> : {{ sortie.descriptioninfos }} </p>
-            </div>
+                <div id="textDescription">
+                <p class="p_info"><U>Description et infos</U> : <br>{{ sortie.descriptioninfos }} </p>
+                </div>
+                </div>
 
             <div id="info_div_2">
                 <p class="p_info"><U>Site organisateur</U> : {{ sortie.organisateur.SitesNoSite.NomSite }} </p>
@@ -81,7 +83,7 @@
         </article>
 
         <div id="buttonSortie">
-            <a href="{{ path('main_index') }}" type="submit"><img id="img-previous" src="{{ asset('img/previous.png') }}" alt="retour"></a>
+            <a href="{{ path('main_index') }}" type="submit">retour</a>
             {% if app.user == sortie.organisateur %}
                 <button class="button is-info" onclick="myFunction()" id="iwantToModify">Modifier</button>
             {% endif %}
@@ -167,7 +169,7 @@
                                 <p class="control has-icons-left">
                     <span id="span-lieux" class="select">
                         <select id="id-lieu" {{ form_widget(formSortie.lieux_no_lieu) }}
-                        <a href="{{ path('sortie_LieuSortie', {'id': sortie.Id}) }}">+</a>
+                        <a class="button is-light is-mobile" href="{{ path('sortie_LieuSortie', {'id': sortie.Id}) }}">+</a>
                     </span>
                                 </p>
                             </div>

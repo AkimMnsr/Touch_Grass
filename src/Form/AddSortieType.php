@@ -48,7 +48,7 @@ class AddSortieType extends AbstractType
 
             ->add('save', SubmitType::class, ['label' => 'Enregistrer'])
             ->add('publish', SubmitType::class, ['label' => 'Publier la sortie'])
-            ->add('remove', SubmitType::class, ['label' => 'Supprimer la sortie'])
+            ->add('remove', SubmitType::class, ['label' => 'Supprimer'])
 
         ;
     }

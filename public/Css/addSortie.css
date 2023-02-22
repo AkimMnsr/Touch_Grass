@@ -71,6 +71,8 @@ p {
 
 }
 
+
+
 @media screen and (max-width: 1400px) {
 
     #Div_form {
@@ -134,6 +136,8 @@ p {
     }
 }
 
+
+
 @media screen and (max-width: 500px) {
 
     #Div_form {
@@ -167,10 +171,6 @@ p {
         margin-bottom: 10px;
     }
 
-    #button-back-form {
-        display: flex;
-        justify-content: center;
-    }
 
 
 
