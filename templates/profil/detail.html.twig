@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Profil{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('Css/profil.css') }}">
+{% endblock %}
+{% block body %}
+
+    <p class="title is-1">{{ participants.pseudo }} </p>
+    <div class="row">
+        <div class="column" id="imageProfil">
+            <img class="imgProfil" src="\img\products\{{ participants.image }}">
+        </div>
+        <div class="column" id="infoProfil">
+            <li>
+                <div id="label">
+                    Nom:
+                </div>
+                <div id="text">
+                    {{ participants.nom }}
+                </div>
+            </li>
+            <li>
+                <div id="label">
+                    Prenom:
+                </div>
+                <div id="text">
+                    {{ participants.prenom }}
+                </div>
+            </li>
+
+            <li>
+                <div id="label">
+                    Téléphone:
+                </div>
+                <div id="text">
+                    {{ participants.telephone }}
+                </div>
+            </li>
+            <li>
+                <div id="label">
+                    Email:
+                </div>
+                <div id="text">
+                    {{ participants.mail }}
+                </div>
+            </li>
+            <li>
+                <div id="label">
+                    Ville de rattachement:
+                </div>
+                <div id="text">
+                    {{ participants.SitesNoSite.NomSite }}
+                </div>
+            </li>
+
+        </div>
+        <div class="column">
+
+        </div>
+    </div>
+
+    <div>
+         {% if app.user == participants %}
+        <li>
+            <div id="modifier">
+                <button id="modif"><a href={{ path('profil_modifier') }}>Modifier</a></button>
+            </div>
+        </li>
+         {%  endif %}
+        <li>
+            <div id="retour">
+                <button id="back"><a href={{ path('profil_afficher') }}>Retour</a></button>
+            </div>
+        </li>
+    </div>
+{% endblock %}

@@ -51,7 +51,17 @@ class ProfilController extends AbstractController
         if ($this->isCsrfTokenValid('delete' . $participant->getId(), $request->request->get('_token'))) {
             $participantsRepository->remove($participant, true);
         }
-
         return $this->redirectToRoute('profil_afficher');
+    }
+
+    #[Route('/{id}', name: 'details')]
+    public function profilbyid(
+        int $id,
+        ParticipantsRepository $participantsRepository,
+    ) : Response
+    {
+        $participants = $participantsRepository->findOneBy(["id" =>$id]);
+        return $this->render('profil/detail.html.twig', compact('participants'));
+
     }
 }
