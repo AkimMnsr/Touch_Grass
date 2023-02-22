@@ -15,33 +15,32 @@
         </div>
     {% endfor %}
 
-
+<section id="section_un">
     <section id="sectionDetail">
-        <h1>Afficher la sortie</h1>
+        <h1 class="title is-2"> {{ sortie.nom }}</h1>
         <article id="article_un">
             <div id="info_div_1">
-                <p class="p_info">Nom de la sortie : {{ sortie.nom }}</p>
-                <p class="p_info">Date et heure de la sortie : {{ sortie.datedebut | date("m/d/Y à H:i") }}</p>
-                <p class="p_info">Date limite d'inscription : {{ sortie.datecloture | date("m/d/Y") }}</p>
-                <p class="p_info">Nombre de places : {{ sortie.nbinscriptionsmax }}</p>
-                <p class="p_info">Durée : {{ sortie.duree }} minutes</p>
-                <p class="p_info">Description et infos : {{ sortie.descriptioninfos }} </p>
+                <p class="p_info"><U> Date et heure de la sortie</U> : {{ sortie.datedebut | date("m/d/Y à H:i") }}</p>
+                <p class="p_info"><U>Date limite d'inscription</U> : {{ sortie.datecloture | date("m/d/Y") }}</p>
+                <p class="p_info"><U>Nombre de places</U> : {{ sortie.nbinscriptionsmax }}</p>
+                <p class="p_info"><U>Durée</U> : {{ sortie.duree }} minutes</p>
+                <p class="p_info"><U>Description et infos</U> : {{ sortie.descriptioninfos }} </p>
             </div>
 
             <div id="info_div_2">
-                <p class="p_info">Site organisateur : {{ sortie.organisateur.SitesNoSite.NomSite }} </p>
-                <p class="p_info">Ville : {{ sortie.LieuxNoLieu.VillesNoVille.NomVille }}</p>
-                <p class="p_info">Lieu : {{ sortie.LieuxNoLieu.NomLieu }}</p>
-                <p class="p_info">Rue : {{ sortie.LieuxNoLieu.Rue }}</p>
-                <p class="p_info">Code postal : {{ sortie.LieuxNoLieu.VillesNoVille.CodePostal }}</p>
-                <p class="p_info">Latitude :
+                <p class="p_info"><U>Site organisateur</U> : {{ sortie.organisateur.SitesNoSite.NomSite }} </p>
+                <p class="p_info"><U>Ville</U> : {{ sortie.LieuxNoLieu.VillesNoVille.NomVille }}</p>
+                <p class="p_info"><U>Lieu</U> : {{ sortie.LieuxNoLieu.NomLieu }}</p>
+                <p class="p_info"><U>Rue</U> : {{ sortie.LieuxNoLieu.Rue }}</p>
+                <p class="p_info"><U>Code postal</U> : {{ sortie.LieuxNoLieu.VillesNoVille.CodePostal }}</p>
+                <p class="p_info"><U>Latitude</U> :
                     {% if   sortie.LieuxNoLieu.Latitude is null %}
                         (Latitude non renseignée)
                     {% else %}
                         {{ sortie.LieuxNoLieu.Latitude }}
                     {% endif %}
                 </p>
-                <p class="p_info">Longitude :
+                <p class="p_info"><U>Longitude</U> :
                     {% if   sortie.LieuxNoLieu.Longitude is null %}
                         (Longitude non renseignée)
                     {% else %}
@@ -50,68 +49,114 @@
                 </p>
 
             </div>
-            <div id="info_div_liste">
-                <h4>Liste des participants inscrits :</h4>
-                <table>
-                    <tr id="thead">
-                        <th scope="col">Pseudo</th>
-                        <th scope="col">Nom</th>
-                    </tr>
-                    <tbody>
-                    {% if sortie.IdInscription != null %}
-                        {% for result in sortie.IdInscription.ParticipantsNoParticipant %}
-                            <tr>
-                                <td>{{ result.Pseudo }}</td>
-                                <td>{{ result.Nom }} {{ result.Prenom }}</td>
-                            </tr>
-                        {% endfor %}
-                    {% else %}
-                        <tr>
-                            <td>Aucun participant</td>
-                            <td>no data</td>
+            <div id="table-wrapper">
+                <div id="table-scroll">
+                    <caption>
+                        <h4 class="title is-5">Inscrits :</h4>
+                    </caption>
+                    <table>
+                        <tr id="thead">
+                            <th scope="col">Pseudo</th>
+                            <th scope="col">Nom</th>
                         </tr>
-                    {% endif %}
-                    </tbody>
-                </table>
-
+                        <tbody>
+                        {% if sortie.IdInscription != null %}
+                            {% for result in sortie.IdInscription.ParticipantsNoParticipant %}
+                                <tr>
+                                    <td>{{ result.Pseudo }}</td>
+                                    <td>{{ result.Nom }} {{ result.Prenom }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td>Aucun participant</td>
+                                <td>no data</td>
+                            </tr>
+                        {% endif %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
+
         </article>
 
         <div id="buttonSortie">
+            <a href="{{ path('main_index') }}" type="submit"><img id="img-previous" src="{{ asset('img/previous.png') }}" alt="retour"></a>
             {% if app.user == sortie.organisateur %}
-                <button onclick="myFunction()" id="iwantToModify">Modifier</button>
+                <button class="button is-info" onclick="myFunction()" id="iwantToModify">Modifier</button>
             {% endif %}
-            <a href="{{ path('main_index') }}" type="submit">Retour</a>
+
         </div>
     </section>
+</section>
 
+    <!-- /!\ on action section ahead disappear and section below appear -->
+
+
+<section id="section_deux">
     <section onload="hideMe()" id="sectionForm">
         <div id="showform">
             {% if app.user == sortie.organisateur %}
                 <div id="Div_form">
-                    <h1>Modifier la sortie</h1>
-                    <p>Ville organisatrice : {{ app.user.SitesNoSite.NomSite }} </p>
+                    <h1 class="title is-3">Modifier la sortie {{ sortie.nom }}</h1>
+                    <p style="text-align: center">Site organisateur : {{ app.user.SitesNoSite.NomSite }} </p> <div class="alert-validation">{{ form_errors(formSortie.nom) }}</div>
+                    <div class="alert-validation">{{ form_errors(formSortie.datedebut) }}</div>
+                    <div class="alert-validation">{{ form_errors(formSortie.datecloture) }}</div>
+                    <div class="alert-validation">{{ form_errors(formSortie.nbinscriptionsmax) }}</div>
+                    <div class="alert-validation">{{ form_errors(formSortie.duree) }}</div>
+                    <div class="alert-validation">{{ form_errors(formSortie.descriptioninfos) }}</div>
                     {{ form_start(formSortie) }}
                     <div id="Form_div">
                         <div id="Form_first_part">
 
-                            {{ form_label(formSortie.nom, 'Nom de la sortie :') }}
-                            {{ form_widget(formSortie.nom) }}
+                            <div class="control is-mobile">
+                                <label class="label is-mobile">Nom de la sortie :</label>
+                                <input id="nomSortie" onload="load()" class="input is-focused is-mobile" {{ form_widget(formSortie.nom) }}
 
-                            {{ form_label(formSortie.datedebut, 'Date et heure de la sortie :') }}
-                            {{ form_widget(formSortie.datedebut) }}
+                            </div>
 
-                            {{ form_label(formSortie.datecloture, 'Date limite d\'inscription :') }}
-                            {{ form_widget(formSortie.datecloture) }}
 
-                            {{ form_label(formSortie.nbinscriptionsmax, 'Nombre de place :') }}
-                            {{ form_widget(formSortie.nbinscriptionsmax) }}
+                            <div class="control is-mobile">
+                                <label class="label  is-mobile"> {{ form_label(formSortie.datedebut, 'Date et heure de la sortie :') }}</label>
+                                <input id="dateSortie" onload="load()" class="input is-focused is-mobile"
+                                {{ form_widget(formSortie.datedebut) }}
+                            </div>
 
-                            {{ form_label(formSortie.duree , 'Durée :') }}
-                            {{ form_widget(formSortie.duree) }}
+                            <div class="control is-mobile">
+                                <label class="label is-mobile">   {{ form_label(formSortie.datecloture, 'Date limite d\'inscription :') }}</label>
+                                <input id="dateCloture" onload="load()" class="input is-focused is-mobile" type="date"
+                                {{ form_widget(formSortie.datecloture) }}
+                            </div>
+
+                            <strong>{{ form_label(formSortie.nbinscriptionsmax, 'Nombre de place :') }}</strong>
+                            <div class="field has-addons is-mobile">
+                                <p class="control is-mobile">
+                                    <input id="PlaceId" onload="load()"
+                                           class="input is-mobile" {{ form_widget(formSortie.nbinscriptionsmax) }}
+                                </p>
+                                <p class="control  is-mobile">
+                                    <a class="button is-static is-mobile">
+                                        places
+                                    </a>
+                                </p>
+                            </div>
+
+                            <strong>      {{ form_label(formSortie.duree , 'Durée :') }}</strong>
+
+                            <div class="field has-addons is-mobile">
+                                <p class="control  is-mobile">
+                                    <input id="DuréeId" onload="load()" class="input is-mobile" {{ form_widget(formSortie.duree) }}
+                                </p>
+                                <p class="control is-mobile">
+                                    <a class="button is-static is-mobile">
+                                        minutes
+                                    </a>
+                                </p>
+                            </div>
 
                             {{ form_label(formSortie.descriptioninfos, 'Description et infos :') }}
-                            {{ form_widget(formSortie.descriptioninfos) }}
+                            <textarea id="DescriptionId" onload="load()"
+                                      class="textarea is-primary is-mobile" {{ form_widget(formSortie.descriptioninfos) }}
 
                         </div>
 
@@ -138,18 +183,21 @@
                         </div>
                     </div>
                     <div id="div_button">
-                        {{ form_widget(formSortie.save) }}
-                        {{ form_widget(formSortie.publish) }}
-                        {{ form_widget(formSortie.remove) }}
+                        <button class="button is-info" {{ form_widget(formSortie.save) }}
+                        <button class="button is-success" {{ form_widget(formSortie.publish) }}
+                        <button class="button is-danger" {{ form_widget(formSortie.remove) }}
 
                     </div>
                     {{ form_end(formSortie) }}
-                    <button onclick="retour()" id="iwantToModify">retour</button>
+                    <div id="button-back-form">
+                        <button onclick="retour()" id="iwantToModify">retour</button>
+                    </div>
                 </div>
 
             {% endif %}
         </div>
     </section>
+</section>
     <script>
 
         const rueElement = document.getElementById('rue');
