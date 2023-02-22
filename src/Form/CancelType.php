@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Sorties;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,8 +18,11 @@ class CancelType extends AbstractType
 
             ->add('descriptioninfos', TextareaType::class)
             ->add('save', SubmitType::class, ['label' => 'Enregistrer'])
-            ->add('cancel', SubmitType::class, ['label' => 'Annuler'])
-        ;
+            ->add('cancel', ButtonType::class, [
+                'label' => 'Annuler',
+                'attr' => ['href' => 'main_index'],
+
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

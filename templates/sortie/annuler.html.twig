@@ -23,9 +23,9 @@
             {{ form_label(cancelForm.descriptioninfos, 'Motif annulation :')}}
 
             {{ form_widget(cancelForm.descriptioninfos) }}
-            <div id="div_button">
+            <a id="div_button">
             <button class="button is-info" {{ form_widget(cancelForm.save) }}
-            <button class="button is-success" {{ form_widget(cancelForm.cancel) }}
+                <a href="{{ path('main_index') }}" class="button is-success" {{ form_widget(cancelForm.cancel) }}</a>
             </div>
             {{ form_end(cancelForm) }}
         </article>
