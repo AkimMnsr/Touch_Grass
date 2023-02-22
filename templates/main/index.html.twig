@@ -108,17 +108,15 @@
                         {# inscrit visible que une fois connecter #}
                         {% if app.user %}
                             <td data-label="Inscrit">
-                                {% for participant in sortie.IdInscription.ParticipantsNoParticipant %}
-                                    {% if app.user==participant %}
-                                        <img src="{{ asset('img/inscrit.svg') }}"
-                                             id="checked"
-                                             alt="inscrit">
-                                    {% else %}
-                                        <img src="{{ asset('img/noninscrit.png') }}"
-                                             id="checked"
-                                             alt="noninscrit">
-                                    {% endif %}
-                                {% endfor %}
+                                {% if app.user in sortie.IdInscription.ParticipantsNoParticipant %}
+                                    <img src="{{ asset('img/inscrit.svg') }}"
+                                         id="checked"
+                                         alt="inscrit">
+                                {% else %}
+                                    <img src="{{ asset('img/noninscrit.png') }}"
+                                         id="checked"
+                                         alt="noninscrit">
+                                {% endif %}
                             </td>
                         {% endif %}
                         {# pseudo de l'organisateur #}
