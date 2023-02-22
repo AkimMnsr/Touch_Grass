@@ -86,6 +86,9 @@
     }
     body {
         background-image: url("/img/videoFixed.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+
     }
 
 }
@@ -94,7 +97,8 @@
 
     body {
         background-image: url("/img/videoFixed.png");
-
+        background-size: cover;
+        background-repeat: no-repeat;
     }
     #form {
         margin-top: 10%;
@@ -116,6 +120,7 @@
 
     body {
         background-image: url("/img/videoFixed.png");
+        background-size: cover;
 
     }
     #form {
