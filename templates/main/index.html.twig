@@ -116,7 +116,7 @@
                             </td>
                         {% endif %}
                         {# pseudo de l'organisateur #}
-                        <td>{{ sortie.Organisateur.Pseudo }}</td>
+                        <td> <a href="{{ path('profil_details', {'id': sortie.Organisateur.id }) }}">{{ sortie.Organisateur.Pseudo }}<a/></td>
                         {# Action #}
                         {% if sortie.EtatsNoEtat.Id != 1 %}
                             <td><a href="{{ path('sortie_sortie', {'id': sortie.Id}) }}">Afficher</a>
