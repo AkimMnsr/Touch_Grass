@@ -55,7 +55,6 @@ class Participants implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 30)]
     private ?string $prenom = null;
 
-    #[Assert\Regex('/^\(0\)[0-9]*$)')]
     #[ORM\Column(length: 15, nullable: true)]
     private ?string $telephone = null;
 
