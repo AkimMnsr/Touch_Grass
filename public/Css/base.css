@@ -1,6 +1,6 @@
 body {
     margin: initial;
-    padding-bottom: 35%;
+    padding-bottom: 20%;
 
 }
 
@@ -26,20 +26,28 @@ body {
     margin-top: 3%;
     margin-left: 10%;
     margin-right: 10%;
-    padding-bottom: 20%;
+    padding-bottom: 15%;
+    min-height: 100vh; /* remove white space after the footer */
+
 }
 
 footer {
+    display: none;
     opacity: 0.8;
     position: sticky;
     left: 0;
     bottom: 0;
+    padding: 10px;
     width: 100%;
-    padding: 15px;
+    height: 2%;
     background-color:#1ea471 ;
     color: white;
     text-align: center;
 }
+
+
+
+
 .footer-a {
     text-decoration: none;
     color:lightgoldenrodyellow;
@@ -64,3 +72,5 @@ footer {
     font-size: 0.9em;
     display: flex;
 }
+
+

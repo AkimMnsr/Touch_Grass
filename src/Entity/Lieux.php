@@ -18,6 +18,12 @@ class Lieux
     #[Assert\NotBlank(
         message: 'Un nom de lieu doit être renseigné'
     )]
+    #[Assert\length(
+        min: 4,
+        max: 30,
+        minMessage: '4 caractères minimum',
+        maxMessage: '30 caractères maximum',
+    )]
     #[Assert\Regex(
         pattern: '/^([^0-9]*)$/',
         match: true,

@@ -55,7 +55,7 @@ class Sorties
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Assert\LessThanOrEqual (
         propertyPath: "datedebut",
-        message: 'La date de sortie ne peux être supérieure à la date de sortie'
+        message: 'La date de limite d\'nscription ne peux être supérieure à la date de sortie'
     )]
     #[Assert\GreaterThanOrEqual ('today',
         message: 'La date de sortie ne peux être inférieur à la date du jour'

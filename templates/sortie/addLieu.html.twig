@@ -12,6 +12,10 @@
 
     <article id="article_form">
         <div id="titre">
+            <div class="alert-validation">{{ form_errors(formLieu.nom_lieu) }}</div>
+            <div class="alert-validation">{{ form_errors(formLieu.rue) }}</div>
+            <div class="alert-validation">{{ form_errors(formLieu.longitude) }}</div>
+            <div class="alert-validation">{{ form_errors(formLieu.latitude) }}</div>
             <h2 class="title is-4">Créer ton propre lieu</h2>
             <img id="img-titre" src="{{ asset('/img/arrosoir.png') }}" alt="pot avec plante">
         </div>

@@ -100,9 +100,13 @@ body {
     }
 }
 
-
-
 #button-annuler{
     border:1px solid;
+}
+
+
+.alert-validation {
+    color: darkred;
+    text-align: center;
 }
 
