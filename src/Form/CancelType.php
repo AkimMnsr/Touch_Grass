@@ -18,11 +18,7 @@ class CancelType extends AbstractType
 
             ->add('descriptioninfos', TextareaType::class)
             ->add('save', SubmitType::class, ['label' => 'Enregistrer'])
-            ->add('cancel', ButtonType::class, [
-                'label' => 'Annuler',
-                'attr' => ['href' => 'main_index'],
-
-            ]);
+            ->add('cancel', ButtonType::class, ['label' => 'Annuler']);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

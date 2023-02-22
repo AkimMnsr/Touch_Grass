@@ -19,6 +19,12 @@
         </button>
 
         <div id="titre">
+            <div class="alert-validation">{{ form_errors(formSortie.nom) }}</div>
+            <div class="alert-validation">{{ form_errors(formSortie.datedebut) }}</div>
+            <div class="alert-validation">{{ form_errors(formSortie.datecloture) }}</div>
+            <div class="alert-validation">{{ form_errors(formSortie.nbinscriptionsmax) }}</div>
+            <div class="alert-validation">{{ form_errors(formSortie.duree) }}</div>
+            <div class="alert-validation">{{ form_errors(formSortie.descriptioninfos) }}</div>
             <h2 class="title is-4 is-mobile">Créer ta propre sortie</h2>
             <img id="img-titre" src="{{ asset('/img/pot_plante.png') }}" alt="pot avec plante">
         </div>

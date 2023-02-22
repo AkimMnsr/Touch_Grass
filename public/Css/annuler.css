@@ -1,14 +1,61 @@
-#section {
+body {
+    background-image:url("/img/magicforest.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
+article {
     display: flex;
-    flex-direction: column;
-    justify-items: center;
+    justify-content: center;
+}
+
+#section {
+    background: #ecf0f3;
+    opacity: 0.9;
+    margin-top: 10%;
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: 14px 14px 20px #cbced1;
+    box-sizing: border-box;
+    width: 35%;
+    height: 100%;
+}
+
+@media screen and (max-width: 1300px) {
+
+    #section {
+        background: #ecf0f3;
+        opacity: 0.9;
+        margin-top: 10%;
+        padding: 15px;
+        border-radius: 20px;
+        box-shadow: 14px 14px 20px #cbced1;
+        box-sizing: border-box;
+        width: 75%;
+        height: 100%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+
+    #section {
+        background: #ecf0f3;
+        opacity: 0.9;
+        margin-top: 30%;
+        padding: 15px;
+        border-radius: 20px;
+        box-shadow: 14px 14px 20px #cbced1;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+    }
 }
 
 #article_one {
     display: flex;
     flex-direction: column;
     text-align: center;
+    align-items: center;
 }
 
 #article_two {
@@ -25,8 +72,8 @@ form  {
     align-items: center;
 }
 textarea {
-    width: 424px;
-    height: 220px;
+    width: 300px;
+    height: 150px;
 
 }
 
@@ -39,3 +86,27 @@ textarea {
 button  {
 
 }
+
+.image-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 100px;
+    height: 100px;
+}
+
+#myImage {
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#myImage:hover{
+    content: url("/img/angryGroot.png");
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    transition: opacity 0.5s ease-in-out;
+}
+

@@ -202,4 +202,8 @@ p {
     padding-bottom: 15px;
 }
 
+.alert-validation {
+    color: darkred;
+    text-align: center;
+}
 
