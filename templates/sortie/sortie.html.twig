@@ -17,7 +17,15 @@
 
     <section id="section_un">
         <section id="sectionDetail">
-            <h1 class="title is-2"> {{ sortie.nom }}</h1>
+            {% if sortie.EtatsNoEtat.Id == 5 %}
+                <h1 class="title is-2"><strike>{{ sortie.nom }}</strike> </h1>
+            <img id="img-event" src="{{ asset('img/event-dont.svg') }}" alt="event annulé">
+            {% elseif sortie.EtatsNoEtat.Id == 2  %}
+                <h1 class="title is-2">{{ sortie.nom }}</h1>
+                <img id="img-open" src="{{ asset('img/OPEN.svg') }}" alt="event Open">
+            {% else %}
+                <h1 class="title is-2">{{ sortie.nom }}</h1>
+            {% endif %}
             <article id="article_un">
                 <div id="info_div_1">
                     <p class="p_info"><U> Date et heure de la sortie</U> : {{ sortie.datedebut | date("m/d/Y à H:i") }}

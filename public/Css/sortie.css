@@ -10,6 +10,26 @@ h1 {
     text-align: center;
 }
 
+#img-event{
+    width: 150px;
+    height: 150px;
+    transition: transform .1s ease-in-out;
+}
+
+#img-open {
+    width: 100px;
+    height: 100px;
+    transition: transform .9s ease-in-out;
+}
+
+#img-open:hover {
+    width: 100px;
+    height: 100px;
+    transform: rotate(360deg);
+    transition: transform .9s ease-in-out;
+
+}
+
 #section_un {
     display: flex;
     justify-content: center;
