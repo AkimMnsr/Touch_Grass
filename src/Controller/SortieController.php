@@ -47,7 +47,10 @@ class SortieController extends AbstractController
                 $inscription->setDateInscription($sortie->getDatedebut());
                 $sortie->setIdInscription($inscription);
                 $inscription->addParticipantsNoParticipant($organisateur);
-                dump($sortie);
+                /** 2 button 'save' and 'pubish' setting  sortie open or created, this is flush in any case
+                 *  also when you create à sortie you create an occurence of entity inscription letting people
+                 *  join you're sortie.
+                 */
                 if ($sortieForm->get("save")->isClicked()) {
                     $save = $etatsRepository->findOneBy(['id' => 1]);
                     $sortie->setEtatsNoEtat($save);
@@ -59,11 +62,9 @@ class SortieController extends AbstractController
                     $em->persist($inscription);
                     $em->persist($sortie);
                     $em->flush();
-
                     $idSortie = $sortie->getId();
                     return $this->redirectToRoute('sortie_sortie', array('id' => $idSortie));
                 }
-
             } catch (Exception $exception) {
                 dd($exception->getMessage());
             }
@@ -72,10 +73,9 @@ class SortieController extends AbstractController
             'formSortie' => $sortieForm->createView(),
             'lieu' => $lieu
         ]);
-
     }
 
-    // Function Adding 'lieu'
+    /** Adding lieu when in the sortieForm you dont have the lieu you want */
     #[IsGranted('ROLE_USER')]
     #[Route('/addLieu', name: 'addLieu')]
     public function addLieu(
@@ -98,7 +98,7 @@ class SortieController extends AbstractController
                     }
                 }
             } catch (Exception $exception) {
-                $exception->getMessage();
+                dd($exception->getMessage());
             }
         }
         return $this->render('sortie/addLieu.html.twig',
@@ -134,7 +134,7 @@ class SortieController extends AbstractController
                     }
                 }
             } catch (Exception $exception) {
-                $exception->getMessage();
+                dd($exception->getMessage());
             }
         }
         return $this->render('sortie/addLieusortie.html.twig',
@@ -165,7 +165,6 @@ class SortieController extends AbstractController
 
             $sortieModif = $this->createForm(AddSortieType::class, $sortie);
             $sortieModif->handleRequest($request);
-            $sortie->getLieuxNoLieu();
             if ($sortieModif->isSubmitted()) {
                 try {
 

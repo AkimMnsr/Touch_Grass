@@ -1,3 +1,10 @@
+/*
+* this script can save what you write in the form. This is when you want to add lieu and go on another page, when you
+* come back, all of you're data be reload on the input
+* its working when you cancel you're sortie
+* Adding a reset button to refresh the form
+*  */
+
 let saveNom;
 let saveDate;
 let saveCloture;

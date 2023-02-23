@@ -1,3 +1,6 @@
+/*
+KONAMI CODE
+* */
 window.onload = function () {
     if (localStorage.getItem("popupShown") === null) {
         document.getElementById("art-info").style.display = "block";

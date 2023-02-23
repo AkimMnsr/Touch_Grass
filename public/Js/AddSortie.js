@@ -1,3 +1,8 @@
+
+/*
+* This three function can show or hide the form to modify a 'sortie'
+* This is only accessible for owner of 'sortie' none of this will work if you're not the owner
+* */
 window.onload = function hideMe() {
     let x = document.getElementById("sectionForm");
     x.style.display = "none";
