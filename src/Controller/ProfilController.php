@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Participants;
 use App\Form\RegistrationFormType;
 use App\Repository\ParticipantsRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -39,19 +38,10 @@ class ProfilController extends AbstractController
             $this->addFlash('success', 'Votre profil a bien été modifié');
             return $this->redirectToRoute('profil_afficher');
         }
-
+        $this->addFlash('error', "Votre profil n'a pas été modifié");
         return $this->render('profil/modifier.html.twig',
             compact('participant', 'registrationForm')
         );
-    }
-
-    #[Route('/supprimer', name: 'supprimer')]
-    public function delete(Request $request, Participants $participant, ParticipantsRepository $participantsRepository): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $participant->getId(), $request->request->get('_token'))) {
-            $participantsRepository->remove($participant, true);
-        }
-        return $this->redirectToRoute('profil_afficher');
     }
 
     #[Route('/{id}', name: 'details')]

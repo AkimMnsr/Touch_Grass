@@ -25,7 +25,7 @@ security:
             remember_me:
                 secret: 'kernel.secret%' # required
                 lifetime: 604800 # 1 week in seconds
-                signature_properties: ['pseudo', 'updatedAt']
+                signature_properties: ['password', 'updatedAt']
                 token_provider:
                     doctrine: true
             user_checker: App\Security\UserChecker
