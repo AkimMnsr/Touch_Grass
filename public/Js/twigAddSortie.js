@@ -23,7 +23,6 @@ window.onload = function load() {
 
 function save() {
     saveNom = document.getElementById('nomSortie').value;
-    console.log(saveNom)
     saveDate = document.getElementById('dateSortie').value;
     saveCloture = document.getElementById('dateCloture').value;
     savePlace = document.getElementById('PlaceId').value;
