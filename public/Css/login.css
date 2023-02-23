@@ -24,31 +24,31 @@
     box-shadow: 14px 14px 20px #cbced1;
     box-sizing: border-box;
     background: #ecf0f3;
-    width:35%;
+    width: 35%;
     height: 75%;
     display: flex;
     justify-content: center;
 
 }
 
-#form-chil{
+#form-chil {
     width: 75%;
 }
 
-#button-div{
+#button-div {
     display: flex;
     flex-direction: column;
     justify-items: center;
     align-items: center;
-    padding:15px;
+    padding: 15px;
 }
 
-#button-connexion{
-    width:40%;
+#button-connexion {
+    width: 40%;
     margin: 15px;
 }
 
-#button-div-child{
+#button-div-child {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -84,6 +84,7 @@
     #myVideo {
         display: none;
     }
+
     body {
         background-image: url("/img/videoFixed.png");
         background-size: cover;
@@ -93,13 +94,14 @@
 
 }
 
-@media screen and (max-width: 1400px)  {
+@media screen and (max-width: 1400px) {
 
     body {
         background-image: url("/img/videoFixed.png");
         background-size: cover;
         background-repeat: no-repeat;
     }
+
     #form {
         margin-top: 10%;
         padding: 1.5rem;
@@ -107,7 +109,7 @@
         box-shadow: 14px 14px 20px #cbced1;
         box-sizing: border-box;
         background: #ecf0f3;
-        width:65%;
+        width: 65%;
         height: 75%;
         display: flex;
         justify-content: center;
@@ -116,13 +118,14 @@
 
 }
 
-@media screen and (max-width: 800px)  {
+@media screen and (max-width: 800px) {
 
     body {
         background-image: url("/img/videoFixed.png");
         background-size: cover;
 
     }
+
     #form {
         margin-top: 25%;
         padding: 1.5rem;
@@ -130,7 +133,7 @@
         box-shadow: 14px 14px 20px #cbced1;
         box-sizing: border-box;
         background: #ecf0f3;
-        width:100%;
+        width: 100%;
         height: 75%;
         display: flex;
         justify-content: center;

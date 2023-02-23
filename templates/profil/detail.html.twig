@@ -61,13 +61,13 @@
     </div>
 
     <div>
-         {% if app.user == participants %}
-        <li>
-            <div id="modifier">
-                <button id="modif"><a href={{ path('profil_modifier') }}>Modifier</a></button>
-            </div>
-        </li>
-         {%  endif %}
+        {% if app.user == participants %}
+            <li>
+                <div id="modifier">
+                    <button id="modif"><a href={{ path('profil_modifier') }}>Modifier</a></button>
+                </div>
+            </li>
+        {% endif %}
         <li>
             <div id="retour">
                 <button id="back"><a href={{ path('main_index') }}>Retour</a></button>

@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Touch Grass{% endblock %}</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>️</text></svg>">
-    <link rel="icon" type="image/png" href="{{ asset('img/groot.svg') }}" />
+    <link rel="icon"
+          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>️</text></svg>">
+    <link rel="icon" type="image/png" href="{{ asset('img/groot.svg') }}"/>
     <link rel="stylesheet" href="{{ asset('Css/base.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css">
 
@@ -36,11 +37,11 @@
     <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
             {% if app.user %}
-            <p id="p_user" class="navbar-item has-text-black" >Connecté : {{  app.user.pseudo }}</p>
+                <p id="p_user" class="navbar-item has-text-black">Connecté : {{ app.user.pseudo }}</p>
             {% endif %}
             <a class="navbar-item" href="{{ path('main_index') }}">Accueil</a>
             {% if app.user %}
-            <a class="navbar-item" href="{{ path('profil_afficher') }}">Mon profil</a>
+                <a class="navbar-item" href="{{ path('profil_afficher') }}">Mon profil</a>
             {% endif %}
             {% if is_granted('ROLE_ADMIN') %}
                 <a class="navbar-item" href="{{ path('admin') }}">Admin</a>
@@ -55,15 +56,16 @@
             </div>
         </div>
     </div>
-    {%  else %}
-    <div id="navbar-end">
-        <div class="navbar-item">
-            <div class="buttons">
-                <a id="logout-button" onclick="logout()" class="button is-light" href="{{ path('app_logout') }}">Se déconnecter</a>
+    {% else %}
+        <div id="navbar-end">
+            <div class="navbar-item">
+                <div class="buttons">
+                    <a id="logout-button" onclick="logout()" class="button is-light" href="{{ path('app_logout') }}">Se
+                        déconnecter</a>
+                </div>
             </div>
         </div>
-    </div>
-    {%  endif %}
+    {% endif %}
 </nav>
 {% for message in app.flashes('success') %}
     <div class="alert alert-success">
@@ -86,7 +88,6 @@
     {% block body %}{% endblock %}
 
 </section>
-
 
 
 <footer>

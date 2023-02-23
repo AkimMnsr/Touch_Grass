@@ -4,10 +4,11 @@ body {
 
 }
 
-#baby-groot{
+#baby-groot {
     width: 100px;
     height: 100px;
 }
+
 .message.is-link {
     background-color: #eff1fa;
     display: flex;
@@ -22,6 +23,7 @@ body {
     align-items: center;
     text-align: center;
 }
+
 #base_section {
     margin-top: 3%;
     margin-left: 10%;
@@ -40,17 +42,15 @@ footer {
     padding: 10px;
     width: 100%;
     height: 2%;
-    background-color:#1ea471 ;
+    background-color: #1ea471;
     color: white;
     text-align: center;
 }
 
 
-
-
 .footer-a {
     text-decoration: none;
-    color:lightgoldenrodyellow;
+    color: lightgoldenrodyellow;
 }
 
 #navbar-end {
@@ -63,10 +63,10 @@ footer {
 }
 
 #title {
-     font-size: 1rem;
-     font-weight: 600;
-     line-height: 1.125;
- }
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.125;
+}
 
 #p_user {
     font-size: 0.9em;

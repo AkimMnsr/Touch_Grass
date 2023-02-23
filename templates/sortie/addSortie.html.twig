@@ -37,7 +37,8 @@
 
                 <div class="control is-mobile">
                     <label class="label is-mobile">Nom de la sortie :</label>
-                    <input id="nomSortie" onload="load()" class="input is-focused is-mobile" {{ form_widget(formSortie.nom) }}
+                    <input id="nomSortie" onload="load()"
+                           class="input is-focused is-mobile" {{ form_widget(formSortie.nom) }}
 
                 </div>
 
@@ -93,7 +94,8 @@
                     <p class="control has-icons-left is-mobile">
                     <span id="span-lieux" class="select is-mobile">
                         <select {{ form_widget(formSortie.lieux_no_lieu) }}
-                         <a class="button is-light is-mobile" onclick="save()" href="{{ path('sortie_addLieu') }}"> + </a>
+                         <a class="button is-light is-mobile" onclick="save()"
+                            href="{{ path('sortie_addLieu') }}"> + </a>
                     </span>
                     </p>
                 </div>
@@ -114,7 +116,7 @@
 
             <div style="display: none">
 
-                <button  href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" {{ form_widget(formSortie.remove) }}
+                <button href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" {{ form_widget(formSortie.remove) }}
 
             </div>
 
@@ -132,7 +134,7 @@
         const combo = document.getElementById('add_sortie_lieux_no_lieu');
         const listLieu = document.getElementById('add_sortie_lieux_no_lieu').value;
         let value = [];
-        window.addEventListener('load',function(){
+        window.addEventListener('load', function () {
             value = listLieu.split("|");
             rueElement.textContent = value[1];
             villeElement.textContent = value[4];
@@ -140,7 +142,7 @@
             longitudeElement.textContent = value[2];
             latitudeElement.textContent = value[3];
         })
-        combo.addEventListener('change',function(event){
+        combo.addEventListener('change', function (event) {
             value = event.target.value.split("|");
             console.log(value)
             rueElement.textContent = value[1];

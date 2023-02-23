@@ -1,26 +1,32 @@
-table th{
+table th {
     background-color: #48c78e;
 }
-table{
+
+table {
     border-collapse: inherit;
     border: 10px solid #48c78e;
-    border-radius : 10px;
+    border-radius: 10px;
     box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
 }
+
 td {
     border: 1px solid #ccc;
 }
+
 th, td {
     padding: 10px;
     text-align: left;
 }
+
 tr:nth-child(even) {
     background-color: #eee;
 }
+
 tr:nth-child(odd) {
     background-color: #fff;
 }
-td{
+
+td {
     vertical-align: middle !important;
     text-align: center !important;
 }

@@ -3,7 +3,7 @@ h1 {
 }
 
 body {
-    background-image:url("/img/bg_profil.jpg");
+    background-image: url("/img/bg_profil.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -14,29 +14,32 @@ body {
     padding-top: 2%;
 }
 
-#Form_div{
+#Form_div {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#Form_first_part{
+#Form_first_part {
     padding: 5px;
     margin: 15px;
 
 }
+
 #Form_second_part {
     padding: 5px;
     margin: 15px;
 }
-#titre{
+
+#titre {
     display: flex;
     flex-direction: column-reverse;
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
 }
-#Div_form{
+
+#Div_form {
     padding-bottom: 15px;
     opacity: 0.9;
     border-radius: 20px;
@@ -105,7 +108,7 @@ body {
         justify-content: center;
     }
 
-    #Form_div{
+    #Form_div {
         display: inline-block;
     }
 }
@@ -143,9 +146,11 @@ body {
         margin-bottom: 10px;
     }
 }
+
 p {
     text-align: center;
 }
+
 #result {
     display: flex;
     flex-direction: column;
@@ -154,6 +159,7 @@ p {
     justify-content: center;
     align-items: flex-start;
 }
+
 .result-p {
     padding-bottom: 15px;
 }
@@ -166,7 +172,7 @@ p {
     gap: 15px;
 }
 
-figure{
+figure {
     border: 1px solid #ddd;
     border-radius: 4px;
     width: 150px;
@@ -174,7 +180,7 @@ figure{
     text-align: center;
 }
 
-hr{
+hr {
     background-color: black;
 }
 
