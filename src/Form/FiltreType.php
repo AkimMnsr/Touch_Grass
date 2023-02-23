@@ -2,7 +2,6 @@
 
 namespace App\Form;
 
-use App\Entity\Lieux;
 use App\Entity\Sites;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
