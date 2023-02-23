@@ -4,6 +4,11 @@ body {
 
 }
 
+#nav-general {
+    position: sticky;
+    top:0;
+}
+
 #baby-groot {
     width: 100px;
     height: 100px;
