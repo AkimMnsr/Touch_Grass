@@ -19,11 +19,9 @@ class CsvImportController extends AbstractController
         $form = $this->createForm(CsvFormType::class);
 
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $fichier = $form->get('csvFile')->getData();
-            if ($fichier)
-            {
+            if ($fichier) {
                 $tableur = IOFactory::load($fichier);
                 $classeur = $tableur->getActiveSheet();
                 $lignes = $classeur->toArray(
@@ -35,6 +33,6 @@ class CsvImportController extends AbstractController
             }
         }
         return $this->render('importCsv/index.html.twig',
-        compact('form'));
+            compact('form'));
     }
 }

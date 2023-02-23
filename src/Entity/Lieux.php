@@ -41,7 +41,6 @@ class Lieux
         minMessage: "Le nom ne peut être inférieur a {{ min }} caractères.",
         maxMessage: "Le pseudo ne peut pas être supérieur à {{ max }} caractères."
     )]
-
     private ?string $rue = null;
 
     #[ORM\Column(nullable: true)]

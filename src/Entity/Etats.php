@@ -40,9 +40,10 @@ class Etats
 
         return $this;
     }
-public function __toString(): string
-{
-    return $this->libelle;
-}
+
+    public function __toString(): string
+    {
+        return $this->libelle;
+    }
 
 }

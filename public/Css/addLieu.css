@@ -1,10 +1,10 @@
 body {
-    background-image:url("/img/nature.jpg");
+    background-image: url("/img/nature.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-#titre{
+#titre {
     display: flex;
     flex-direction: column-reverse;
     flex-wrap: nowrap;
@@ -100,8 +100,8 @@ body {
     }
 }
 
-#button-annuler{
-    border:1px solid;
+#button-annuler {
+    border: 1px solid;
 }
 
 

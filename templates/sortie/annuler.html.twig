@@ -10,32 +10,34 @@
 {% block body %}
 
     <script src="{{ asset('/Js/annuler.js') }}"></script>
-<article>
-    <section id="section">
-        <article id="article_one">
-            <div class="image-container">
-                <img id="myImage" src="{{ asset('img/sadGroot.png') }}" alt="Image 1">
-            </div>
-            <p>Nom de la sortie : {{ sortie.nom }}</p>
-            <p>Date et heure de la sortie : {{ sortie.datedebut | date("m/d/Y à H:i")}}</p>
-            <p>Ville organisatrice : {{ sortie.organisateur.SitesNoSite.NomSite }}</p>
-            <p>Lieu : {{ sortie.LieuxNoLieu.NomLieu }}   {{ sortie.LieuxNoLieu.Rue }}  {{ sortie.LieuxNoLieu.VillesNoVille.CodePostal }} {{ sortie.LieuxNoLieu.VillesNoVille.NomVille }}</p>
-        </article>
+    <article>
+        <section id="section">
+            <article id="article_one">
+                <div class="image-container">
+                    <img id="myImage" src="{{ asset('img/sadGroot.png') }}" alt="Image 1">
+                </div>
+                <p>Nom de la sortie : {{ sortie.nom }}</p>
+                <p>Date et heure de la sortie : {{ sortie.datedebut | date("m/d/Y à H:i") }}</p>
+                <p>Ville organisatrice : {{ sortie.organisateur.SitesNoSite.NomSite }}</p>
+                <p>Lieu
+                    : {{ sortie.LieuxNoLieu.NomLieu }}   {{ sortie.LieuxNoLieu.Rue }}  {{ sortie.LieuxNoLieu.VillesNoVille.CodePostal }} {{ sortie.LieuxNoLieu.VillesNoVille.NomVille }}</p>
+            </article>
 
-        <article id="article_two">
-            {{ form_start(cancelForm) }}
+            <article id="article_two">
+                {{ form_start(cancelForm) }}
 
-            {{ form_label(cancelForm.descriptioninfos, 'Motif annulation :')}}
-            <textarea id="DescriptionId" onload="load()"
-                      class="textarea is-primary is-mobile"   {{ form_widget(cancelForm.descriptioninfos) }}
-            <div>
-            <a id="div_button">
-            <button  class="button is-info" {{ form_widget(cancelForm.save) }}
-                <a href="{{ path('main_index') }}" class="button is-success" {{ form_widget(cancelForm.cancel) }}</a>
-            </div>
-            {{ form_end(cancelForm) }}
-        </article>
-    </section>
-</article>
+                {{ form_label(cancelForm.descriptioninfos, 'Motif annulation :') }}
+                <textarea id="DescriptionId" onload="load()"
+                          class="textarea is-primary is-mobile" {{ form_widget(cancelForm.descriptioninfos) }}
+                <div>
+                    <a id="div_button">
+                        <button class="button is-info" {{ form_widget(cancelForm.save) }}
+                        <a href="{{ path('main_index') }}"
+                           class="button is-success" {{ form_widget(cancelForm.cancel) }}</a>
+                </div>
+                {{ form_end(cancelForm) }}
+            </article>
+        </section>
+    </article>
 
 {% endblock %}

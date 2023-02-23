@@ -20,24 +20,25 @@ window.onload = function load() {
     document.getElementById("DuréeId").value = saveDuree;
     document.getElementById("DescriptionId").value = saveDescription;
 }
-    function save () {
-        saveNom = document.getElementById('nomSortie').value;
-        console.log(saveNom)
-        saveDate = document.getElementById('dateSortie').value;
-        saveCloture = document.getElementById('dateCloture').value;
-        savePlace = document.getElementById('PlaceId').value;
-        saveDuree = document.getElementById('DuréeId').value;
-        saveDescription = document.getElementById('DescriptionId').value;
 
-        localStorage.setItem("saveNom", saveNom);
-        localStorage.setItem("saveDate", saveDate);
-        localStorage.setItem("saveCloture", saveCloture);
-        localStorage.setItem("savePlace", savePlace);
-        localStorage.setItem("saveDuree", saveDuree);
-        localStorage.setItem("saveDescription", saveDescription);
-    }
+function save() {
+    saveNom = document.getElementById('nomSortie').value;
+    console.log(saveNom)
+    saveDate = document.getElementById('dateSortie').value;
+    saveCloture = document.getElementById('dateCloture').value;
+    savePlace = document.getElementById('PlaceId').value;
+    saveDuree = document.getElementById('DuréeId').value;
+    saveDescription = document.getElementById('DescriptionId').value;
 
-function reset (){
+    localStorage.setItem("saveNom", saveNom);
+    localStorage.setItem("saveDate", saveDate);
+    localStorage.setItem("saveCloture", saveCloture);
+    localStorage.setItem("savePlace", savePlace);
+    localStorage.setItem("saveDuree", saveDuree);
+    localStorage.setItem("saveDescription", saveDescription);
+}
+
+function reset() {
     localStorage.removeItem('saveNom');
     localStorage.removeItem('saveDate');
     localStorage.removeItem('saveCloture');

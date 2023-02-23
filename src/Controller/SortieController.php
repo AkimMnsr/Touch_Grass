@@ -29,15 +29,15 @@ class SortieController extends AbstractController
     #[Route('/addSortie', name: 'addSortie')]
     public function addSortie(
         EntityManagerInterface $em,
-        EtatsRepository $etatsRepository,
-        Request $request,
-        LieuxRepository $lieuxRepository
-    ) : Response
+        EtatsRepository        $etatsRepository,
+        Request                $request,
+        LieuxRepository        $lieuxRepository
+    ): Response
     {
 
         $sortie = new Sorties();
         $lieu = $lieuxRepository->findAll();
-        $sortieForm = $this->createForm(AddSortieType::class,$sortie);
+        $sortieForm = $this->createForm(AddSortieType::class, $sortie);
         $sortieForm->handleRequest($request);
 
         if ($sortieForm->isSubmitted()) {
@@ -49,27 +49,27 @@ class SortieController extends AbstractController
                 $sortie->setIdInscription($inscription);
                 $inscription->addParticipantsNoParticipant($organisateur);
                 dump($sortie);
-               if( $sortieForm->get("save")->isClicked()) {
-                   $save = $etatsRepository->findOneBy(['id' => 1]);
-                   $sortie->setEtatsNoEtat($save);
-               } else {
-                   $publish = $etatsRepository->findOneBy(['id' => 2]);
-                   $sortie->setEtatsNoEtat($publish);
-               };
+                if ($sortieForm->get("save")->isClicked()) {
+                    $save = $etatsRepository->findOneBy(['id' => 1]);
+                    $sortie->setEtatsNoEtat($save);
+                } else {
+                    $publish = $etatsRepository->findOneBy(['id' => 2]);
+                    $sortie->setEtatsNoEtat($publish);
+                };
                 if ($sortieForm->isValid()) {
                     $em->persist($inscription);
                     $em->persist($sortie);
                     $em->flush();
 
                     $idSortie = $sortie->getId();
-                    return $this->redirectToRoute('sortie_sortie', array('id' =>$idSortie));
+                    return $this->redirectToRoute('sortie_sortie', array('id' => $idSortie));
                 }
 
             } catch (Exception $exception) {
                 dd($exception->getMessage());
             }
         }
-        return $this->render('sortie/addSortie.html.twig',[
+        return $this->render('sortie/addSortie.html.twig', [
             'formSortie' => $sortieForm->createView(),
             'lieu' => $lieu
         ]);
@@ -81,23 +81,24 @@ class SortieController extends AbstractController
     #[Route('/addLieu', name: 'addLieu')]
     public function addLieu(
         EntityManagerInterface $em,
-        Request $request
-    ):Response{
+        Request                $request
+    ): Response
+    {
 
         $lieu = new Lieux();
         $formLieu = $this->createForm(AddLieuType::class, $lieu);
         $formLieu->handleRequest($request);
 
-        if ($formLieu->isSubmitted()){
+        if ($formLieu->isSubmitted()) {
             try {
-                if( $formLieu->get("save")->isClicked()){
+                if ($formLieu->get("save")->isClicked()) {
                     if ($formLieu->isValid()) {
                         $em->persist($lieu);
                         $em->flush();
-                            return $this->redirectToRoute('sortie_addSortie');
+                        return $this->redirectToRoute('sortie_addSortie');
                     }
                 }
-            } catch (Exception $exception){
+            } catch (Exception $exception) {
                 $exception->getMessage();
             }
         }
@@ -111,28 +112,29 @@ class SortieController extends AbstractController
     #[IsGranted('ROLE_USER')]
     #[Route('/LieuSortie/{id}', name: 'LieuSortie')]
     public function LieuSortie(
-        int $id,
+        int                    $id,
         EntityManagerInterface $em,
-        Request $request,
-        SortiesRepository $sortiesRepository,
-    ):Response{
+        Request                $request,
+        SortiesRepository      $sortiesRepository,
+    ): Response
+    {
 
         $lieusortie = new Lieux();
-        $sortie = $sortiesRepository->findOneBy(["id" =>$id]);
+        $sortie = $sortiesRepository->findOneBy(["id" => $id]);
         $formLieu = $this->createForm(AddLieuType::class, $lieusortie);
         $formLieu->handleRequest($request);
 
-        if ($formLieu->isSubmitted()){
+        if ($formLieu->isSubmitted()) {
             try {
-                if( $formLieu->get("save")->isClicked()){
+                if ($formLieu->get("save")->isClicked()) {
                     if ($formLieu->isValid()) {
                         $em->persist($lieusortie);
                         $em->flush();
                         $idSortie = $sortie->getId();
-                        return $this->redirectToRoute('sortie_sortie', array('id' =>$idSortie));
+                        return $this->redirectToRoute('sortie_sortie', array('id' => $idSortie));
                     }
                 }
-            } catch (Exception $exception){
+            } catch (Exception $exception) {
                 $exception->getMessage();
             }
         }
@@ -150,32 +152,32 @@ class SortieController extends AbstractController
     #[Route('/{id}', name: 'sortie')]
     public function sortie(
         EntityManagerInterface $em,
-        Request $request,
-        int $id,
-        SortiesRepository $sortiesRepository,
-        EtatsRepository $etatsRepository,
-        LieuxRepository $lieuxRepository,
+        Request                $request,
+        int                    $id,
+        SortiesRepository      $sortiesRepository,
+        EtatsRepository        $etatsRepository,
+        LieuxRepository        $lieuxRepository,
     ): Response
     {
         $owner = $this->getUser();
         $lieu = $lieuxRepository->findAll();
-        $sortie = $sortiesRepository->findOneBy(["id" =>$id]);
-        if ($sortie->getOrganisateur() === $owner ){
+        $sortie = $sortiesRepository->findOneBy(["id" => $id]);
+        if ($sortie->getOrganisateur() === $owner) {
 
-            $sortieModif = $this->createForm(AddSortieType::class,$sortie);
+            $sortieModif = $this->createForm(AddSortieType::class, $sortie);
             $sortieModif->handleRequest($request);
             $sortie->getLieuxNoLieu();
             if ($sortieModif->isSubmitted()) {
                 try {
 
-                    if( $sortieModif->get("save")->isClicked()) {
+                    if ($sortieModif->get("save")->isClicked()) {
                         $save = $etatsRepository->findOneBy(['id' => 1]);
                         $sortie->setEtatsNoEtat($save);
                     } else {
                         $publish = $etatsRepository->findOneBy(['id' => 2]);
                         $sortie->setEtatsNoEtat($publish);
                     }
-                    if ($sortieModif->get("remove")->isClicked()){
+                    if ($sortieModif->get("remove")->isClicked()) {
                         $em->remove($sortie);
                         $em->flush();
                         $this->addFlash('remove', 'La sortie a bien été supprimée');
@@ -186,7 +188,7 @@ class SortieController extends AbstractController
                         $em->flush();
                         $idSortie = $sortie->getId();
                         $this->addFlash('sucess', 'La sortie a bien été modifiée');
-                        return $this->redirectToRoute('sortie_sortie', array('id' =>$idSortie));
+                        return $this->redirectToRoute('sortie_sortie', array('id' => $idSortie));
                     }
 
                 } catch (Exception $exception) {
@@ -198,7 +200,7 @@ class SortieController extends AbstractController
                 'formSortie' => $sortieModif->createView(),
                 'sortie' => $sortie,
                 'lieu' => $lieu
-            ] );
+            ]);
         } else {
             return $this->render('sortie/sortie.html.twig',
                 [
@@ -212,26 +214,26 @@ class SortieController extends AbstractController
     #[IsGranted('ROLE_USER')]
     #[Route('/annuler/{id}', name: 'annuler')]
     public function annuler(
-        int $id,
-        Request $request,
-        SortiesRepository $sortiesRepository,
+        int                    $id,
+        Request                $request,
+        SortiesRepository      $sortiesRepository,
         EntityManagerInterface $em,
-        EtatsRepository $etatsRepository,
+        EtatsRepository        $etatsRepository,
 
-    ) : Response
+    ): Response
     {
         $owner = $this->getUser();
         $sortie = $sortiesRepository->findOneBy(["id" => $id]);
 
-        if ($sortie->getOrganisateur() === $owner ){
-        $cancelForm = $this->createForm(CancelType::class, $sortie);
-        $cancelForm->handleRequest($request);
-            if($cancelForm->isSubmitted()){
+        if ($sortie->getOrganisateur() === $owner) {
+            $cancelForm = $this->createForm(CancelType::class, $sortie);
+            $cancelForm->handleRequest($request);
+            if ($cancelForm->isSubmitted()) {
                 try {
                     $cancel = $etatsRepository->findOneBy(['id' => 5]);
                     $sortie->setEtatsNoEtat($cancel);
-                    if($cancelForm->isValid()) {
-                        $sortie->setDescriptioninfos("Motif de l'annulation : ".$sortie->getDescriptioninfos());
+                    if ($cancelForm->isValid()) {
+                        $sortie->setDescriptioninfos("Motif de l'annulation : " . $sortie->getDescriptioninfos());
                         $em->persist($sortie);
                         $em->flush();
                         $this->addFlash('annule', 'La sortie a bien été annulée');
@@ -242,22 +244,21 @@ class SortieController extends AbstractController
                 }
             }
 
-        return $this->render('sortie/annuler.html.twig', [
-            'sortie' => $sortie,
-            'cancelForm' => $cancelForm->createView(),
+            return $this->render('sortie/annuler.html.twig', [
+                'sortie' => $sortie,
+                'cancelForm' => $cancelForm->createView(),
 
-        ]);
+            ]);
         }
         return $this->trolling();
     }
 
 
     #[Route('/troll', name: 'troll')]
-    public function trolling() {
-            return $this->render('sortie/trolling.html.twig');
+    public function trolling()
+    {
+        return $this->render('sortie/trolling.html.twig');
     }
-
-
 
 
 }

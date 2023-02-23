@@ -25,27 +25,27 @@ class MainController extends AbstractController
 
             $site = $request->get("filtre")['site'];
             $nom = $request->get("filtre")["nom"];
-            $dateDeb =$request->get("filtre")['datedebut'];
+            $dateDeb = $request->get("filtre")['datedebut'];
             $dateFin = $request->get("filtre")['datecloture'];
             $orga = $this->getUser();
 
             if ($site != null || $site != "") {
-                $lesSorties += $sr->filtreBySite($site,$orga->getId(),$pr);
+                $lesSorties += $sr->filtreBySite($site, $orga->getId(), $pr);
                 $reset = false;
             }
             if ($nom != null || $nom != "") {
-                $lesSorties += $sr->filtreByNom($nom,$orga->getId());
+                $lesSorties += $sr->filtreByNom($nom, $orga->getId());
                 $reset = false;
             }
             if ($dateDeb != null) {
-                $lesSorties += $sr->filtreByDateDeb($dateDeb,$orga);
+                $lesSorties += $sr->filtreByDateDeb($dateDeb, $orga);
                 $reset = false;
             }
             if ($dateFin != null) {
-                $lesSorties += $sr->filtreByDateFin($dateFin,$orga);
+                $lesSorties += $sr->filtreByDateFin($dateFin, $orga);
                 $reset = false;
             }
-            if(!$reset){
+            if (!$reset) {
                 $lesSorties = $su->noDoublon($lesSorties);
             }
         }

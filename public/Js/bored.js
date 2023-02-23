@@ -46,7 +46,7 @@ const render = () => {
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height, -(index * (speed / 2)) % canvas.width, 0, canvas.width, canvas.height);
 
     // pipe display
-    if (gamePlaying){
+    if (gamePlaying) {
         pipes.map(pipe => {
             // pipe moving
             pipe[0] -= speed;
@@ -57,13 +57,13 @@ const render = () => {
             ctx.drawImage(img, 432 + pipeWidth, 108, pipeWidth, canvas.height - pipe[1] + pipeGap, pipe[0], pipe[1] + pipeGap, pipeWidth, canvas.height - pipe[1] + pipeGap);
 
             // give 1 point & create new pipe
-            if(pipe[0] <= -pipeWidth){
+            if (pipe[0] <= -pipeWidth) {
                 currentScore++;
                 // check if it's the best score
                 bestScore = Math.max(bestScore, currentScore);
 
                 // remove & create new pipe
-                pipes = [...pipes.slice(1), [pipes[pipes.length-1][0] + pipeGap + pipeWidth, pipeLoc()]];
+                pipes = [...pipes.slice(1), [pipes[pipes.length - 1][0] + pipeGap + pipeWidth, pipeLoc()]];
                 console.log(pipes);
             }
 

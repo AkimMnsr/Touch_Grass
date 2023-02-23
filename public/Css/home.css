@@ -1,170 +1,202 @@
-body{
+body {
     background-image: url(../img/home.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
+
 p {
     text-align: center;
 }
-#dgv{
+
+#dgv {
     margin: 0 10% 5%;
-    overflow-x: auto ;
-    overflow-y: auto ;
+    overflow-x: auto;
+    overflow-y: auto;
 }
-#button-color{
-    color:black;
+
+#button-color {
+    color: black;
 }
-#div_button{
+
+#div_button {
     display: flex;
     margin-left: 25%;
     margin-right: 25%;
     margin-bottom: 5px;
     justify-content: space-around;
-    gap:10px;
+    gap: 10px;
 }
-#create-sortie{
+
+#create-sortie {
     border: solid;
     border-color: chocolate;
 }
-#checked{
+
+#checked {
     width: 50px;
     height: 40px;
 }
-h2,#filtreTitre{
+
+h2, #filtreTitre {
     font-weight: bold;
 }
-br{
+
+br {
     display: none;
 }
-#base_section{
+
+#base_section {
     padding-bottom: 10%;
 }
-.transparent{
+
+.transparent {
     opacity: 0.6;
 }
-#tabList{
+
+#tabList {
     display: flex;
     align-items: center;
 }
-#Div_form{
+
+#Div_form {
     padding-bottom: 15px;
     border-radius: 20px;
     box-sizing: border-box;
-    background: rgba(236,240,243,0.6);
+    background: rgba(236, 240, 243, 0.6);
     width: 100%;
     height: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-#info{
+
+#info {
     display: flex;
     flex-direction: column;
     margin-top: 20px;
     border-collapse: inherit;
     border-radius: 10px;
-    background: rgb(236,240,243);
+    background: rgb(236, 240, 243);
     border-top-width: 30px;
     padding: 10px 20px;
     align-items: center;
 }
-#Form_div{
+
+#Form_div {
     display: flex;
     justify-content: center;
     flex-direction: column;
     border-collapse: inherit;
     border-radius: 10px;
-    background: rgb(236,240,243);
+    background: rgb(236, 240, 243);
     margin-top: 30px;
     margin-bottom: 30px;
 }
-#filtrage{
+
+#filtrage {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-#Form_second_part, #Form_first_part{
+
+#Form_second_part, #Form_first_part {
     display: flex;
     flex-direction: column;
     padding: 10px;
 }
 
 @media screen and (min-width: 1000px) {
-    body{
+    body {
         background-image: url(../img/home.jpg);
     }
-    #Div_form{
+
+    #Div_form {
         box-shadow: 14px 14px 20px #CBCED1, -14px -14px 20px white;
     }
-    #filtre_Rechercher{
+
+    #filtre_Rechercher {
         margin: 10px 40%;
     }
-    #filtreTitre{
+
+    #filtreTitre {
         font-size: 1.2em;
     }
-    #filtrage{
+
+    #filtrage {
         flex-direction: row;
         flex-wrap: wrap;
     }
-    #info{
+
+    #info {
         margin-left: 70%;
         box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
         margin-right: 30px;
     }
 
-    #tabList{
+    #tabList {
         flex-direction: column;
     }
-    #Form_second_part, #Form_first_part{
+
+    #Form_second_part, #Form_first_part {
         margin: 30px;
     }
-    #Form_div{
+
+    #Form_div {
         box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
     }
 
 }
 
 @media screen and (max-width: 1000px) {
-    body{
+    body {
         background-image: url(../img/homeMobile.jpg);
     }
-    #Div_form{
+
+    #Div_form {
         box-shadow: 14px -9px 20px #cbced1;
     }
-    #Form_div{
+
+    #Form_div {
         box-shadow: 14px 14px 20px #cbced1;
     }
-    #filtrage{
+
+    #filtrage {
         flex-direction: column-reverse;
     }
-    #filtre_Rechercher{
+
+    #filtre_Rechercher {
         margin: 10px 0;
     }
 
-    #info{
+    #info {
         box-shadow: 14px 14px 20px #cbced1;
     }
-    #filtre{
+
+    #filtre {
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
         align-items: center;
     }
-    #tabList{
+
+    #tabList {
         flex-direction: column-reverse;
     }
-    #Form_second_part, #Form_first_part{
+
+    #Form_second_part, #Form_first_part {
         margin: 10px;
     }
-    #create-sortie{
+
+    #create-sortie {
         margin-bottom: 20px;
     }
-    #table-sorties{
+
+    #table-sorties {
         box-shadow: none;
     }
 
 
-/*adaptation mobile du tableau*/
+    /*adaptation mobile du tableau*/
     table {
         border: 1px solid #ccc;
         border-collapse: collapse;
@@ -173,6 +205,7 @@ br{
         width: 100%;
         table-layout: fixed;
     }
+
     table {
         border: 0;
     }

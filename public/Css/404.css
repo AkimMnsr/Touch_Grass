@@ -1,9 +1,10 @@
-body{
+body {
     background-image: url("../img/404.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
-.error{
+
+.error {
     margin: 0 15%;
     padding: 10px 0;
     display: flex;
@@ -13,6 +14,7 @@ body{
     border-radius: 10px;
     background: rgb(63 79 90);
 }
-.fox{
+
+.fox {
     color: #CA4E33;
 }

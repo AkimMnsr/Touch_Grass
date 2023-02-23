@@ -1,10 +1,7 @@
-
-
-window.onload = function hideMe () {
+window.onload = function hideMe() {
     let x = document.getElementById("sectionForm");
     x.style.display = "none";
 }
-
 
 
 function myFunction() {
@@ -19,7 +16,7 @@ function myFunction() {
     }
 }
 
-function retour () {
+function retour() {
     let x = document.getElementById("sectionForm");
     let y = document.getElementById('sectionDetail');
     if (x.style.display === "block") {

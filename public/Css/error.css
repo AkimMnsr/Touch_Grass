@@ -1,9 +1,10 @@
-body{
+body {
     background-image: url("../img/error.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
-.error{
+
+.error {
     margin: 0 15%;
     padding: 10px 0;
     display: flex;
@@ -13,6 +14,7 @@ body{
     border-radius: 10px;
     background: rgb(60 59 54);
 }
-.bear{
+
+.bear {
     color: #DEB887;
 }

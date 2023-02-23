@@ -1,16 +1,16 @@
 
 body {
-    background-image:url("/img/groot-background.jpg");
+    background-image: url("/img/groot-background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-#Form_div{
+#Form_div {
     display: flex;
     justify-content: center;
 }
 
-#Form_first_part{
+#Form_first_part {
     display: flex;
     flex-direction: column;
     padding: 5px;
@@ -25,13 +25,14 @@ body {
     margin: 15px;
 }
 
-#titre{
+#titre {
     display: flex;
     flex-direction: column-reverse;
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
 }
+
 h2 {
     text-align: center;
 }
@@ -46,20 +47,20 @@ h2 {
 }
 
 
-#div_button{
+#div_button {
     display: flex;
     margin-left: 25%;
     margin-right: 25%;
     margin-bottom: 5px;
     justify-content: space-around;
-    gap:10px;
+    gap: 10px;
 }
 
 p {
     text-align: center;
 }
 
-#Div_form{
+#Div_form {
     padding-bottom: 15px;
     opacity: 0.9;
     border-radius: 20px;
@@ -70,7 +71,6 @@ p {
     height: 75%;
 
 }
-
 
 
 @media screen and (max-width: 1400px) {
@@ -131,11 +131,10 @@ p {
         justify-content: center;
     }
 
-    #Form_div{
+    #Form_div {
         display: inline-block;
     }
 }
-
 
 
 @media screen and (max-width: 500px) {
@@ -153,12 +152,12 @@ p {
         height: 100%;
     }
 
-    #Form_div{
+    #Form_div {
         display: inline-block;
         justify-items: center;
     }
 
-    #div_button{
+    #div_button {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -170,9 +169,6 @@ p {
         justify-items: center;
         margin-bottom: 10px;
     }
-
-
-
 
 
 }

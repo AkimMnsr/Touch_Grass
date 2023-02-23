@@ -1,6 +1,6 @@
 
 body {
-    background-image:url("/img/forest.jpg");
+    background-image: url("/img/forest.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -14,7 +14,8 @@ h1 {
     display: flex;
     justify-content: center;
 }
-#sectionDetail{
+
+#sectionDetail {
     margin-top: 2.5%;
     opacity: 0.9;
     display: flex;
@@ -55,9 +56,8 @@ h1 {
 }
 
 
-
 #article_deux {
-    display:inherit;
+    display: inherit;
 }
 
 #info_div_1 {
@@ -75,7 +75,7 @@ h1 {
     align-items: center;
 }
 
-#img-previous{
+#img-previous {
     width: 45px;
     height: 45px;
 }
@@ -86,12 +86,12 @@ h1 {
     text-align: center;
 }
 
-#Form_div{
+#Form_div {
     display: flex;
     justify-content: center;
 }
 
-#Form_first_part{
+#Form_first_part {
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -107,7 +107,7 @@ h1 {
 }
 
 
-#div_button{
+#div_button {
     display: flex;
     margin-left: 25%;
     margin-right: 25%;
@@ -174,6 +174,7 @@ th, td {
     display: flex;
     flex-direction: row;
 }
+
 #textDescription {
     width: 337px;
     overflow-wrap: break-word;
@@ -182,31 +183,34 @@ th, td {
 }
 
 #table-wrapper {
-    position:relative;
+    position: relative;
 }
+
 #table-scroll {
     padding: 10px;
-    height:200px;
-    overflow:auto;
-    margin-top:20px;
+    height: 200px;
+    overflow: auto;
+    margin-top: 20px;
     border-radius: 20px;
-    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;}
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
 
 #table-wrapper table {
 
-    width:100%;
+    width: 100%;
 
 }
+
 #table-wrapper table thead th .text {
-    position:absolute;
-    top:-20px;
-    z-index:2;
-    height:20px;
-    width:35%;
-    border:1px solid red;
+    position: absolute;
+    top: -20px;
+    z-index: 2;
+    height: 20px;
+    width: 35%;
+    border: 1px solid red;
 }
 
-@media screen and (max-width: 1400px){
+@media screen and (max-width: 1400px) {
     #article_un {
         display: flex;
         flex-direction: column;
@@ -214,7 +218,7 @@ th, td {
         text-align: center;
     }
 
-    #sectionDetail{
+    #sectionDetail {
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
@@ -241,7 +245,7 @@ th, td {
     }
 }
 
-@media screen and (max-width: 1000px){
+@media screen and (max-width: 1000px) {
     #article_un {
         display: flex;
         flex-direction: column;
@@ -249,7 +253,7 @@ th, td {
         text-align: center;
     }
 
-    #sectionDetail{
+    #sectionDetail {
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
@@ -279,7 +283,7 @@ th, td {
 }
 
 
-@media screen and (max-width: 700px){
+@media screen and (max-width: 700px) {
     #Form_div {
         display: flex;
         flex-direction: column;
