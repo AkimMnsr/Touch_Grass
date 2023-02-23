@@ -1,5 +1,5 @@
-var input = "";
-var konami = "38384040373937396665";
+let input = "";
+let konami = "38384040373937396665";
 document.getElementById('temp').addEventListener("keydown", function (e) {
     input += "" + e.keyCode;
     if (input === konami) {

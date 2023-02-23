@@ -84,10 +84,6 @@ textarea {
     gap: 20px;
 }
 
-button {
-
-}
-
 .image-container {
     display: flex;
     flex-direction: column;

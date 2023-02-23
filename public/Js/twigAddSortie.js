@@ -1,9 +1,9 @@
-var saveNom;
-var saveDate;
-var saveCloture;
-var savePlace;
-var saveDuree;
-var saveDescription;
+let saveNom;
+let saveDate;
+let saveCloture;
+let savePlace;
+let saveDuree;
+let saveDescription;
 
 window.onload = function load() {
     saveNom = localStorage.getItem("saveNom");

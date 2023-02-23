@@ -30,7 +30,11 @@ body {
     margin-top: 10%;
     padding: 15px;
     border-radius: 20px;
-    box-shadow: 14px 14px 20px #cbced1;
+    box-shadow:
+            14px
+            14px
+            20px
+            #cbced1;
     box-sizing: border-box;
     width: 25%;
     height: 100%;

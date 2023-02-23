@@ -20,7 +20,6 @@ class InscriptionController extends AbstractController
         ParticipantsRepository $participantsRepository,
         SortiesRepository      $sortiesRepository,
         EntityManagerInterface $em,
-        Request                $request
     ): Response
     {
 
@@ -47,7 +46,6 @@ class InscriptionController extends AbstractController
         ParticipantsRepository $participantsRepository,
         SortiesRepository      $sortiesRepository,
         EntityManagerInterface $em,
-        Request                $request
     ): Response
     {
         $inscrit = $this->getUser()->getUserIdentifier();
