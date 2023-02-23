@@ -6,72 +6,55 @@
 {% endblock %}
 {% block body %}
 
-    <p class="title is-1">{{ participants.pseudo }} </p>
-    <div class="row">
-        <div class="column" id="imageProfil">
-            <img class="imgProfil" src="\img\products\{{ participants.image }}">
-        </div>
-        <div class="column" id="infoProfil">
-            <li>
-                <div id="label">
-                    Nom:
-                </div>
-                <div id="text">
-                    {{ participants.nom }}
-                </div>
-            </li>
-            <li>
-                <div id="label">
-                    Prenom:
-                </div>
-                <div id="text">
-                    {{ participants.prenom }}
-                </div>
-            </li>
+    <section id="section_un">
 
-            <li>
-                <div id="label">
-                    Téléphone:
-                </div>
-                <div id="text">
-                    {{ participants.telephone }}
-                </div>
-            </li>
-            <li>
-                <div id="label">
-                    Email:
-                </div>
-                <div id="text">
-                    {{ participants.mail }}
-                </div>
-            </li>
-            <li>
-                <div id="label">
-                    Ville de rattachement:
-                </div>
-                <div id="text">
-                    {{ participants.SitesNoSite.NomSite }}
-                </div>
-            </li>
+        <div id="Div_form">
 
-        </div>
-        <div class="column">
+            <h1 class="title is-1 is-mobile">{{ app.user.pseudo }} </h1>
+            <hr>
+            <div id="Form_div">
 
-        </div>
-    </div>
+                <div id="Form_first_part">
 
-    <div>
-        {% if app.user == participants %}
-            <li>
-                <div id="modifier">
-                    <button id="modif"><a href={{ path('profil_modifier') }}>Modifier</a></button>
+                    <figure class="image is-128x128">
+
+                        <img class="is-rounded" src="\img\products\{{ app.user.image }}">
+
+                    </figure>
+
                 </div>
-            </li>
-        {% endif %}
-        <li>
-            <div id="retour">
-                <button id="back"><a href={{ path('main_index') }}>Retour</a></button>
+
+                <div id="Form_second_part">
+
+                    <div id="result">
+
+                        <p class="result-p is-mobile"><strong>Nom</strong></p>
+                        <p>{{ app.user.nom }}</p>
+                        <p class="result-p is-mobile"><strong>Prenom</strong></p>
+                        <p>{{ app.user.prenom }}</p>
+                        <p class="result-p is-mobile"><strong>Téléphone</strong></p>
+                        <p>{{ app.user.telephone }}</p>
+                        <p class="result-p is-mobile"><strong>Email</strong></p>
+                        <p>{{ app.user.mail }}</p>
+                        <p class="result-p is-mobile"><strong>Site de rattachement: </strong></p>
+                        <p>{{ app.user.SitesNoSite.NomSite }}</p>
+                        <hr>
+                    </div>
+
+                </div>
+
             </div>
-        </li>
-    </div>
+
+            <div id="div_button">
+                {% if app.user == participants %}
+                <a class="button is-info" href={{ path('profil_modifier') }}>Modifier</a>
+                {% endif %}
+                <a class="button is-danger" href={{ path('main_index') }}>Retour</a>
+
+            </div>
+
+        </div>
+
+
+    </section>
 {% endblock %}

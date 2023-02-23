@@ -120,9 +120,15 @@
                             </td>
                         {% endif %}
                         {# pseudo de l'organisateur #}
-                        <td data-label="Organisateur"><a
-                                    href="{{ path('profil_details', {'id': sortie.Organisateur.id }) }}">{{ sortie.Organisateur.Pseudo }}</a>
-                        </td>
+                        {% if app.user == sortie.Organisateur %}
+                            <td data-label="Organisateur"><a
+                                        href="{{ path('profil_afficher', {'id': sortie.Organisateur.id }) }}">{{ sortie.Organisateur.Pseudo }}</a>
+                            </td>
+                        {% else %}
+                            <td data-label="Organisateur"><a
+                                        href="{{ path('profil_details', {'id': sortie.Organisateur.id }) }}">{{ sortie.Organisateur.Pseudo }}</a>
+                            </td>
+                            {% endif %}
                         {# Action #}
                         <td data-label="Action">
                         {% if sortie.EtatsNoEtat.Id != 1 %}
