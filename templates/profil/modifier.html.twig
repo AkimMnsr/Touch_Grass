@@ -1,13 +1,60 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Modifier profil{% endblock %}
-
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('Css/profil.css') }}">
+{% endblock %}
 {% block body %}
-    <h1>Modifier son profil</h1>
+    <section id="section_un">
 
-    {{ form_start(registrationForm) }}
+        <div id="Div_form">
 
-    {{ form_end(registrationForm) }}
+            <h1 class="title is-1 is-mobile">Modifier</h1>
 
+            <hr>
+            <div id="Form_div">
+
+                {{ form_start(registrationForm) }}
+
+                <div id="result">
+
+                <p class="result-p is-mobile"><strong>{{ form_label(registrationForm.pseudo, 'Pseudo') }}</strong></p>
+                <p>{{ form_widget(registrationForm.pseudo) }}</p>
+
+                <p class="result-p is-mobile"><strong>{{ form_label(registrationForm.nom, 'Nom') }}</strong></p>
+                <p>{{ form_widget(registrationForm.nom) }}</p>
+
+                <p class="result-p is-mobile"><strong>{{ form_label(registrationForm.prenom, 'Prénom' ) }}</strong></p>
+                <p>{{ form_widget(registrationForm.prenom) }}</p>
+
+                <p class="result-p is-mobile"><strong>{{ form_label(registrationForm.telephone, 'Téléphone') }}</strong></p>
+                <p>{{ form_widget(registrationForm.telephone) }}</p>
+
+                <p class="result-p is-mobile"><strong>{{ form_label(registrationForm.plainPassword.first, 'Mot de passe') }}</strong></p>
+                <p>{{ form_widget(registrationForm.plainPassword.first) }}</p>
+
+                <p class="result-p is-mobile"><strong>{{ form_label(registrationForm.plainPassword.second, 'Confirmation') }}</strong></p>
+                <p>{{ form_widget(registrationForm.plainPassword.second) }}</p>
+
+                <p class="result-p is-mobile"><strong>{{ form_label(registrationForm.mail, 'Mail') }}</strong></p>
+                <p>{{ form_widget(registrationForm.mail) }}</p>
+
+                <p class="result-p is-mobile"><strong>{{ form_label(registrationForm.sitesNoSite, 'Site de rattachement') }}</strong></p>
+                <p>{{ form_widget(registrationForm.sitesNoSite) }}</p>
+
+                <p class="result-p is-mobile"><strong>{{ form_label(registrationForm.imageFile, 'Photo') }}</strong></p>
+                <p>{{ form_widget(registrationForm.imageFile) }}</p>
+                    <hr>
+                   </div>
+            </div>
+                <div id="div_button">
+
+                    <button type="submit" class="button is-info">Enregistrer</button>
+                    <button type="reset" class="button is-danger">Annuler</button>
+
+                </div>
+                {{ form_end(registrationForm) }}
+            </div>
+    </section>
 {% endblock %}
 

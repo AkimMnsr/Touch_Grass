@@ -57,9 +57,7 @@ class RegistrationFormType extends AbstractType
                     "label" => "Ma photo",
                     "allow_delete" => false,
                     "download_label" => false
-                ])
-            ->add('Enregistrer', SubmitType::class)
-            ->add('Annuler', ResetType::class);
+                ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
