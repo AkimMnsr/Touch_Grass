@@ -89,6 +89,7 @@ h1 {
 }
 
 #buttonSortie {
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -226,7 +227,7 @@ th, td {
     border: 1px solid red;
 }
 
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 1550px) {
     #article_un {
         display: flex;
         flex-direction: column;
