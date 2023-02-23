@@ -18,14 +18,12 @@ class LieuxType extends AbstractType
     {
         $builder
             ->add('nom_lieu', EntityType::class,
-            [
-              'class' => Lieux::class,
-              'choice_label' => 'NomLieu',
-            ])
+                [
+                    'class' => Lieux::class,
+                    'choice_label' => 'NomLieu',
+                ])
             ->add('latitude')
-            ->add('longitude')
-
-        ;
+            ->add('longitude');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

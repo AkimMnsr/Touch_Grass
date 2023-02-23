@@ -40,17 +40,13 @@ class AddSortieType extends AbstractType
                 [
                     'class' => Lieux::class,
                     'choice_label' => 'nom_lieu',
-                    'choice_value' => function(?Lieux $lieux) {
-                        return $lieux ? $lieux:"";
+                    'choice_value' => function (?Lieux $lieux) {
+                        return $lieux ? $lieux : "";
                     }
                 ])
-
-
             ->add('save', SubmitType::class, ['label' => 'Enregistrer'])
             ->add('publish', SubmitType::class, ['label' => 'Publier la sortie'])
-            ->add('remove', SubmitType::class, ['label' => 'Supprimer'])
-
-        ;
+            ->add('remove', SubmitType::class, ['label' => 'Supprimer']);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

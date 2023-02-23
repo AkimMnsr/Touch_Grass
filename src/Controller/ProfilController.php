@@ -32,7 +32,7 @@ class ProfilController extends AbstractController
         $registrationForm = $this->createForm(RegistrationFormType::class, $participant);
         $registrationForm->handleRequest($request);
 
-        if ($registrationForm->isSubmitted()&&$registrationForm->isValid()) {
+        if ($registrationForm->isSubmitted() && $registrationForm->isValid()) {
             $participant = $registrationForm->getData();
             $em->persist($participant);
             $em->flush();
@@ -56,11 +56,11 @@ class ProfilController extends AbstractController
 
     #[Route('/{id}', name: 'details')]
     public function profilbyid(
-        int $id,
+        int                    $id,
         ParticipantsRepository $participantsRepository,
-    ) : Response
+    ): Response
     {
-        $participants = $participantsRepository->findOneBy(["id" =>$id]);
+        $participants = $participantsRepository->findOneBy(["id" => $id]);
         return $this->render('profil/detail.html.twig', compact('participants'));
 
     }

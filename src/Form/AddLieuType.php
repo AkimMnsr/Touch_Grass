@@ -25,8 +25,7 @@ class AddLieuType extends AbstractType
                     'class' => Villes::class,
                     'choice_label' => 'NomVille',
                 ])
-            ->add('save', SubmitType::class, ['label' => 'Enregistrer'])
-        ;
+            ->add('save', SubmitType::class, ['label' => 'Enregistrer']);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

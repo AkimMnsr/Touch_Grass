@@ -41,7 +41,7 @@ class Participants implements UserInterface, PasswordAuthenticatedUserInterface
         minMessage: "Le nom doit être supérieur à 2 caractères.",
         maxMessage: "Le nom ne peut pas être supérieur à 20 caractères."
     )]
-    #[Assert\Type(type:'string')]
+    #[Assert\Type(type: 'string')]
     #[ORM\Column(length: 30)]
     private ?string $nom = null;
 
@@ -51,7 +51,7 @@ class Participants implements UserInterface, PasswordAuthenticatedUserInterface
         minMessage: "Le prenom doit être supérieur à 2 caractères.",
         maxMessage: "Le prenom ne peut pas être supérieur à 20 caractères."
     )]
-    #[Assert\Type(type:'string')]
+    #[Assert\Type(type: 'string')]
     #[ORM\Column(length: 30)]
     private ?string $prenom = null;
 
@@ -76,7 +76,7 @@ class Participants implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn(nullable: false)]
     private ?Sites $sites_no_site = null;
 
-    #[Assert\Type(type:'string')]
+    #[Assert\Type(type: 'string')]
     #[ORM\Column(length: 255, nullable: true)]
     private $image;
 

@@ -35,7 +35,7 @@ class Sites
 
     public function __toString(): string
     {
-       return $this->nom_site;
+        return $this->nom_site;
     }
 
 }

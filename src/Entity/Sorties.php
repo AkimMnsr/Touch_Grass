@@ -46,7 +46,7 @@ class Sorties
     #[Assert\Range(
         min: 15,
         max: 480,
-        notInRangeMessage: 'La durée doit être comprise entre {{ min }} minutes et {{ max }} minutes' ,
+        notInRangeMessage: 'La durée doit être comprise entre {{ min }} minutes et {{ max }} minutes',
 
     )]
     #[Assert\NotBlank(message: "Vous devez renseigner une durée")]
@@ -67,14 +67,14 @@ class Sorties
     #[Assert\NotBlank(message: "Vous devez renseigner le nombre de place")]
     #[Assert\Range(
         min: 2,
-        max:100,
-        notInRangeMessage: 'Le nombre de place doit être compris entre {{ min }} et {{ max }}' ,
+        max: 100,
+        notInRangeMessage: 'Le nombre de place doit être compris entre {{ min }} et {{ max }}',
     )]
     private ?int $nbinscriptionsmax = null;
 
     #[ORM\Column(length: 500, nullable: false)]
     #[Assert\Length(
-        min:10,
+        min: 10,
         max: 500,
         minMessage: 'La description doit être au minimum de 10 caractères',
         maxMessage: 'La description doit être au maximum de 500 caractères',

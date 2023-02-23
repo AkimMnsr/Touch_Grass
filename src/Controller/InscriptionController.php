@@ -40,24 +40,24 @@ class InscriptionController extends AbstractController
         return $this->redirectToRoute('main_index');
     }
 
-        #[IsGranted('ROLE_USER')]
-        #[Route('/desinscription/{id}', name: 'inscription_desinscription')]
-        public function desinscription(
-        int $id,
+    #[IsGranted('ROLE_USER')]
+    #[Route('/desinscription/{id}', name: 'inscription_desinscription')]
+    public function desinscription(
+        int                    $id,
         ParticipantsRepository $participantsRepository,
-        SortiesRepository $sortiesRepository,
+        SortiesRepository      $sortiesRepository,
         EntityManagerInterface $em,
-        Request $request
-        ): Response
-         {
+        Request                $request
+    ): Response
+    {
         $inscrit = $this->getUser()->getUserIdentifier();
         $user = $participantsRepository->findOneBy(["pseudo" => $inscrit]);
-        $sortie = $sortiesRepository->findOneBy(["id" =>$id]);
+        $sortie = $sortiesRepository->findOneBy(["id" => $id]);
         $inscription = $sortie->getIdInscription();
-        if ($inscrit !== $inscription){
+        if ($inscrit !== $inscription) {
             $inscription->removeParticipantsNoParticipant($user);
             $em->persist($inscription);
-           $em->persist($user);
+            $em->persist($user);
             $em->flush();
         }
         return $this->redirectToRoute('main_index');

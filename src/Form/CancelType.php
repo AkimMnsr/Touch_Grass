@@ -15,7 +15,6 @@ class CancelType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-
             ->add('descriptioninfos', TextareaType::class)
             ->add('save', SubmitType::class, ['label' => 'Enregistrer'])
             ->add('cancel', ButtonType::class, ['label' => 'Annuler']);
