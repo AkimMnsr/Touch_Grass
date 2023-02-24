@@ -9,12 +9,54 @@
 
 {% block body %}
 
-    <article>
+    <article id="article_form">
+        <div id="titre">
+            <div class="alert-validation">{{ form_errors(formLieu.nom_lieu) }}</div>
+            <div class="alert-validation">{{ form_errors(formLieu.rue) }}</div>
+            <div class="alert-validation">{{ form_errors(formLieu.longitude) }}</div>
+            <div class="alert-validation">{{ form_errors(formLieu.latitude) }}</div>
+            <h2 class="title is-4">Créer ton propre lieu</h2>
+            <img id="img-titre" src="{{ asset('/img/arrosoir.png') }}" alt="pot avec plante">
+        </div>
+
         <div>
             {{ form_start(formLieu) }}
-            {{ form_end(formLieu) }}
-            <a class="button is-light" href="{{ path('sortie_sortie',{'id': sortie.Id}) }}">Annuler</a>
+            <div class="control is-mobile">
+                <label class="label is-mobile">Nom du lieu :</label>
+                <input id="nomSortie" onload="load()"
+                       class="input is-focused is-mobile" {{ form_widget(formLieu.nom_lieu) }}
 
+            </div>
+            <div class="control">
+                <label class="label is-mobile">Rue :</label>
+                <input id="nomSortie" onload="load()" class="input is-focused is-mobile" {{ form_widget(formLieu.rue) }}
+            </div>
+            <div class="control is-mobile">
+                <label class="label is-mobile">Longitude :</label>
+                <input id="nomSortie" onload="load()"
+                       class="input is-focused is-mobile" {{ form_widget(formLieu.longitude) }}
+            </div>
+            <div class="control">
+                <label class="label">Latitude :</label>
+                <input id="nomSortie" onload="load()"
+                       class="input is-focused is-mobile" {{ form_widget(formLieu.latitude) }}
+            </div>
+
+            <div class="field">
+
+                <p class="control has-icons-left is-mobile">
+                    <label class="label is-mobile">Ville :</label>
+                    <span id="span-lieux" class="select is-mobile">
+                        <select {{ form_widget(formLieu.villes_no_ville) }}
+                    </span>
+                </p>
+            </div>
+
+
+            <button class="button is-success is-mobile" {{ form_widget(formLieu.save) }}
+            <a id="button-annuler" class="button is-light is-mobile" href="{{ path('sortie_addSortie') }}">Annuler</a>
+
+            {{ form_end(formLieu) }}
 
         </div>
 
